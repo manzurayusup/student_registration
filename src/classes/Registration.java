@@ -26,8 +26,12 @@ public class Registration
         map.put("CSE330", rapid);
         System.out.println("Welcome to the student registration system!");
         Student currentStudent = logIn();
-        System.out.println(currentStudent);
-        System.out.println(currentStudent.getRegisteredCourses());
+        while (currentStudent == null) {
+        	System.out.println("Did not recognize ID, please try again");
+        	currentStudent = logIn(); 	
+        }
+//        System.out.println(currentStudent);
+//        System.out.println(currentStudent.getRegisteredCourses());
         int choice=5;
         do {
             printChoices();
@@ -44,7 +48,7 @@ public class Registration
             }
         }while (choice!=5);
         saveRegistration();
-        String pathToFileStudents = "/Users/manzura/git/student_registration/src/textfiles/students.txt";
+        String pathToFileStudents = "/Users/irtaza/git/student_registration/src/textfiles/students.txt";
 //        String pathToFileStudents = "./../textfiles/students.txt";
 
         
@@ -52,20 +56,34 @@ public class Registration
     
     public static Student logIn() {
     	int id = getId();
+    	if (id == -1) {
+    		return null;
+    	}
     	String stringId = String.valueOf(id);
-    	Student loggedUser = populateStudentObjectFromFile("/Users/Yeab/git/student_registration/src/textfiles/students.txt" , stringId);
+    	Student loggedUser = populateStudentObjectFromFile("/Users/irtaza/git/student_registration/src/textfiles/students.txt" , stringId);
     	return loggedUser;
     }
     
     public static int getId() {
-    	int id = keyboard.nextInt();
-    	return id;
+    	try {
+    		String id = keyboard.next();
+    		if (id.length() > 6) {
+    			System.out.println("Not a legal integer, please only enter 6 digits");
+    			return -1;
+    		}
+    		return Integer.valueOf(id);
+    	}
+    	catch(Exception e) {
+    		System.out.println("Not a legal integer, please only enter 6 digits");
+    		return -1;
+    	}
+    	
     }
     
     public static Student populateStudentObjectFromFile(String filename, String studentID) {
     	File file = new File(filename);
-    	System.out.println(file.getName());
-    	System.out.println(file.canRead());
+//    	System.out.println(file.getName());
+//    	System.out.println(file.canRead());
     	if (file.canRead()) {
     		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
     		    String line;
@@ -75,6 +93,7 @@ public class Registration
     		    	words = line.split("\\s");
     		    	// 0: FirstName 1: LastName 2: wustl ID
     		    	if (words[2].equals(studentID)) {
+    		    		System.out.println("You are now logged in!");
 	    		    	Student student = new Student(words[0], words[1], Integer.valueOf(words[2]));
 	    		    	String registeredCourses = words[3];
 	    		    	StringBuilder sb = new StringBuilder();
@@ -109,6 +128,7 @@ public class Registration
     		    	}
     		    	
     		    	
+    		    	
     		    }
     		    return null;
     		    
@@ -122,7 +142,7 @@ public class Registration
     }
 	
 	public static Course makeCourse(String courseCode) throws FileNotFoundException {
-		String path = "/Users/Yeab/git/student_registration/src/textfiles/courses.txt";
+		String path = "/Users/irtaza/git/student_registration/src/textfiles/courses.txt";
 		File file = new File(path);
 		Scanner courseReader = new Scanner(file);
 		
@@ -145,6 +165,11 @@ public class Registration
 	
 	public static void printChoices() {
 		// the print pattern should match the order of the switch cases in the main function.
+		System.out.println("\t1. Register for a course");
+        System.out.println("\t2. Add course to waitlist");
+        System.out.println("\t3. Print a course");
+        System.out.println("\t4. Print all courses");
+        System.out.println("\t5. Quit");
 	}
 	
 	public static void saveRegistration() {
