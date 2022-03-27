@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import classes.Course;
 import classes.ErrorCodes;
 import classes.Student;
 
