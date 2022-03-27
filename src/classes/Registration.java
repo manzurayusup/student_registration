@@ -46,9 +46,10 @@ public class Registration
                 case 4: printAllCourses(); break;
                 default: break;
             }
+            System.out.println(currentStudent.getRegisteredCourses());
         }while (choice!=5);
         saveRegistration();
-        String pathToFileStudents = "/Users/irtaza/git/student_registration/src/textfiles/students.txt";
+        String pathToFileStudents = "/Users/khushi/git/student_registration/src/textfiles/students.txt";
 //        String pathToFileStudents = "./../textfiles/students.txt";
 
         
@@ -60,7 +61,7 @@ public class Registration
     		return null;
     	}
     	String stringId = String.valueOf(id);
-    	Student loggedUser = populateStudentObjectFromFile("/Users/irtaza/git/student_registration/src/textfiles/students.txt" , stringId);
+    	Student loggedUser = populateStudentObjectFromFile("/Users/khushi/git/student_registration/src/textfiles/students.txt" , stringId);
     	return loggedUser;
     }
     
@@ -142,7 +143,7 @@ public class Registration
     }
 	
 	public static Course makeCourse(String courseCode) throws FileNotFoundException {
-		String path = "/Users/irtaza/git/student_registration/src/textfiles/courses.txt";
+		String path = "/Users/khushi/git/student_registration/src/textfiles/courses.txt";
 		File file = new File(path);
 		Scanner courseReader = new Scanner(file);
 		
@@ -155,7 +156,7 @@ public class Registration
 				String courseName = splittedCurrentCourse[1];
 				String startTime = splittedCurrentCourse[2];
 				String endTime = splittedCurrentCourse[3];
-				Course course = new Course(courseName, courseCode, startTime, endTime, -1, -1);
+				Course course = new Course(courseName, courseCode, startTime, endTime, 1, 1);
 				
 				return course;
 			}
@@ -176,8 +177,19 @@ public class Registration
 		// this method saves the current registration status of the student in the student file.
 	}
 	
-	public static void register(Student currentStudent) {
+	public static void register(Student currentStudent) throws FileNotFoundException {
 		// this method gets the name of course the student wants to register in, check's availability and adds it to students registered courses list.
+		String courseCode = keyboard.next();
+		keyboard.nextLine();
+		Course course = makeCourse(courseCode);
+		if (course.getSeats() > 0) {
+			ErrorCodes register = currentStudent.addRegisterCourse(course);
+			if (register == ErrorCodes.ERROR) {
+				System.out.println("Student was not able to register to this course");
+			}else {
+				System.out.println("Student has successfully registered to this course");
+			}
+		}
 	}
 	
 	public static void waitlist(Student currentStudent) {
