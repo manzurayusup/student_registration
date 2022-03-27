@@ -2,6 +2,7 @@ package classes;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,33 +24,45 @@ public class Registration
         map.put("CSE132", intro_to_ce);
         Course rapid = new Course("Rapid Prototype Development and Creative Programming", "CSE330", "2022-08-29T13:00:00.000Z", "2022-12-09T14:20:00.000Z", 70, 3);
         map.put("CSE330", rapid);
-        Student currentStudent = makeStudent();
-        
-//        int choice=5;
-//        do {
-//            printChoices();
-//            choice= keyboard.nextInt();
-//            keyboard.nextLine();
-//            switch (choice)
-//            {
-//				// more functionalities will be added as we go.
-//                case 1: register(currentStudent); break;
-//                case 2: waitlist(currentStudent); break;
-//                case 3: printCourse(); break;
-//                case 4: printAllCourses(); break;
-//                default: break;
-//            }
-//        }while (choice!=5);
-//        saveRegistration();
+        System.out.println("Welcome to the student registration system!");
+        Student currentStudent = logIn();
+        System.out.println(currentStudent);
+        System.out.println(currentStudent.getRegisteredCourses());
+        int choice=5;
+        do {
+            printChoices();
+            choice= keyboard.nextInt();
+            keyboard.nextLine();
+            switch (choice)
+            {
+				// more functionalities will be added as we go.
+                case 1: register(currentStudent); break;
+                case 2: waitlist(currentStudent); break;
+                case 3: printCourse(); break;
+                case 4: printAllCourses(); break;
+                default: break;
+            }
+        }while (choice!=5);
+        saveRegistration();
         String pathToFileStudents = "/Users/manzura/git/student_registration/src/textfiles/students.txt";
 //        String pathToFileStudents = "./../textfiles/students.txt";
 
-        ErrorCodes returnVal = populateStudentObjectFromFile(pathToFileStudents, "123456");
-        System.out.println(returnVal);
         
     }
     
-    public static ErrorCodes populateStudentObjectFromFile(String filename, String studentID) {
+    public static Student logIn() {
+    	int id = getId();
+    	String stringId = String.valueOf(id);
+    	Student loggedUser = populateStudentObjectFromFile("/Users/Yeab/git/student_registration/src/textfiles/students.txt" , stringId);
+    	return loggedUser;
+    }
+    
+    public static int getId() {
+    	int id = keyboard.nextInt();
+    	return id;
+    }
+    
+    public static Student populateStudentObjectFromFile(String filename, String studentID) {
     	File file = new File(filename);
     	System.out.println(file.getName());
     	System.out.println(file.canRead());
@@ -68,7 +81,7 @@ public class Registration
 	    		    	for (int i=0; i<registeredCourses.length(); i++) {
 	    		    		if (registeredCourses.charAt(i)=='-') {
 	    		    			
-	    		    			student.addRegisterCourse(map.get(sb.toString()));
+	    		    			student.addRegisterCourse(makeCourse(sb.toString()));
 	    		    			sb.setLength(0);
 	    		    		}
 	    		    		else {
@@ -76,13 +89,13 @@ public class Registration
 	    		    		}
 	    		    	}
 	    		    	if (sb.toString().length()>0) {
-	    		    		student.addRegisterCourse(map.get(sb.toString()));
+	    		    		student.addRegisterCourse(makeCourse(sb.toString()));
 	    		    	}
 	    		    	sb.setLength(0);
 	    		    	String waitlistedCourses = words[4];
 	    		    	for (int i=0; i<waitlistedCourses.length(); i++) {
 	    		    		if (waitlistedCourses.charAt(i)=='-') {
-	    		    			student.addWaitlistCourse(map.get(sb.toString()));
+	    		    			student.addWaitlistCourse(makeCourse(sb.toString()));
 	    		    			sb.setLength(0);
 	    		    		}
 	    		    		else {
@@ -90,32 +103,43 @@ public class Registration
 	    		    		}
 	    		    	}
 	    		    	if (sb.toString().length()>0) {
-	    		    		student.addWaitlistCourse(map.get(sb.toString()));
+	    		    		student.addWaitlistCourse(makeCourse(sb.toString()));
 	    		    	}
+	    		    	return student;
     		    	}
     		    	
     		    	
     		    }
-    		    return ErrorCodes.SUCCESS;
+    		    return null;
     		    
     		} catch (Exception e) {
     			e.printStackTrace();
-    			return ErrorCodes.ERROR;
+    			return null;
     		}
     	}
     	System.out.println("never going into the if statement");
-    	return ErrorCodes.ERROR;
+    	return null;
     }
 	
-    public static Student makeStudent() {
-		// this method should call on to make course method to make the registered and waitlisted courses for the student.
-		// this method should also get user's id through user input and make a student object for the user.
-		System.out.println("this is the make student method");
-		return null;
-	}
-	
-	public static Course makeCourse() {
-		System.out.println("this is the makeCourse Method");
+	public static Course makeCourse(String courseCode) throws FileNotFoundException {
+		String path = "/Users/Yeab/git/student_registration/src/textfiles/courses.txt";
+		File file = new File(path);
+		Scanner courseReader = new Scanner(file);
+		
+		while(courseReader.hasNextLine()) {
+
+			String currentCourse = courseReader.nextLine();
+			String splittedCurrentCourse[] = currentCourse.split("\\s");
+			
+			if(courseCode.equals(splittedCurrentCourse[0])) {
+				String courseName = splittedCurrentCourse[1];
+				String startTime = splittedCurrentCourse[2];
+				String endTime = splittedCurrentCourse[3];
+				Course course = new Course(courseName, courseCode, startTime, endTime, -1, -1);
+				
+				return course;
+			}
+		}
 		return null;
 	}
 	
@@ -142,5 +166,4 @@ public class Registration
 	public static void printAllCourses() {
 		// this method prints all courses in the database (courses.txt).
 	}
-	
 }
