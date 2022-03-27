@@ -41,17 +41,19 @@ public class Registration
 //            }
 //        }while (choice!=5);
 //        saveRegistration();
-        
-        ErrorCodes returnVal = populateStudentObjectFromFile("../textfiles/students.txt");
+        String pathToFileStudents = "/Users/manzura/git/student_registration/src/textfiles/students.txt";
+//        String pathToFileStudents = "./../textfiles/students.txt";
+
+        ErrorCodes returnVal = populateStudentObjectFromFile(pathToFileStudents, "123456");
         System.out.println(returnVal);
         
     }
     
-    public static ErrorCodes populateStudentObjectFromFile(String filename) {
+    public static ErrorCodes populateStudentObjectFromFile(String filename, String studentID) {
     	File file = new File(filename);
     	System.out.println(file.getName());
     	System.out.println(file.canRead());
-    	if (true) {
+    	if (file.canRead()) {
     		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
     		    String line;
     		    
@@ -59,32 +61,34 @@ public class Registration
     		    	String words[];
     		    	words = line.split("\\s");
     		    	// 0: FirstName 1: LastName 2: wustl ID
-    		    	Student student = new Student(words[0], words[1], Integer.valueOf(words[2]));
-    		    	String registeredCourses = words[3];
-    		    	StringBuilder sb = new StringBuilder();
-    		    	for (int i=0; i<registeredCourses.length(); i++) {
-    		    		if (registeredCourses.charAt(i)=='-') {
-    		    			
-    		    			student.addRegisterCourse(map.get(sb.toString()));
-    		    			sb.setLength(0);
-    		    		}
-    		    		else {
-    		    			sb.append(registeredCourses.charAt(i));
-    		    		}
-    		    	}
-    		    	if (sb.toString().length()>0) {
-    		    		student.addRegisterCourse(map.get(sb.toString()));
-    		    	}
-    		    	sb.setLength(0);
-    		    	String waitlistedCourses = words[4];
-    		    	for (int i=0; i<waitlistedCourses.length(); i++) {
-    		    		if (waitlistedCourses.charAt(i)=='-') {
-    		    			student.addWaitlistCourse(map.get(sb.toString()));
-    		    			sb.setLength(0);
-    		    		}
-    		    		else {
-    		    			sb.append(waitlistedCourses.charAt(i));
-    		    		}
+    		    	if (words[2].equals(studentID)) {
+	    		    	Student student = new Student(words[0], words[1], Integer.valueOf(words[2]));
+	    		    	String registeredCourses = words[3];
+	    		    	StringBuilder sb = new StringBuilder();
+	    		    	for (int i=0; i<registeredCourses.length(); i++) {
+	    		    		if (registeredCourses.charAt(i)=='-') {
+	    		    			
+	    		    			student.addRegisterCourse(map.get(sb.toString()));
+	    		    			sb.setLength(0);
+	    		    		}
+	    		    		else {
+	    		    			sb.append(registeredCourses.charAt(i));
+	    		    		}
+	    		    	}
+	    		    	if (sb.toString().length()>0) {
+	    		    		student.addRegisterCourse(map.get(sb.toString()));
+	    		    	}
+	    		    	sb.setLength(0);
+	    		    	String waitlistedCourses = words[4];
+	    		    	for (int i=0; i<waitlistedCourses.length(); i++) {
+	    		    		if (waitlistedCourses.charAt(i)=='-') {
+	    		    			student.addWaitlistCourse(map.get(sb.toString()));
+	    		    			sb.setLength(0);
+	    		    		}
+	    		    		else {
+	    		    			sb.append(waitlistedCourses.charAt(i));
+	    		    		}
+	    		    	}
     		    	}
     		    	if (sb.toString().length()>0) {
     		    		student.addWaitlistCourse(map.get(sb.toString()));
