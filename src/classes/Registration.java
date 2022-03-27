@@ -89,10 +89,11 @@ public class Registration
 	    		    			sb.append(waitlistedCourses.charAt(i));
 	    		    		}
 	    		    	}
+	    		    	if (sb.toString().length()>0) {
+	    		    		student.addWaitlistCourse(map.get(sb.toString()));
+	    		    	}
     		    	}
-    		    	if (sb.toString().length()>0) {
-    		    		student.addWaitlistCourse(map.get(sb.toString()));
-    		    	}
+    		    	
     		    	
     		    }
     		    return ErrorCodes.SUCCESS;
