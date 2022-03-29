@@ -163,7 +163,7 @@ public class Registration
 		String courseCode = keyboard.next();
 		keyboard.nextLine();
 		Course course = makeCourse(courseCode);
-		if (course != null && course.getSeats() > 0) {
+		if (course != null) {
 			if (course.getSeats() > 0) {
 				ErrorCodes register = currentStudent.addRegisterCourse(course);
 				if (register == ErrorCodes.ERROR) {
