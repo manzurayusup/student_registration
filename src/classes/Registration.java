@@ -175,6 +175,9 @@ public class Registration
 				}
 			}
 		}
+		else {
+			System.out.println("Course does not exist");
+		}
 	}
 	
 	public static void waitlist(Student currentStudent) {
