@@ -36,12 +36,10 @@ public class Student {
     }
     public ErrorCodes addWaitlistCourse(Course waitlistCourse) {
     	if (this.waitlistedCourses.size() + this.registeredCourses.size() == 7) {
-//    		System.out.println("Error: Cannot exceed 21 total credits");
     		return ErrorCodes.ERROR;
     	}
     	else {
-    		if (this.registeredCourses.contains(waitlistCourse)) {
-//    			System.out.println("Error: Student is already registered for this course. Remove course from registered courses first");
+    		if (this.registeredCourses.contains(waitlistCourse)) {;
     			return ErrorCodes.ERROR;
     		}
     		else {
@@ -49,7 +47,6 @@ public class Student {
                     this.waitlistedCourses.add(waitlistCourse);
                 }
         		else {
-//        			System.out.println("Course already exists in the waitlisted courses");
         			return ErrorCodes.ERROR;
         		}
     		}
@@ -61,7 +58,6 @@ public class Student {
             this.waitlistedCourses.remove(waitlistCourse);
         }
         else {
-//            System.out.println("Error: Course does not exist in student's waitlisted courses");
         	return ErrorCodes.ERROR;
         }
         return ErrorCodes.SUCCESS;
@@ -79,12 +75,10 @@ public class Student {
     
     public ErrorCodes addRegisterCourse(Course registerCourse) {
     	if (this.waitlistedCourses.size() + this.registeredCourses.size() == 7) {
-//    		System.out.println("Error: Cannot exceed 21 total credits");
     		return ErrorCodes.ERROR;
     	}
     	else {
     		if (this.waitlistedCourses.contains(registerCourse)) {
-//    			System.out.println("Error: Student is already waitlisted for this course");
     			return ErrorCodes.ERROR;
     		}
     		else {
@@ -92,7 +86,6 @@ public class Student {
 	                this.registeredCourses.add(registerCourse);
 	            }
 	    		else {
-//	    			System.out.println("Course already exists in the registered courses");
 	    			return ErrorCodes.ERROR;
 	    		}
     		}
@@ -104,7 +97,6 @@ public class Student {
             this.registeredCourses.remove(registerCourse);
         }
         else {
-            System.out.println("Error: Course does not exist in student's registered courses");
             return ErrorCodes.ERROR;
         }
         return ErrorCodes.SUCCESS;

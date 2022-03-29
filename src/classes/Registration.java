@@ -13,11 +13,11 @@ import java.util.Vector;
 public class Registration
 {
 	private static Scanner keyboard=new Scanner(System.in);
-	public static HashMap<String, Course> map = new HashMap<>();
     public static void main(String[] args) throws IOException
     {
     	
         System.out.println("Welcome to the student registration system!");
+        System.out.println("Enter Student ID to log in:");
         Student currentStudent = logIn();
         while (currentStudent == null) {
         	System.out.println("Did not recognize ID, please try again");
@@ -38,13 +38,8 @@ public class Registration
                 case 4: printAllCourses(); break;
                 default: break;
             }
-            System.out.println(currentStudent.getRegisteredCourses());
         }while (choice!=5);
         saveRegistration();
-        String pathToFileStudents = "src/textfiles/students.txt";
-//        String pathToFileStudents = "./../textfiles/students.txt";
-
-        
     }
     
     public static Student logIn() {
@@ -69,59 +64,27 @@ public class Registration
     	catch(Exception e) {
     		System.out.println("Not a legal integer, please only enter 6 digits");
     		return -1;
-    	}
-    	
+    	}	
     }
     
     public static Student populateStudentObjectFromFile(String filename, String studentID) {
     	File file = new File(filename);
-//    	System.out.println(file.getName());
-//    	System.out.println(file.canRead());
     	if (file.canRead()) {
     		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
     		    String line;
-    		    
     		    while ((line = br.readLine()) != null) {
-    		    	String words[];
-    		    	words = line.split("\\s");
-    		    	// 0: FirstName 1: LastName 2: wustl ID
+    		    	String words[] = line.split("\\s");
     		    	if (words[2].equals(studentID)) {
-    		    		System.out.println("You are now logged in!");
-	    		    	Student student = new Student(words[0], words[1], Integer.valueOf(words[2]));
+    		    		System.out.println("You are now logged in! Enter the number corresponding to the option you want to choose");
+    		    		String firstName = words[0];
+    		    		String lastName = words[1];
+	    		    	Student student = new Student(firstName, lastName, Integer.valueOf(studentID));
 	    		    	String registeredCourses = words[3];
-	    		    	StringBuilder sb = new StringBuilder();
-	    		    	for (int i=0; i<registeredCourses.length(); i++) {
-	    		    		if (registeredCourses.charAt(i)=='-') {
-	    		    			
-	    		    			student.addRegisterCourse(makeCourse(sb.toString()));
-	    		    			sb.setLength(0);
-	    		    		}
-	    		    		else {
-	    		    			sb.append(registeredCourses.charAt(i));
-	    		    		}
-	    		    	}
-	    		    	if (sb.toString().length()>0) {
-	    		    		student.addRegisterCourse(makeCourse(sb.toString()));
-	    		    	}
-	    		    	sb.setLength(0);
+	    		    	AddRegisteredCoursesToStudentObject(registeredCourses, student);
 	    		    	String waitlistedCourses = words[4];
-	    		    	for (int i=0; i<waitlistedCourses.length(); i++) {
-	    		    		if (waitlistedCourses.charAt(i)=='-') {
-	    		    			student.addWaitlistCourse(makeCourse(sb.toString()));
-	    		    			sb.setLength(0);
-	    		    		}
-	    		    		else {
-	    		    			sb.append(waitlistedCourses.charAt(i));
-	    		    		}
-	    		    	}
-	    		    	if (sb.toString().length()>0) {
-	    		    		student.addWaitlistCourse(makeCourse(sb.toString()));
-	    		    	}
+	    		    	AddWaitlistedCoursesToStudentObject(waitlistedCourses, student);
 	    		    	return student;
     		    	}
-    		    	
-    		    	
-    		    	
     		    }
     		    return null;
     		    
@@ -130,28 +93,51 @@ public class Registration
     			return null;
     		}
     	}
-    	System.out.println("never going into the if statement");
     	return null;
     }
     
-
-	
+    public static void AddRegisteredCoursesToStudentObject(String registeredCourses, Student student) throws FileNotFoundException {
+    	StringBuilder sb = new StringBuilder();
+    	for (int i=0; i<registeredCourses.length(); i++) {
+    		if (registeredCourses.charAt(i)=='-') {	
+    			student.addRegisterCourse(makeCourse(sb.toString()));
+    			sb.setLength(0);
+    		}
+    		else {
+    			sb.append(registeredCourses.charAt(i));
+    		}
+    	}
+    	if (sb.toString().length()>0) {
+    		student.addRegisterCourse(makeCourse(sb.toString()));
+    	}
+    }
+    public static void AddWaitlistedCoursesToStudentObject(String waitlistedCourses, Student student) throws FileNotFoundException {
+    	StringBuilder sb = new StringBuilder();
+    	for (int i=0; i<waitlistedCourses.length(); i++) {
+    		if (waitlistedCourses.charAt(i)=='-') {
+    			student.addWaitlistCourse(makeCourse(sb.toString()));
+    			sb.setLength(0);
+    		}
+    		else {
+    			sb.append(waitlistedCourses.charAt(i));
+    		}
+    	}
+    	if (sb.toString().length()>0) {
+    		student.addWaitlistCourse(makeCourse(sb.toString()));
+    	}
+    }
 	public static Course makeCourse(String courseCode) throws FileNotFoundException {
 		String path = "src/textfiles/courses.txt";
 		File file = new File(path);
 		Scanner courseReader = new Scanner(file);
-		
 		while(courseReader.hasNextLine()) {
-
 			String currentCourse = courseReader.nextLine();
 			String splittedCurrentCourse[] = currentCourse.split("\\s");
-			
 			if(courseCode.equals(splittedCurrentCourse[0])) {
 				String courseName = splittedCurrentCourse[1];
 				String startTime = splittedCurrentCourse[2];
 				String endTime = splittedCurrentCourse[3];
 				Course course = new Course(courseName, courseCode, startTime, endTime, 1, 1);
-				
 				return course;
 			}
 		}
@@ -173,15 +159,20 @@ public class Registration
 	
 	public static void register(Student currentStudent) throws FileNotFoundException {
 		// this method gets the name of course the student wants to register in, check's availability and adds it to students registered courses list.
+		System.out.println("Please enter the course code of the course you want to register for");
 		String courseCode = keyboard.next();
 		keyboard.nextLine();
 		Course course = makeCourse(courseCode);
-		if (course.getSeats() > 0) {
-			ErrorCodes register = currentStudent.addRegisterCourse(course);
-			if (register == ErrorCodes.ERROR) {
-				System.out.println("Student was not able to register to this course");
-			}else {
-				System.out.println("Student has successfully registered to this course");
+		if (course != null && course.getSeats() > 0) {
+			if (course.getSeats() > 0) {
+				ErrorCodes register = currentStudent.addRegisterCourse(course);
+				if (register == ErrorCodes.ERROR) {
+					System.out.println("Student was not able to register to this course");
+				}else {
+					System.out.println("Student has successfully registered to this course");
+					System.out.println(currentStudent.toString() + " Registered Courses: ");
+					System.out.println(currentStudent.getRegisteredCourses());
+				}
 			}
 		}
 	}
