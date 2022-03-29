@@ -71,8 +71,6 @@ class StudentTest {
     
     @Test
     void testGetWaitlistedCourses() {
-    	System.out.println("HelloLol");
-
     	LinkedList<Course> expectedList = new LinkedList<>();
     	expectedList.add(waitlistCourse1);
     	expectedList.add(waitlistCourse2);
@@ -82,49 +80,28 @@ class StudentTest {
     @Test
     void testAddWaitlistCourse() {
     	System.out.println("hello 100");
-
-//    	LinkedList<Course> expectedList = new LinkedList<>();
-//    	expectedList.add(waitlistCourse1);
-//    	expectedList.add(waitlistCourse2);
-//    	expectedList.add(course3);
     	ErrorCodes returnValue = student.addWaitlistCourse(course3);
-    	assertEquals(ErrorCodes.SUCCESS, returnValue);
-//    	student.addWaitlistCourse(course3);
-//    	assertEquals(true, expectedList.equals(student.getRegisteredCourses()));
-    	
+    	assertEquals(ErrorCodes.SUCCESS, returnValue);	
     }
     
     @Test
     void testAddDuplicateWaitlistCourse() {
-    	System.out.println("Hello0");
     	ErrorCodes returnValue = student.addWaitlistCourse(waitlistCourse1);
-    	assertEquals(ErrorCodes.ERROR, returnValue);
-//    	System.out.println(outContent.toString());
-    	
+    	assertEquals(ErrorCodes.ERROR, returnValue);	
     }
     
     @Test
     void testAddWaitlistCourseThatAlreadyExistsInRegisterCourses() {
-    	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    	PrintStream originalOut = System.out;
-    	System.setOut(new PrintStream(outContent));
-    	student.addWaitlistCourse(registerCourse1);
-    	String expected = "Error: Student is already registered for this course. Remove course from registered courses first";
-    	assertEquals(true, expected.equals(outContent.toString()));
-    	System.setOut(originalOut);
+    	ErrorCodes returnValue = student.addWaitlistCourse(registerCourse1);
+    	assertEquals(ErrorCodes.ERROR, returnValue);
     }
     @Test
     void testCreditsExceedWhenAddingWaitlistCourse() {
-    	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    	PrintStream originalOut = System.out;
-    	System.setOut(new PrintStream(outContent));
     	student.addWaitlistCourse(course3);
     	student.addWaitlistCourse(course4);
     	student.addWaitlistCourse(course5);
-    	student.addWaitlistCourse(course6);
-    	String expected = "Error: Cannot exceed 21 total credits";
-    	assertEquals(true, expected.equals(outContent.toString()));
-    	System.setOut(originalOut);
+    	ErrorCodes returnValue = student.addWaitlistCourse(course6);
+    	assertEquals(ErrorCodes.ERROR, returnValue);
     }
     @Test
     void testRemoveWaitlistCourse() {
@@ -135,13 +112,8 @@ class StudentTest {
     }
     @Test
     void testRemoveWaitlistCourseThatDoesNotExistInStudentWaitlistCourses() {
-    	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    	PrintStream originalOut = System.out;
-    	System.setOut(new PrintStream(outContent));
-    	student.removeWaitlistCourse(course3);
-    	String expected = "Error: Course does not exist in student's waitlisted courses";
-    	assertEquals(true, expected.equals(outContent.toString()));
-    	System.setOut(originalOut);
+    	ErrorCodes returnValue = student.removeWaitlistCourse(course3);
+    	assertEquals(ErrorCodes.ERROR, returnValue);
     }
     
     
@@ -163,36 +135,21 @@ class StudentTest {
     }
     @Test
     void testAddDuplicateRegisterCourse() {
-    	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    	PrintStream originalOut = System.out;
-    	System.setOut(new PrintStream(outContent));
-    	student.addRegisterCourse(registerCourse1);
-    	String expected = "Course already exists in the registered courses";
-    	assertEquals(true, expected.equals(outContent.toString()));
-    	System.setOut(originalOut);
+    	ErrorCodes returnValue = student.addRegisterCourse(registerCourse1);
+    	assertEquals(ErrorCodes.ERROR, returnValue);
     }
     @Test
     void testAddRegisterCourseThatAlreadyExistsInWaitlistCourses() {
-    	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    	PrintStream originalOut = System.out;
-    	System.setOut(new PrintStream(outContent));
-    	student.addRegisterCourse(waitlistCourse1);
-    	String expected = "Error: Student is already waitlisted for this course";
-    	assertEquals(true, expected.equals(outContent.toString()));
-    	System.setOut(originalOut);
+    	ErrorCodes returnValue = student.addRegisterCourse(waitlistCourse1);
+    	assertEquals(ErrorCodes.ERROR, returnValue);
     }
     @Test
     void testCreditsExceedWhenAddingRegisterCourse() {
-    	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    	PrintStream originalOut = System.out;
-    	System.setOut(new PrintStream(outContent));
     	student.addRegisterCourse(course3);
     	student.addRegisterCourse(course4);
     	student.addRegisterCourse(course5);
-    	student.addRegisterCourse(course6);
-    	String expected = "Error: Cannot exceed 21 total credits";
-    	assertEquals(true, expected.equals(outContent.toString()));
-    	System.setOut(originalOut);
+    	ErrorCodes returnValue = student.addRegisterCourse(course6);
+    	assertEquals(ErrorCodes.ERROR, returnValue);
     }
     @Test
     void testRemoveRegisterCourse() {
@@ -203,13 +160,8 @@ class StudentTest {
     }
     @Test
     void testRemoveRegisterCourseThatDoesNotExistInStudentRegisterCourses() {
-    	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    	PrintStream originalOut = System.out;
-    	System.setOut(new PrintStream(outContent));
-    	student.removeRegisterCourse(course3);
-    	String expected = "Error: Course does not exist in student's registered courses";
-    	assertEquals(true, expected.equals(outContent.toString()));
-    	System.setOut(originalOut);
+    	ErrorCodes returnValue = student.removeRegisterCourse(course3);
+    	assertEquals(ErrorCodes.ERROR, returnValue);
     }
     
     
