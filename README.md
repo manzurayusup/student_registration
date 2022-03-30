@@ -11,7 +11,7 @@
   -- Since not all the options in the processChoice() method in Registration.java are selectable (e.g. printing all courses, adding to waitlist etc), we did not write tests for the processChoice() method because it is not complete right now. We intend to have the tests for that method by the next iteration.
 
 ### What commands are needed to compile and run your code from the command line (or better yet, provide a script that people can use to run your program!)
-  -- You need to be in bash and run the below command.
+  -- You need to be in bash and run the following command.
   -- ./run_program.sh
   
 ### Note:
