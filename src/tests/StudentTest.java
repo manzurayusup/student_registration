@@ -79,7 +79,6 @@ class StudentTest {
     
     @Test
     void testAddWaitlistCourse() {
-    	System.out.println("hello 100");
     	ErrorCodes returnValue = student.addWaitlistCourse(course3);
     	assertEquals(ErrorCodes.SUCCESS, returnValue);	
     }
