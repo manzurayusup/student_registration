@@ -12,10 +12,10 @@ As of right now, our entire code works. However, not all options are selectable 
 Since not all the options in the processChoice() method in Registration.java are selectable (e.g. printing all courses, adding to waitlist etc), we did not write tests for the processChoice() method because it is not complete right now. We intend to have the tests for that method by the next iteration.
 
 ### What commands are needed to compile and run your code from the command line (or better yet, provide a script that people can use to run your program!)
-  You need to be in bash and run the following command: ./run_program.sh
-  For ID, type 123456 (no spaces) and click ENTER.
-  To register for a course, type 1 then press ENTER. Then type CSE131 (or CSE132) to register for that class and click ENTER. 
-  To quit, type 5 and press ENTER.
+  You need to be in bash and run the following command: ./run_program.sh <br/>
+  For ID, type 123456 (no spaces) and click ENTER. <br/>
+  To register for a course, type 1 then press ENTER. Then type CSE131 (or CSE132) to register for that class and click ENTER. <br/>
+  To quit, type 5 and press ENTER. <br/>
   
   
 ### Note:
