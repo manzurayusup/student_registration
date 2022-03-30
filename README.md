@@ -7,11 +7,12 @@
   -- In the next Iteration, we want to be able to save the changes a student has made onto their account after the user quits. We also want to print out all the available classes the student can choose from to take. Like we previously said, we want to take out the part that print out all the classes the student has registered for after the user registers for a class, and instead, we want to add a separate numbered option the user can elect that will display the classes the user has registered for. In this iteration, we will also implement the waitlist option when the class is full, complete the processChoice() method in Registration.java and write tests for processChoice().
 
 ###	Is there anything that you implemented but doesn't currently work
-  -- As of right now, our entire code works. However, not all options are selectable because the code has not been implemented, yet. The user is allowed to log-in, register for an available class, and quit.
+  -- As of right now, our entire code works. However, not all options are selectable because the code has not been implemented, yet. The user is allowed to log-in, register for an available class, and quit. <br/>
   -- Since not all the options in the processChoice() method in Registration.java are selectable (e.g. printing all courses, adding to waitlist etc), we did not write tests for the processChoice() method because it is not complete right now. We intend to have the tests for that method by the next iteration.
 
 ### What commands are needed to compile and run your code from the command line (or better yet, provide a script that people can use to run your program!)
-  -- You need to be in bash and run the following command: ./run_program.sh
+  -- You need to be in bash and run the following command: <br/>
+  ./run_program.sh
   
 ### Note:
   -- We merged the make_main_registration_class to main even though the functionality inside Registration.java is not complete. This was done to make it easy to clone and run the program and for grading purposes and peer review. We plan to complete Registration.java before the upcoming iteration.
