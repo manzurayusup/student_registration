@@ -34,38 +34,43 @@ public class Student {
     public LinkedList<Course> getWaitlistedCourses() {
         return this.waitlistedCourses;
     }
+    
+    /**
+     * 
+     * @param waitlistCourse: Course to be added to the waitlist
+     * @return An enum indicating if the addition was successful.
+     */
     public ErrorCodes addWaitlistCourse(Course waitlistCourse) {
     	if (this.waitlistedCourses.size() + this.registeredCourses.size() == 7) {
-//    		System.out.println("Error: Cannot exceed 21 total credits");
     		return ErrorCodes.ERROR;
-    	}
-    	else {
-    		if (this.registeredCourses.contains(waitlistCourse)) {
-//    			System.out.println("Error: Student is already registered for this course. Remove course from registered courses first");
+    	} else {
+    		if (this.registeredCourses.contains(waitlistCourse)) {;
     			return ErrorCodes.ERROR;
-    		}
-    		else {
+    		} else {
     			if (!this.waitlistedCourses.contains(waitlistCourse)) {
                     this.waitlistedCourses.add(waitlistCourse);
-                }
-        		else {
-//        			System.out.println("Course already exists in the waitlisted courses");
+                } else {
         			return ErrorCodes.ERROR;
         		}
     		}
     	}
     	return ErrorCodes.SUCCESS;
     }
+    
+    /**
+     * 
+     * @param waitlistCourse: Course to be removed from the waitlist
+     * @return An enum indicating if the removal was successful.
+     */
     public ErrorCodes removeWaitlistCourse(Course waitlistCourse) {
         if (this.waitlistedCourses.contains(waitlistCourse)) {
             this.waitlistedCourses.remove(waitlistCourse);
-        }
-        else {
-//            System.out.println("Error: Course does not exist in student's waitlisted courses");
+        } else {
         	return ErrorCodes.ERROR;
         }
         return ErrorCodes.SUCCESS;
     }
+    
     
     public void displayWaitListCourses() {
         for (int i=0; i<this.waitlistedCourses.size(); i++) {
@@ -73,42 +78,47 @@ public class Student {
         }
     }
 
+    
     public LinkedList<Course> getRegisteredCourses() {
         return this.registeredCourses;
     }
     
+    /**
+     * 
+     * @param registerCourse: Add a Course to the Student's register list.
+     * @return An enum indicating whether the action was successful.
+     */
     public ErrorCodes addRegisterCourse(Course registerCourse) {
     	if (this.waitlistedCourses.size() + this.registeredCourses.size() == 7) {
-//    		System.out.println("Error: Cannot exceed 21 total credits");
     		return ErrorCodes.ERROR;
-    	}
-    	else {
+    	} else {
     		if (this.waitlistedCourses.contains(registerCourse)) {
-//    			System.out.println("Error: Student is already waitlisted for this course");
     			return ErrorCodes.ERROR;
-    		}
-    		else {
+    		} else {
     			if (!this.registeredCourses.contains(registerCourse)) {
 	                this.registeredCourses.add(registerCourse);
-	            }
-	    		else {
-//	    			System.out.println("Course already exists in the registered courses");
+	            } else {
 	    			return ErrorCodes.ERROR;
 	    		}
     		}
     	}
     	return ErrorCodes.SUCCESS;
     }
+    
+    /**
+     * 
+     * @param registerCourse: Remove a Course from the Student's register list.
+     * @return	An enum indicating whether the action was successful.
+     */
     public ErrorCodes removeRegisterCourse(Course registerCourse) {
         if (this.registeredCourses.contains(registerCourse)) {
             this.registeredCourses.remove(registerCourse);
-        }
-        else {
-            System.out.println("Error: Course does not exist in student's registered courses");
+        } else {
             return ErrorCodes.ERROR;
         }
         return ErrorCodes.SUCCESS;
     }
+    
     public void displayRegisterCourses() {
         for (int i=0; i<this.registeredCourses.size(); i++) {
             System.out.println(this.registeredCourses.get(i));
