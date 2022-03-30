@@ -56,8 +56,6 @@ class StudentTest {
 	}
     @Test
 	void testGetID() {
-    	System.out.println("Hello0");
-
 		int expected = 472936;
 		assertEquals(true, expected == student.getID());
 	}
