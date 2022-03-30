@@ -1,10 +1,13 @@
 package classes;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Vector;
@@ -19,22 +22,24 @@ public class Registration
     {
     	
         Student currentStudent = intro();
-        processChoice(currentStudent);
+        processChoice(currentStudent, System.in);
         saveRegistration();
+        
     }
     
     // get a choice from user and process it accordingly.
     // input: the current student that is making the choices.
-    public static void processChoice(Student currentStudent) throws FileNotFoundException {
+    public static void processChoice(Student currentStudent, InputStream inputStream) throws FileNotFoundException {
     	int choice=5;
         do {
             printChoices();
-            choice= keyboard.nextInt();
-            keyboard.nextLine();
+            Scanner scanner = new Scanner(inputStream);
+            choice= scanner.nextInt();
+            scanner.nextLine();
             switch (choice)
             {
 				// more functionalities will be added as we go.
-                case 1: register(currentStudent); break;
+                case 1: register(currentStudent, System.in); break;
                 case 2: waitlist(currentStudent); break;
                 case 3: printCourse(); break;
                 case 4: printAllCourses(); break;
@@ -47,18 +52,19 @@ public class Registration
     public static Student intro() {
     	System.out.println("Welcome to the student registration system!");
         System.out.println("Enter Student ID to log in:");
-        Student currentStudent = logIn();
+        Student currentStudent = logIn(System.in);
         
         while (currentStudent == null) {
         	System.out.println("Did not recognize ID, please try again");
-        	currentStudent = logIn(); 	
+        	currentStudent = logIn(System.in); 	
         }
         return currentStudent;
     }
     
     // use user Id to create a student object, hence logging them in.
-    public static Student logIn() {
-    	int id = getId();
+    public static Student logIn(InputStream inputStream) {
+    	
+    	int id = getId(inputStream);
     	if (id == -1) {
     		return null;
     	}
@@ -68,9 +74,13 @@ public class Registration
     }
     
     // return: an integer Id inputted by a user.
-    public static int getId() {
+    public static int getId(InputStream inputStream) {
     	try {
-    		String id = keyboard.next();
+    		String id = "";
+    		Scanner scanner = new Scanner(inputStream);
+    		if (scanner.hasNext()) {
+    			id = scanner.next();
+    		}
     		if (id.length() > 6) {
     			System.out.println("Not a legal integer, please only enter 6 digits");
     			return -1;
@@ -217,10 +227,12 @@ public class Registration
 	
 	// input: the current student that registers for a course.
 	// Desc: prompts user for course code, checks if course is in database and adds course to registered courses for student.
-	public static void register(Student currentStudent) throws FileNotFoundException {
+	public static void register(Student currentStudent, InputStream inputStream) throws FileNotFoundException {
 		System.out.println("Please enter the course code of the course you want to register for");
-		String courseCode = keyboard.next();
-		keyboard.nextLine();
+		Scanner scanner = new Scanner(inputStream);
+		String courseCode = scanner.next();
+		System.out.println("Course code: " + courseCode);
+		scanner.nextLine();
 		Course course = makeCourse(courseCode);
 		if (course != null) {
 			registerForSingleCourse(course, currentStudent);

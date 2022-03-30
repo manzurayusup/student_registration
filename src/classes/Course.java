@@ -32,6 +32,10 @@ public class Course{
 		this.credits = credits;
 	}
 	
+	/**
+	 * 
+	 * @return a default date object initialized to a dummy date.
+	 */
 	public static Date initializeDate() {
 		Date defaultDate = new Date();
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -105,6 +109,11 @@ public class Course{
 		return this.seats;
 	}
 	
+	/**
+	 * 
+	 * @param time: a string time to be converted to date object
+	 * @return: a date object from time.
+	 */
 	public static Date parseStringToDate(String time) {
 		Date courseDate = new Date();
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -116,6 +125,9 @@ public class Course{
 		return courseDate;
 	}
 	
+	/**
+	 * @return a string containing all information about this course.
+	 */
 	public String toString(){
 		return "Name: " + this.getName() + " \nCode: " + this.getCourseCode() + " \nstart time: " + this.getStartTime() + " \nend time: " + this.getEndTime() + " \nseats left: " + this.getSeats() + " \nCredits: " + this.getCredits();
 	}
