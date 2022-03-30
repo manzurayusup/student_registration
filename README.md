@@ -13,7 +13,7 @@ Since not all the options in the processChoice() method in Registration.java are
 
 ### What commands are needed to compile and run your code from the command line (or better yet, provide a script that people can use to run your program!)
   You need to be in bash and run the following command: ./run_program.sh <br/>
-  For ID, type 123456 (no spaces) and click ENTER. <br/>
+  For ID, type 123456 (no spaces; the ID entered must match an ID inside students.txt and 123456 corresponds to the first student in that file) and click ENTER. <br/>
   To register for a course, type 1 then press ENTER. Then type CSE131 (or CSE132) to register for that class and click ENTER. <br/>
   To quit, type 5 and press ENTER. <br/>
   
