@@ -15,21 +15,21 @@ import java.util.Vector;
 
 public class Registration
 {
-	private static Scanner keyboard=new Scanner(System.in);
-	private static String courseTextPath = "src/textfiles/courses.txt";
-	private static String studentTextPath = "src/textfiles/students.txt";
+	private Scanner keyboard=new Scanner(System.in);
+	private String courseTextPath = "src/textfiles/courses.txt";
+	private String studentTextPath = "src/textfiles/students.txt";
     public static void main(String[] args) throws IOException
     {
-    	
-        Student currentStudent = intro();
-        processChoice(currentStudent, System.in);
-        saveRegistration();
+    	Registration registration = new Registration();
+        Student currentStudent = registration.intro();
+        registration.processChoice(currentStudent, System.in);
+        registration.saveRegistration();
         
     }
     
     // get a choice from user and process it accordingly.
     // input: the current student that is making the choices.
-    public static void processChoice(Student currentStudent, InputStream inputStream) throws FileNotFoundException {
+    public void processChoice(Student currentStudent, InputStream inputStream) throws FileNotFoundException {
     	int choice=5;
         do {
             printChoices();
@@ -49,7 +49,7 @@ public class Registration
     }
     
     // print an intro to the user and get their information.
-    public static Student intro() {
+    public Student intro() {
     	System.out.println("Welcome to the student registration system!");
         System.out.println("Enter Student ID to log in:");
         Student currentStudent = logIn(System.in);
@@ -62,7 +62,7 @@ public class Registration
     }
     
     // use user Id to create a student object, hence logging them in.
-    public static Student logIn(InputStream inputStream) {
+    public Student logIn(InputStream inputStream) {
     	
     	int id = getId(inputStream);
     	if (id == -1) {
@@ -74,7 +74,7 @@ public class Registration
     }
     
     // return: an integer Id inputted by a user.
-    public static int getId(InputStream inputStream) {
+    public int getId(InputStream inputStream) {
     	try {
     		String id = "";
     		Scanner scanner = new Scanner(inputStream);
@@ -95,7 +95,7 @@ public class Registration
     
     // return: a student object referring to an ID provided as argument. null if student could not be created.
     // input: a String corresponding to a students ID.
-    public static Student populateStudentObjectFromFile(String studentID) {
+    public Student populateStudentObjectFromFile(String studentID) {
     	File file = new File(studentTextPath);
     	if (file.canRead()) {
     		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -111,7 +111,7 @@ public class Registration
     
     // return: a student referring to an ID provided as argument from a file given. Null if student not found in file.
     // input: a string student id and a buffered reader that points to a file.
-    public static Student findStudentInFile (String studentID, BufferedReader br) throws FileNotFoundException, IOException {
+    public Student findStudentInFile (String studentID, BufferedReader br) throws FileNotFoundException, IOException {
     	String line;
     	while ((line = br.readLine()) != null) {
 	    	String words[] = line.split("\\s");
@@ -126,7 +126,7 @@ public class Registration
     // return: a student object referring to a student Id.
     // input: an array of strings containing information about a student and student id
     //			strings should be in order of: first name, last name, registered courses, waitlisted courses.
-    public static Student createSingleStudent(String[] words, String studentID) throws FileNotFoundException {
+    public Student createSingleStudent(String[] words, String studentID) throws FileNotFoundException {
     	String firstName = words[0];
 		String lastName = words[1];
     	Student student = new Student(firstName, lastName, Integer.valueOf(studentID));
@@ -140,7 +140,7 @@ public class Registration
     // input: a string containing all registered courses, and a student object.
     // Desc: populates the registered courses for a student object from the string.
     // 		registerdCourses should be a '-' separated string containing course codes.
-    public static void AddRegisteredCoursesToStudentObject(String registeredCourses, Student student) throws FileNotFoundException {
+    public void AddRegisteredCoursesToStudentObject(String registeredCourses, Student student) throws FileNotFoundException {
     	StringBuilder sb = new StringBuilder();
     	for (int i=0; i<registeredCourses.length(); i++) {
     		if (registeredCourses.charAt(i)=='-') {	
@@ -159,7 +159,7 @@ public class Registration
     // input: a string containing all waitlisted courses, and a student object.
     // Desc: populates the waitlisted courses for a student object from the string.
     // 		waitlistedCourses should be a '-' separated string containing course codes.
-    public static void AddWaitlistedCoursesToStudentObject(String waitlistedCourses, Student student) throws FileNotFoundException {
+    public void AddWaitlistedCoursesToStudentObject(String waitlistedCourses, Student student) throws FileNotFoundException {
     	StringBuilder sb = new StringBuilder();
     	for (int i=0; i<waitlistedCourses.length(); i++) {
     		if (waitlistedCourses.charAt(i)=='-') {
@@ -177,7 +177,7 @@ public class Registration
     
     // return: a course object or null if course could not be created
     // input: a string coursecode.
-    public static Course makeCourse(String courseCode) throws FileNotFoundException {
+    public Course makeCourse(String courseCode) throws FileNotFoundException {
     	String path = courseTextPath;
     	File file = new File(path);
     	Scanner courseReader = new Scanner(file);
@@ -188,7 +188,7 @@ public class Registration
     
     // return: a course object corresponding to a coursecode given as input, null if course could not be created.
     // input: a string coursecode and a scanner pointing to courses.txt
-    private static Course findAndCreateCourse(String courseCode, Scanner courseReader) {
+    private Course findAndCreateCourse(String courseCode, Scanner courseReader) {
     	while(courseReader.hasNextLine()) {
     		String currentCourse = courseReader.nextLine();
     		String splittedCurrentCourse[] = currentCourse.split("\\s");
@@ -202,7 +202,7 @@ public class Registration
     // return: a course object
     // input: an array of strings with information about the course.
     // 		array should be in the structure of: courseCode, courseName, courseStartTime, and courseEndTime. separaged with dashes.
-    private static Course createSingleCourse (String[] splittedCurrentCourse) {
+    private Course createSingleCourse (String[] splittedCurrentCourse) {
     	String courseCode = splittedCurrentCourse[0];
 		String courseName = splittedCurrentCourse[1];
 		String startTime = splittedCurrentCourse[2];
@@ -212,7 +212,7 @@ public class Registration
     }
 	
     // Post: prints the action options of the user.
-	public static void printChoices() {
+	public void printChoices() {
 		// the print pattern should match the order of the switch cases in the main function.
 		System.out.println("\t1. Register for a course");
         System.out.println("\t2. Add course to waitlist");
@@ -221,13 +221,13 @@ public class Registration
         System.out.println("\t5. Quit");
 	}
 	
-	public static void saveRegistration() {
+	public void saveRegistration() {
 		// this method saves the current registration status of the student in the student file.
 	}
 	
 	// input: the current student that registers for a course.
 	// Desc: prompts user for course code, checks if course is in database and adds course to registered courses for student.
-	public static void register(Student currentStudent, InputStream inputStream) throws FileNotFoundException {
+	public void register(Student currentStudent, InputStream inputStream) throws FileNotFoundException {
 		System.out.println("Please enter the course code of the course you want to register for");
 		Scanner scanner = new Scanner(inputStream);
 		String courseCode = scanner.next();
@@ -243,7 +243,7 @@ public class Registration
 	}
 	
 	// input: a course to register for and the registering student
-	public static void registerForSingleCourse (Course course, Student currentStudent) {
+	public void registerForSingleCourse (Course course, Student currentStudent) {
 		if (course.getSeats() > 0) {
 			ErrorCodes register = currentStudent.addRegisterCourse(course);
 			if (register == ErrorCodes.ERROR) {
@@ -255,15 +255,15 @@ public class Registration
 			}
 		}
 	}
-	public static void waitlist(Student currentStudent) {
+	public void waitlist(Student currentStudent) {
 		// this method gets the name of course the student wants to waitlist in, adds it to students waitlisted courses list.
 	}
 	
-	public static void printCourse() {
+	public void printCourse() {
 		// this method gets the coursecode from user input and displays details of that course
 	}
-	
-	public static void printAllCourses() {
+
+	public void printAllCourses() {
 		// this method prints all courses in the database (courses.txt).
 	}
 }

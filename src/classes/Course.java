@@ -36,7 +36,7 @@ public class Course{
 	 * 
 	 * @return a default date object initialized to a dummy date.
 	 */
-	public static Date initializeDate() {
+	public Date initializeDate() {
 		Date defaultDate = new Date();
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 		try {
@@ -114,7 +114,7 @@ public class Course{
 	 * @param time: a string time to be converted to date object
 	 * @return: a date object from time.
 	 */
-	public static Date parseStringToDate(String time) {
+	public Date parseStringToDate(String time) {
 		Date courseDate = new Date();
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 		try {
