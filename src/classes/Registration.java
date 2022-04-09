@@ -30,7 +30,7 @@ public class Registration
     // get a choice from user and process it accordingly.
     // input: the current student that is making the choices.
     public void processChoice(Student currentStudent, InputStream inputStream) throws FileNotFoundException {
-    	int choice=5;
+    	int choice=6;
         do {
             printChoices();
             Scanner scanner = new Scanner(inputStream);
@@ -43,9 +43,10 @@ public class Registration
                 case 2: waitlist(currentStudent); break;
                 case 3: printCourse(); break;
                 case 4: printAllCourses(); break;
+                case 5: currentStudent.displayRegisterCourses(); break;
                 default: break;
             }
-        }while (choice!=5);
+        }while (choice!=6);
     }
     
     // print an intro to the user and get their information.
@@ -266,4 +267,5 @@ public class Registration
 	public void printAllCourses() {
 		// this method prints all courses in the database (courses.txt).
 	}
+	
 }
