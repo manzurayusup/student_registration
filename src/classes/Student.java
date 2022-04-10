@@ -124,5 +124,16 @@ public class Student {
             System.out.println(this.registeredCourses.get(i));
         }
     }
+    
+    public void printSummary() {
+		System.out.println("----------------------- Summary ---------------------------");
+		System.out.println(toString());
+		System.out.println("------------------ Registered Courses ---------------------");
+		displayRegisterCourses();
+		System.out.println("------------------ Waitlisted Courses ---------------------");
+		displayWaitListCourses();
+		System.out.println("-----------------------------------------------------------");
+	}
+    
 
 }
