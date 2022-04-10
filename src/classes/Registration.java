@@ -198,6 +198,8 @@ public class Registration
     	}
     	return null;
     }
+//    CSE131 Introduction-to-Computer-Science 2022-08-29T11:30:00.000Z 2022-12-09T12:50:00.000Z TR Shook Yes Urbauer-222
+
 
     // return: a course object
     // input: an array of strings with information about the course.
@@ -207,7 +209,10 @@ public class Registration
 		String courseName = splittedCurrentCourse[1];
 		String startTime = splittedCurrentCourse[2];
 		String endTime = splittedCurrentCourse[3];
-		Course course = new Course(courseName, courseCode, startTime, endTime, 1, 1);
+		int seats = Integer.valueOf(splittedCurrentCourse[4]);
+		String professorName = splittedCurrentCourse[5];
+		String exams = splittedCurrentCourse[6];
+		Course course = new Course(courseName, courseCode, startTime, endTime, seats, 3, professorName, exams);
 		return course;
     }
 	
@@ -276,8 +281,18 @@ public class Registration
 			return ErrorCodes.ERROR;
 		}
 	}
-
-	public void printAllCourses() {
-		// this method prints all courses in the database (courses.txt).
+	//return: a String which contains all the courses in the database (courses.txt)
+	public String printAllCourses() throws FileNotFoundException {
+    	File file = new File(courseTextPath);
+    	Scanner courseReader = new Scanner(file);
+    	String allCourses="";
+    	while(courseReader.hasNextLine()) {
+    		String splittedCurrentCourse[] = courseReader.nextLine().split("\\s");
+    		Course course = makeCourse(splittedCurrentCourse[0]);
+    		allCourses+=course.toString()+"\n\n";
+    	}
+    	System.out.println(allCourses);
+    	return allCourses;
 	}
+	
 }
