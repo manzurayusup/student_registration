@@ -28,11 +28,10 @@ class RegistrationTest {
 		Student student = new Student("Jack", "Sparrow", 123456);
     	InputStream isLogIn = new ByteArrayInputStream("CSE131\n".getBytes());    	
 		registration.register(student, isLogIn);
-		String expected = "Name: Introduction-to-Computer-Science \n" + "Code: CSE131 \n" + "start time: 11:30:00 \n"
-				+ "end time: 12:50:00 \n" + "seats left: 1 \n" + "Credits: 1";
+		String expected = "Name: Introduction-to-Computer-Science \n"+ "Code: CSE131 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 20 \n"+ "Credits: 3\n"+ "Professor: Shook\n"+ "Exams: Yes";
 		assertTrue(expected.equals(student.getRegisteredCourses().get(0).toString()));
-
 	}
+
 	@Test
 	void testLogIn() throws FileNotFoundException {
 		
@@ -46,8 +45,7 @@ class RegistrationTest {
 	@Test
 	void testMakeCourse() throws FileNotFoundException {
 		Course createdCourse = registration.makeCourse("CSE131");
-		String expected = "Name: Introduction-to-Computer-Science \n" + "Code: CSE131 \n" + "start time: 11:30:00 \n"
-				+ "end time: 12:50:00 \n" + "seats left: 1 \n" + "Credits: 1";
+		String expected = "Name: Introduction-to-Computer-Science \n"+ "Code: CSE131 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 20 \n"+ "Credits: 3\n"+ "Professor: Shook\n"+ "Exams: Yes";
 		assertTrue(expected.equals(createdCourse.toString()));
 	}
 
@@ -55,8 +53,7 @@ class RegistrationTest {
 	void testAddRegisteredCoursesToStudentObject() throws FileNotFoundException {
 		Student student = new Student("Jack", "Sparrow", 123456);
 		registration.AddRegisteredCoursesToStudentObject("CSE131", student);
-		String expected = "Name: Introduction-to-Computer-Science \n" + "Code: CSE131 \n" + "start time: 11:30:00 \n"
-				+ "end time: 12:50:00 \n" + "seats left: 1 \n" + "Credits: 1";
+		String expected = "Name: Introduction-to-Computer-Science \n"+ "Code: CSE131 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 20 \n"+ "Credits: 3\n"+ "Professor: Shook\n"+ "Exams: Yes";
 		assertTrue(expected.equals(student.getRegisteredCourses().get(0).toString()));
 	}
 
@@ -64,8 +61,7 @@ class RegistrationTest {
 	void testAddWaitlistedCoursesToStudentObject() throws FileNotFoundException {
 		Student student = new Student("Jack", "Sparrow", 123456);
 		registration.AddWaitlistedCoursesToStudentObject("CSE131", student);
-		String expected = "Name: Introduction-to-Computer-Science \n" + "Code: CSE131 \n" + "start time: 11:30:00 \n"
-				+ "end time: 12:50:00 \n" + "seats left: 1 \n" + "Credits: 1";
+		String expected = "Name: Introduction-to-Computer-Science \n"+ "Code: CSE131 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 20 \n"+ "Credits: 3\n"+ "Professor: Shook\n"+ "Exams: Yes";
 		assertTrue(expected.equals(student.getWaitlistedCourses().get(0).toString()));
 	}
 
@@ -74,8 +70,7 @@ class RegistrationTest {
 		Student currentStudent = new Student("Jack", "Sparrow", 123456);
 		Course course = registration.makeCourse("CSE131");
 		registration.registerForSingleCourse(course, currentStudent);
-		String expected = "Name: Introduction-to-Computer-Science \n" + "Code: CSE131 \n" + "start time: 11:30:00 \n"
-				+ "end time: 12:50:00 \n" + "seats left: 1 \n" + "Credits: 1";
+		String expected = "Name: Introduction-to-Computer-Science \n"+ "Code: CSE131 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 20 \n"+ "Credits: 3\n"+ "Professor: Shook\n"+ "Exams: Yes";
 		assertTrue(expected.equals(currentStudent.getRegisteredCourses().get(0).toString()));
 	}
 
@@ -95,6 +90,12 @@ class RegistrationTest {
 		}
 		Course wcourse = registration.makeCourse("CSE330");
 		assertTrue(student.getWaitlistedCourses().get(0).getName().equals(wcourse.getName()));
+	}
+	@Test
+	void testPrintAllCourses() throws FileNotFoundException {
+		String returnedString = registration.printAllCourses();
+		String expected = "Name: Introduction-to-Computer-Science \n"+ "Code: CSE131 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 20 \n"+ "Credits: 3\n"+ "Professor: Shook\n"+ "Exams: Yes\n"+ "\n"+ "Name: Introduction-to-Computer-Engineering \n"+ "Code: CSE132 \n"+ "start time: 13:00:00 \n"+ "end time: 14:20:00 \n"+ "seats left: 30 \n"+ "Credits: 3\n"+ "Professor: Chamberlain\n"+ "Exams: Yes\n"+ "\n"+ "Name: Web-Development \n"+ "Code: CSE204 \n"+ "start time: 08:30:00 \n"+ "end time: 09:50:00 \n"+ "seats left: 40 \n"+ "Credits: 3\n"+ "Professor: Clapp\n"+ "Exams: No\n"+ "\n"+ "Name: Introduction-to-Data-Science \n"+ "Code: CSE217 \n"+ "start time: 14:30:00 \n"+ "end time: 15:50:00 \n"+ "seats left: 20 \n"+ "Credits: 3\n"+ "Professor: Singh\n"+ "Exams: No\n"+ "\n"+ "Name: Logic-and-Discrete-Mathematics \n"+ "Code: CSE240 \n"+ "start time: 10:00:00 \n"+ "end time: 11:20:00 \n"+ "seats left: 30 \n"+ "Credits: 3\n"+ "Professor: Garnett\n"+ "Exams: No\n"+ "\n"+ "Name: Data-Structures-and-Algorithms \n"+ "Code: CSE247 \n"+ "start time: 13:00:00 \n"+ "end time: 14:20:00 \n"+ "seats left: 40 \n"+ "Credits: 3\n"+ "Professor: Cole\n"+ "Exams: No\n"+ "\n"+ "Name: Rapid-Prototype-Development-and-Creative-Programming \n"+ "Code: CSE330 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 60 \n"+ "Credits: 3\n"+ "Professor: Sproull\n"+ "Exams: No\n"+ "\n"+ "Name: Object-Oriented-Software-Development-Laboratory \n"+ "Code: CSE332 \n"+ "start time: 10:00:00 \n"+ "end time: 11:20:00 \n"+ "seats left: 100 \n"+ "Credits: 3\n"+ "Professor: Shidal\n"+ "Exams: No\n"+ "\n"+ "Name: Analysis-of-Algorithms \n"+ "Code: CSE347 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 120 \n"+ "Credits: 3\n"+ "Professor: Buhler\n"+ "Exams: Yes"+ "\n\n";
+    	assertTrue(returnedString.equals(expected));
 	}
 
 }
