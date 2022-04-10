@@ -40,7 +40,7 @@ public class Registration
             {
 				// more functionalities will be added as we go.
                 case 1: register(currentStudent, System.in); break;
-                case 2: printCourse(); break;
+                case 2: printCourse(System.in); break;
                 case 3: printAllCourses(); break;
                 case 4: currentStudent.displayRegisterCourses(); break;
                 default: break;
@@ -220,10 +220,9 @@ public class Registration
 	public void printChoices() {
 		// the print pattern should match the order of the switch cases in the main function.
 		System.out.println("\t1. Register for a course");
-//        System.out.println("\t2. Add course to waitlist");
-		System.out.println("\t2. Print enrolled courses");
-        System.out.println("\t3. Print a course");
-        System.out.println("\t4. Print all courses");
+        System.out.println("\t2. Print a course");
+        System.out.println("\t3. Print all courses");
+        System.out.println("\t4. Print enrolled courses (not yet implemented)");
         System.out.println("\t5. Quit");
 	}
 	
