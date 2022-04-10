@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.LinkedList;
 
 import classes.Course;
+import classes.ErrorCodes;
 import classes.Registration;
 import classes.Student;
 
@@ -91,7 +92,24 @@ class RegistrationTest {
 		Course wcourse = registration.makeCourse("CSE330");
 		assertTrue(student.getWaitlistedCourses().get(0).getName().equals(wcourse.getName()));
 	}
+  
 	@Test
+	void testPrintCourse() throws FileNotFoundException {
+		InputStream is = new ByteArrayInputStream("CSE131".getBytes());    	
+		ErrorCodes isPrinted = registration.printCourse(is);
+		
+		assertEquals(ErrorCodes.SUCCESS, isPrinted);
+	}
+	
+	@Test
+	void testPrintCourseWrongCourse() throws FileNotFoundException {
+		InputStream is = new ByteArrayInputStream("hello".getBytes());    	
+		ErrorCodes isPrinted = registration.printCourse(is);
+		
+		assertEquals(ErrorCodes.ERROR, isPrinted);
+  }
+  
+  @Test
 	void testPrintAllCourses() throws FileNotFoundException {
 		String returnedString = registration.printAllCourses();
 		String expected = "Name: Introduction-to-Computer-Science \n"+ "Code: CSE131 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 20 \n"+ "Credits: 3\n"+ "Professor: Shook\n"+ "Exams: Yes\n"+ "\n"+ "Name: Introduction-to-Computer-Engineering \n"+ "Code: CSE132 \n"+ "start time: 13:00:00 \n"+ "end time: 14:20:00 \n"+ "seats left: 30 \n"+ "Credits: 3\n"+ "Professor: Chamberlain\n"+ "Exams: Yes\n"+ "\n"+ "Name: Web-Development \n"+ "Code: CSE204 \n"+ "start time: 08:30:00 \n"+ "end time: 09:50:00 \n"+ "seats left: 40 \n"+ "Credits: 3\n"+ "Professor: Clapp\n"+ "Exams: No\n"+ "\n"+ "Name: Introduction-to-Data-Science \n"+ "Code: CSE217 \n"+ "start time: 14:30:00 \n"+ "end time: 15:50:00 \n"+ "seats left: 20 \n"+ "Credits: 3\n"+ "Professor: Singh\n"+ "Exams: No\n"+ "\n"+ "Name: Logic-and-Discrete-Mathematics \n"+ "Code: CSE240 \n"+ "start time: 10:00:00 \n"+ "end time: 11:20:00 \n"+ "seats left: 30 \n"+ "Credits: 3\n"+ "Professor: Garnett\n"+ "Exams: No\n"+ "\n"+ "Name: Data-Structures-and-Algorithms \n"+ "Code: CSE247 \n"+ "start time: 13:00:00 \n"+ "end time: 14:20:00 \n"+ "seats left: 40 \n"+ "Credits: 3\n"+ "Professor: Cole\n"+ "Exams: No\n"+ "\n"+ "Name: Rapid-Prototype-Development-and-Creative-Programming \n"+ "Code: CSE330 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 60 \n"+ "Credits: 3\n"+ "Professor: Sproull\n"+ "Exams: No\n"+ "\n"+ "Name: Object-Oriented-Software-Development-Laboratory \n"+ "Code: CSE332 \n"+ "start time: 10:00:00 \n"+ "end time: 11:20:00 \n"+ "seats left: 100 \n"+ "Credits: 3\n"+ "Professor: Shidal\n"+ "Exams: No\n"+ "\n"+ "Name: Analysis-of-Algorithms \n"+ "Code: CSE347 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 120 \n"+ "Credits: 3\n"+ "Professor: Buhler\n"+ "Exams: Yes"+ "\n\n";
