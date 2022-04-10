@@ -40,13 +40,13 @@ public class Registration
             {
 				// more functionalities will be added as we go.
                 case 1: register(currentStudent, System.in); break;
-                case 2: waitlist(currentStudent); break;
-                case 3: printCourse(); break;
-                case 4: printAllCourses(); break;
-                case 5: currentStudent.displayRegisterCourses(); break;
+//                case 2: waitlist(currentStudent); break;
+                case 2: printCourse(); break;
+                case 3: printAllCourses(); break;
+                case 4: currentStudent.displayRegisterCourses(); break;
                 default: break;
             }
-        }while (choice!=6);
+        }while (choice!=5);
     }
     
     // print an intro to the user and get their information.
@@ -221,7 +221,8 @@ public class Registration
 	public void printChoices() {
 		// the print pattern should match the order of the switch cases in the main function.
 		System.out.println("\t1. Register for a course");
-        System.out.println("\t2. Add course to waitlist");
+//        System.out.println("\t2. Add course to waitlist");
+		System.out.println("\t2. Print enrolled courses");
         System.out.println("\t3. Print a course");
         System.out.println("\t4. Print all courses");
         System.out.println("\t5. Quit");
@@ -255,14 +256,16 @@ public class Registration
 			if (register == ErrorCodes.ERROR) {
 				System.out.println("Student was not able to register to this course");
 			}else {
+				course.setSeats(course.getSeats() - 1);
 				System.out.println("Student has successfully registered to this course");
-				System.out.println(currentStudent.toString() + " Registered Courses: ");
-				System.out.println(currentStudent.getRegisteredCourses());
+				currentStudent.printSummary();
 			}
+		} else {
+			// waitlist the student
+			currentStudent.addWaitlistCourse(course);
+			System.out.println("Student added to the waitlist for this course.");
+			currentStudent.printSummary();
 		}
-	}
-	public void waitlist(Student currentStudent) {
-		// this method gets the name of course the student wants to waitlist in, adds it to students waitlisted courses list.
 	}
 	
 	public void printCourse() {
