@@ -1,14 +1,17 @@
 package classes;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -23,14 +26,14 @@ public class Registration
     	Registration registration = new Registration();
         Student currentStudent = registration.intro();
         registration.processChoice(currentStudent, System.in);
-        registration.saveRegistration();
         
     }
     
     // get a choice from user and process it accordingly.
     // input: the current student that is making the choices.
-    public void processChoice(Student currentStudent, InputStream inputStream) throws FileNotFoundException {
+    public void processChoice(Student currentStudent, InputStream inputStream) throws IOException {
     	int choice=6;
+    	
         do {
             printChoices();
             Scanner scanner = new Scanner(inputStream);
@@ -226,13 +229,62 @@ public class Registration
         System.out.println("\t5. Quit");
 	}
 	
-	public void saveRegistration() {
+	public void saveRegistration(Student currentStudent, String courseCode) throws IOException {
 		// this method saves the current registration status of the student in the student file.
+		BufferedReader sbr = new BufferedReader(new FileReader(studentTextPath));
+		String studentLine;
+		LinkedList<String[]> studentList = new LinkedList<>();
+		while ((studentLine = sbr.readLine()) != null) {
+			String words[] = studentLine.split("\\s");
+			studentList.add(words);
+		}
+		sbr.close();
+		BufferedWriter sbw = new BufferedWriter(new FileWriter(studentTextPath));
+		for (int i = 0; i <studentList.size(); i++) {
+			String words[] = studentList.get(i);
+			String studentOnThisLine = words[0] + " " + words[1] + " " + words[2];
+			for (int j = 0; j < words.length; j++) {
+				if ((studentOnThisLine.equals(currentStudent.toString())) && (j == 3)) {
+					sbw.write(words[3] + "-" + courseCode);
+				} else {
+					sbw.write(words[j]);
+				}
+				sbw.write(" ");
+			}
+			sbw.write("\n");
+		}
+		sbw.close();
+		
+		
+		BufferedReader cbr = new BufferedReader(new FileReader(courseTextPath));
+		String courseLine;
+		LinkedList<String[]> courseList = new LinkedList<>();
+		while ((courseLine = cbr.readLine()) != null) {
+			String words[] = courseLine.split("\\s");
+			courseList.add(words);
+		}
+		cbr.close();
+		BufferedWriter cbw = new BufferedWriter(new FileWriter(courseTextPath));
+		for (int i = 0; i < courseList.size(); i++) {
+			String words[] = courseList.get(i);
+			for (int j = 0; j < words.length; j++) {
+				if ((words[0].equals(courseCode)) && (j == 4)) {
+					int seats = Integer.valueOf(words[j]);
+					seats--;
+					cbw.write(String.valueOf(seats));
+				} else {
+					cbw.write(words[j]);
+				}
+				cbw.write(" ");
+			}
+			cbw.write("\n");
+		}
+		cbw.close();
 	}
 	
 	// input: the current student that registers for a course.
 	// Desc: prompts user for course code, checks if course is in database and adds course to registered courses for student.
-	public void register(Student currentStudent, InputStream inputStream) throws FileNotFoundException {
+	public void register(Student currentStudent, InputStream inputStream) throws IOException {
 		System.out.println("Please enter the course code of the course you want to register for");
 		Scanner scanner = new Scanner(inputStream);
 		String courseCode = scanner.next();
@@ -241,6 +293,7 @@ public class Registration
 		Course course = makeCourse(courseCode);
 		if (course != null) {
 			registerForSingleCourse(course, currentStudent);
+			saveRegistration(currentStudent, courseCode);
 		}
 		else {
 			System.out.println("Course does not exist");
