@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import classes.Course;
+import classes.ErrorCodes;
 import classes.Registration;
 import classes.Student;
 
@@ -125,7 +126,24 @@ class RegistrationTest {
 		Course wcourse = registration.makeCourse("CSE330");
 		assertTrue(student.getWaitlistedCourses().get(0).getName().equals(wcourse.getName()));
 	}
+  
 	@Test
+	void testPrintCourse() throws FileNotFoundException {
+		InputStream is = new ByteArrayInputStream("CSE131".getBytes());    	
+		ErrorCodes isPrinted = registration.printCourse(is);
+		
+		assertEquals(ErrorCodes.SUCCESS, isPrinted);
+	}
+	
+	@Test
+	void testPrintCourseWrongCourse() throws FileNotFoundException {
+		InputStream is = new ByteArrayInputStream("hello".getBytes());    	
+		ErrorCodes isPrinted = registration.printCourse(is);
+		
+		assertEquals(ErrorCodes.ERROR, isPrinted);
+  }
+  
+  @Test
 	void testPrintAllCourses() throws FileNotFoundException {
 		String returnedString = registration.printAllCourses();
 		

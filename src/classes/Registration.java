@@ -40,7 +40,6 @@ public class Registration
             {
 				// more functionalities will be added as we go.
                 case 1: register(currentStudent, System.in); break;
-//                case 2: waitlist(currentStudent); break;
                 case 2: printCourse(); break;
                 case 3: printAllCourses(); break;
                 case 4: currentStudent.displayRegisterCourses(); break;
@@ -268,8 +267,22 @@ public class Registration
 		}
 	}
 	
-	public void printCourse() {
+	public ErrorCodes printCourse(InputStream inputStream) throws FileNotFoundException {
 		// this method gets the coursecode from user input and displays details of that course
+		// Course (String name, String courseCode, String startTime, String endTime, int seats, int credits)
+		System.out.println("Please enter the course code: ");
+		Scanner scanner = new Scanner(inputStream);
+		String courseCode = scanner.nextLine();
+		
+		Course course = makeCourse(courseCode);
+		if (course != null) {
+			System.out.println(course);
+			return ErrorCodes.SUCCESS;
+		}
+		else {
+			System.out.println("Course does not exist");
+			return ErrorCodes.ERROR;
+		}
 	}
 	//return: a String which contains all the courses in the database (courses.txt)
 	public String printAllCourses() throws FileNotFoundException {
