@@ -15,19 +15,14 @@ class CourseTest {
 	@BeforeEach
 	void setup() {
 		course = new Course();
-		course2 = new Course("programming tools and techniques", "CSE237", "2022-08-29T13:00:00.000Z", "2022-08-29T14:20:00.000Z", 45, 3);
+		course2 = new Course("Introduction-to-Computer-Science", "CSE131", "2022-08-29T11:30:00.000Z", "2022-12-09T12:50:00.000Z", 20, 3, "Shook", "Yes");
 	}
 
 	// test toString overloadded method method.
 	@Test
 	void testToString () {
 //		String expected = "Name: programming tools and techniques \nCode: CSE237 \nstart time: 13:00:00 \nendtime: 14:20:00 \nseats left: 45 \nCredits: 3";
-		String expected = "Name: programming tools and techniques \n"
-				+ "Code: CSE237 \n"
-				+ "start time: 13:00:00 \n"
-				+ "end time: 14:20:00 \n"
-				+ "seats left: 45 \n"
-				+ "Credits: 3";
+		String expected = "Name: Introduction-to-Computer-Science \n"+ "Code: CSE131 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 20 \n"+ "Credits: 3\n"+ "Professor: Shook\n"+ "Exams: Yes";
 		System.out.println(course2.toString());
 		assertTrue(expected.equals(course2.toString()));
 	}

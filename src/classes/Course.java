@@ -13,6 +13,8 @@ public class Course{
 	private Date endTime;
 	private int seats;
 	private int credits;
+	private String professorName;
+	private String exams;
 	
 	public Course () {
 		this.name = "unknown";
@@ -21,15 +23,19 @@ public class Course{
 		this.endTime = initializeDate();
 		this.seats = -1;
 		this.credits = -1;
+		this.professorName = "unknown";
+		this.exams = "Yes";
 	}
 	
-	public Course (String name, String courseCode, String startTime, String endTime, int seats, int credits) {
+	public Course (String name, String courseCode, String startTime, String endTime, int seats, int credits, String professorName, String exams) {
 		this.name = name;
 		this.courseCode = courseCode;
 		setStartTime(startTime);
 		setEndTime(endTime);
 		this.seats = seats;
 		this.credits = credits;
+		this.professorName = professorName;
+		this.exams = exams;
 	}
 	
 	/**
@@ -50,6 +56,20 @@ public class Course{
 	public void setName(String name){
 		this.name = name;
 	}
+	
+	public void setProfessorName(String professorName) {
+		this.professorName = professorName;
+	}
+	public void setExams(String exams) {
+		this.exams = exams;
+	}
+	public String getExams() {
+		return this.exams;
+	}
+	public String getProfessorName() {
+		return this.professorName;
+	}
+	
 	
 	public void setCourseCode(String code) {
 		this.courseCode = code;
@@ -129,6 +149,6 @@ public class Course{
 	 * @return a string containing all information about this course.
 	 */
 	public String toString(){
-		return "Name: " + this.getName() + " \nCode: " + this.getCourseCode() + " \nstart time: " + this.getStartTime() + " \nend time: " + this.getEndTime() + " \nseats left: " + this.getSeats() + " \nCredits: " + this.getCredits();
+		return "Name: " + this.getName() + " \nCode: " + this.getCourseCode() + " \nstart time: " + this.getStartTime() + " \nend time: " + this.getEndTime() + " \nseats left: " + this.getSeats() + " \nCredits: " + this.getCredits() + "\nProfessor: " + this.getProfessorName() + "\nExams: " + this.getExams();
 	}
 }
