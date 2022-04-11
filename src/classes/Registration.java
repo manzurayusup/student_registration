@@ -299,6 +299,14 @@ public class Registration
 	
 	// input: a course to register for and the registering student
 	public void registerForSingleCourse (Course course, Student currentStudent) throws IOException {
+		if (currentStudent.getRegisteredCourses().contains(course)) {
+			System.out.println("You're already registered for this course");
+			return;
+		}
+		if (currentStudent.getWaitlistedCourses().contains(course)) {
+			System.out.println("You're already waitlisted for this course");
+			return;
+		}
 		if (course.getSeats() > 0) {
 			ErrorCodes register = currentStudent.addRegisterCourse(course);
 			if (register == ErrorCodes.ERROR) {
@@ -306,7 +314,6 @@ public class Registration
 			}else {
 				course.setSeats(course.getSeats() - 1);
 				System.out.println("Student has successfully registered to this course");
-				System.out.println("This is what the updated seats should be TESTTESTESGSTFSDGVJBDFNSKj: " + course.getSeats());
 				saveRegistration(currentStudent, course);
 				currentStudent.printSummary();
 			}
@@ -314,7 +321,6 @@ public class Registration
 			// waitlist the student
 			currentStudent.addWaitlistCourse(course);
 			System.out.println("Student added to the waitlist for this course.");
-			System.out.println("1111This is what the updated seats should be TESTTESTESGSTFSDGVJBDFNSKj: " + course.getSeats());
 			currentStudent.printSummary();
 		}
 	}

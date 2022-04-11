@@ -151,4 +151,16 @@ public class Course{
 	public String toString(){
 		return "Name: " + this.getName() + " \nCode: " + this.getCourseCode() + " \nstart time: " + this.getStartTime() + " \nend time: " + this.getEndTime() + " \nseats left: " + this.getSeats() + " \nCredits: " + this.getCredits() + "\nProfessor: " + this.getProfessorName() + "\nExams: " + this.getExams();
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+	    // self check
+	    if (this == o) return true;
+	    // null check
+	    if (o == null) return false;
+	    Course course = (Course) o;
+	    // field comparison
+	    return Objects.equals(this.courseCode, course.courseCode);
+	}
+	
 }
