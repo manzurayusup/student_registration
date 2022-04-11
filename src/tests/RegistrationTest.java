@@ -79,7 +79,7 @@ class RegistrationTest {
 	}
 
 	@Test
-	void testRegisterForSingleCourse() throws FileNotFoundException {
+	void testRegisterForSingleCourse() throws IOException {
 		Student currentStudent = new Student("Jack", "Sparrow", 123456);
 		Course course = registration.makeCourse("CSE131");
 		registration.registerForSingleCourse(course, currentStudent);

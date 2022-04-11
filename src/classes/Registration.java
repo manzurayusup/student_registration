@@ -229,23 +229,17 @@ public class Registration
         System.out.println("\t5. Quit");
 	}
 	
-	public void saveRegistration(Student currentStudent, String courseCode) throws IOException {
+	public void saveRegistration(Student currentStudent, Course course) throws IOException {
 		// this method saves the current registration status of the student in the student file.
-		BufferedReader sbr = new BufferedReader(new FileReader(studentTextPath));
-		String studentLine;
-		LinkedList<String[]> studentList = new LinkedList<>();
-		while ((studentLine = sbr.readLine()) != null) {
-			String words[] = studentLine.split("\\s");
-			studentList.add(words);
-		}
-		sbr.close();
+		LinkedList<String[]> studentList = bufferedReaderSaveRegistration(studentTextPath);
+		
 		BufferedWriter sbw = new BufferedWriter(new FileWriter(studentTextPath));
 		for (int i = 0; i <studentList.size(); i++) {
 			String words[] = studentList.get(i);
 			String studentOnThisLine = words[0] + " " + words[1] + " " + words[2];
 			for (int j = 0; j < words.length; j++) {
 				if ((studentOnThisLine.equals(currentStudent.toString())) && (j == 3)) {
-					sbw.write(words[3] + "-" + courseCode);
+					sbw.write(words[3] + "-" + course.getCourseCode());
 				} else {
 					sbw.write(words[j]);
 				}
@@ -256,22 +250,14 @@ public class Registration
 		sbw.close();
 		
 		
-		BufferedReader cbr = new BufferedReader(new FileReader(courseTextPath));
-		String courseLine;
-		LinkedList<String[]> courseList = new LinkedList<>();
-		while ((courseLine = cbr.readLine()) != null) {
-			String words[] = courseLine.split("\\s");
-			courseList.add(words);
-		}
-		cbr.close();
+		LinkedList<String[]> courseList = bufferedReaderSaveRegistration(courseTextPath);
+		
 		BufferedWriter cbw = new BufferedWriter(new FileWriter(courseTextPath));
 		for (int i = 0; i < courseList.size(); i++) {
 			String words[] = courseList.get(i);
 			for (int j = 0; j < words.length; j++) {
-				if ((words[0].equals(courseCode)) && (j == 4)) {
-					int seats = Integer.valueOf(words[j]);
-					seats--;
-					cbw.write(String.valueOf(seats));
+				if ((words[0].equals(course.getCourseCode())) && (j == 4)) {
+					cbw.write(String.valueOf(course.getSeats()));
 				} else {
 					cbw.write(words[j]);
 				}
@@ -280,6 +266,18 @@ public class Registration
 			cbw.write("\n");
 		}
 		cbw.close();
+	}
+	
+	public LinkedList<String[]> bufferedReaderSaveRegistration(String textpath) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(textpath));
+		String line;
+		LinkedList<String[]> list = new LinkedList<>();
+		while ((line = br.readLine()) != null) {
+			String words[] = line.split("\\s");
+			list.add(words);
+		}
+		br.close();
+		return list;
 	}
 	
 	// input: the current student that registers for a course.
@@ -293,7 +291,6 @@ public class Registration
 		Course course = makeCourse(courseCode);
 		if (course != null) {
 			registerForSingleCourse(course, currentStudent);
-			saveRegistration(currentStudent, courseCode);
 		}
 		else {
 			System.out.println("Course does not exist");
@@ -301,7 +298,7 @@ public class Registration
 	}
 	
 	// input: a course to register for and the registering student
-	public void registerForSingleCourse (Course course, Student currentStudent) {
+	public void registerForSingleCourse (Course course, Student currentStudent) throws IOException {
 		if (course.getSeats() > 0) {
 			ErrorCodes register = currentStudent.addRegisterCourse(course);
 			if (register == ErrorCodes.ERROR) {
@@ -309,12 +306,15 @@ public class Registration
 			}else {
 				course.setSeats(course.getSeats() - 1);
 				System.out.println("Student has successfully registered to this course");
+				System.out.println("This is what the updated seats should be TESTTESTESGSTFSDGVJBDFNSKj: " + course.getSeats());
+				saveRegistration(currentStudent, course);
 				currentStudent.printSummary();
 			}
 		} else {
 			// waitlist the student
 			currentStudent.addWaitlistCourse(course);
 			System.out.println("Student added to the waitlist for this course.");
+			System.out.println("1111This is what the updated seats should be TESTTESTESGSTFSDGVJBDFNSKj: " + course.getSeats());
 			currentStudent.printSummary();
 		}
 	}
