@@ -157,27 +157,27 @@ class RegistrationTest {
 	@Test
 	void testSaveRegistrationCourseInfo() throws IOException {
 	    String courseTextPath = "src/textfiles/courses.txt";
-		BufferedReader cbr = new BufferedReader(new FileReader(courseTextPath));
-		String courseLine;
-		LinkedList<String[]> courseList = new LinkedList<>();
-		while ((courseLine = cbr.readLine()) != null) {
-			String words[] = courseLine.split("\\s");
-			courseList.add(words);
+		BufferedReader cbrBefore = new BufferedReader(new FileReader(courseTextPath));
+		String courseLineBefore;
+		LinkedList<String[]> courseListBefore = new LinkedList<>();
+		while ((courseLineBefore = cbrBefore.readLine()) != null) {
+			String words[] = courseLineBefore.split("\\s");
+			courseListBefore.add(words);
 		}
-		cbr.close();
-		int seatsBefore = Integer.valueOf(courseList.get(0)[4]);
+		cbrBefore.close();
+		int seatsBefore = Integer.valueOf(courseListBefore.get(0)[4]);
 		Student student = new Student("Jack", "Sparrow", 123456);
     	InputStream isLogIn = new ByteArrayInputStream("CSE131\n".getBytes());    	
 		registration.register(student, isLogIn);
-		BufferedReader cbr2 = new BufferedReader(new FileReader(courseTextPath));
-		String courseLine2;
-		LinkedList<String[]> courseList2 = new LinkedList<>();
-		while ((courseLine2 = cbr2.readLine()) != null) {
-			String words[] = courseLine2.split("\\s");
-			courseList2.add(words);
+		BufferedReader cbrAfter = new BufferedReader(new FileReader(courseTextPath));
+		String courseLineAfter;
+		LinkedList<String[]> courseListAfter = new LinkedList<>();
+		while ((courseLineAfter = cbrAfter.readLine()) != null) {
+			String words[] = courseLineAfter.split("\\s");
+			courseListAfter.add(words);
 		}
-		cbr2.close();
-		int seatsAfter = Integer.valueOf(courseList2.get(0)[4]);
+		cbrAfter.close();
+		int seatsAfter = Integer.valueOf(courseListAfter.get(0)[4]);
 		assertTrue(seatsBefore-seatsAfter==1);
 	}
 	
@@ -187,17 +187,17 @@ class RegistrationTest {
 		Student student = new Student("Jack", "Sparrow", 123456);
     	InputStream isLogIn = new ByteArrayInputStream("CSE131\n".getBytes());    	
 		registration.register(student, isLogIn);
-		BufferedReader cbr2 = new BufferedReader(new FileReader(studentTextPath));
-		String studentLine2;
-		LinkedList<String[]> studentList2 = new LinkedList<>();
-		while ((studentLine2 = cbr2.readLine()) != null) {
-			String words[] = studentLine2.split("\\s");
-			studentList2.add(words);
+		BufferedReader cbr = new BufferedReader(new FileReader(studentTextPath));
+		String studentLine;
+		LinkedList<String[]> studentList = new LinkedList<>();
+		while ((studentLine = cbr.readLine()) != null) {
+			String words[] = studentLine.split("\\s");
+			studentList.add(words);
 		}
-		cbr2.close();
-		String[] registeredCoursesAfter = studentList2.get(0)[3].split("-");
-		System.out.println(registeredCoursesAfter[registeredCoursesAfter.length-1]);
-		assertTrue(registeredCoursesAfter[registeredCoursesAfter.length-1].equals("CSE131"));
+		cbr.close();
+		String[] registeredCourses = studentList.get(0)[3].split("-");
+		System.out.println(registeredCourses[registeredCourses.length-1]);
+		assertTrue(registeredCourses[registeredCourses.length-1].equals("CSE131"));
 	}
 
 }
