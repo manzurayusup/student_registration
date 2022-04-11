@@ -225,7 +225,7 @@ public class Registration
 		System.out.println("\t1. Register for a course");
         System.out.println("\t2. Print a course");
         System.out.println("\t3. Print all courses");
-        System.out.println("\t4. Print enrolled courses (not yet implemented)");
+        System.out.println("\t4. Print enrolled courses");
         System.out.println("\t5. Quit");
 	}
 	
