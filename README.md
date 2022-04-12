@@ -4,7 +4,7 @@
 In iteration 2, we complemented five new use cases. The app now saves the student's registration info and updates the courses' seats. Moreover, the app automatically adds the course to the student's waitlisted courses if the course is full. Another small change is that the user (student) is now able to see the list of all of their registered/waitlisted classes.
 
 ### What user stories do you intend to complete next iteration?
-In the next iteration, we are planning to split up the Registration class because it is getting too big. We're trying to extract objects out of it which will make our program easier to test and easier to understand. (You can take a look at branch "${BRANCH_NAME}" if you want to see our progress so far.) We think this will take up some time. But if we do have some time leftover before the third iteration, we will first fix our current bugs and then implement logout and dropping a class.
+In the next iteration, we are planning to split up the Registration class because it is getting too big. We're trying to extract objects out of it which will make our program easier to test and easier to understand. (You can take a look at branch "updateRegistrationFile" if you want to see our progress so far.) We think this will take up some time. But if we do have some time leftover before the third iteration, we will first fix our current bugs and then implement logout and dropping a class.
 
 ###	Is there anything that you implemented but doesn't currently work
 Currently, all the menu options should be working. We do not have test cases for all the methods that depend on user input, but we think they will be testable after we break up the Registration class. <br/>
@@ -33,7 +33,7 @@ List of courses with seats left: <br/>
 List of courses with 0 seats: <br/>
 * CSE131
 * CSE132
-* CSE347
+* CSE347 
 
   
   
