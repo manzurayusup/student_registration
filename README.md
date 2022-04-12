@@ -13,7 +13,6 @@ Other bugs we need to fix:
 * The app crashes if a student with no registered courses logs in.
 * The app crashes if the user types a string that doesn't match any of the menu options. 
 * The code doesn't save the student's waitlisted courses.
-* Tests cases manipulate the text files when run, so running all the test cases twice will likely result in errors. Two tests -- testSaveRegistrationCourseInfo() and testPrintAllCourses() -- are failing and we're trying to fix that.
 
 ### What commands are needed to compile and run your code from the command line (or better yet, provide a script that people can use to run your program!)
 You need to be in the root directory and using bash. Run the following command: ./run_program.sh <br/>
