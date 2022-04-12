@@ -232,42 +232,14 @@ public class Registration
 	public void saveRegistration(Student currentStudent, Course course) throws IOException {
 		// this method saves the current registration status of the student in the student file.
 		LinkedList<String[]> studentList = bufferedReaderSaveRegistration(studentTextPath);
-		
 		BufferedWriter sbw = new BufferedWriter(new FileWriter(studentTextPath));
-		for (int i = 0; i <studentList.size(); i++) {
-			String words[] = studentList.get(i);
-			String studentOnThisLine = words[0] + " " + words[1] + " " + words[2];
-			for (int j = 0; j < words.length; j++) {
-				if ((studentOnThisLine.equals(currentStudent.toString())) && (j == 3)) {
-					sbw.write(words[3] + "-" + course.getCourseCode());
-				} else {
-					sbw.write(words[j]);
-				}
-				sbw.write(" ");
-			}
-			sbw.write("\n");
-		}
-		sbw.close();
-		
-		
+		bufferedWriterSaveRegistration(sbw, studentList, currentStudent, course, true);
+
 		LinkedList<String[]> courseList = bufferedReaderSaveRegistration(courseTextPath);
-		
 		BufferedWriter cbw = new BufferedWriter(new FileWriter(courseTextPath));
-		for (int i = 0; i < courseList.size(); i++) {
-			String words[] = courseList.get(i);
-			for (int j = 0; j < words.length; j++) {
-				if ((words[0].equals(course.getCourseCode())) && (j == 4)) {
-					cbw.write(String.valueOf(course.getSeats()));
-				} else {
-					cbw.write(words[j]);
-				}
-				cbw.write(" ");
-			}
-			cbw.write("\n");
-		}
-		cbw.close();
+		bufferedWriterSaveRegistration(cbw, courseList, currentStudent, course, false);
 	}
-	
+
 	public LinkedList<String[]> bufferedReaderSaveRegistration(String textpath) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(textpath));
 		String line;
@@ -279,6 +251,46 @@ public class Registration
 		br.close();
 		return list;
 	}
+
+	public void bufferedWriterSaveRegistration(BufferedWriter bw, LinkedList<String[]> list, Student currentStudent, Course course, Boolean student) throws IOException {
+
+		for (int i = 0; i < list.size(); i++) {
+			String words[] = list.get(i);
+			if (student.equals(true)) {
+				bufferedWriterStudentSaveRegistration(bw, currentStudent, course, words);
+			}else {
+				bufferedWriterCourseSaveRegistration(bw, course, words);
+			}
+			bw.write("\n");
+		}
+		bw.close();
+		
+	}
+	
+	public void bufferedWriterStudentSaveRegistration(BufferedWriter bw, Student currentStudent, Course course, String words[]) throws IOException {
+		String studentOnThisLine = words[0] + " " + words[1] + " " + words[2];
+		for (int j = 0; j < words.length; j++) {
+			if ((studentOnThisLine.equals(currentStudent.toString())) && (j == 3)) {
+				bw.write(words[3] + "-" + course.getCourseCode());
+			} else {
+				bw.write(words[j]);
+			}
+			bw.write(" ");
+		}
+	}
+	
+	public void bufferedWriterCourseSaveRegistration(BufferedWriter bw, Course course, String words[]) throws IOException {
+		for (int j = 0; j < words.length; j++) {
+			if ((words[0].equals(course.getCourseCode())) && (j == 4)) {
+				bw.write(String.valueOf(course.getSeats()));
+			} else {
+				bw.write(words[j]);
+			}
+			bw.write(" ");
+		}
+	}
+	
+	
 	
 	// input: the current student that registers for a course.
 	// Desc: prompts user for course code, checks if course is in database and adds course to registered courses for student.
