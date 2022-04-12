@@ -29,20 +29,20 @@ class StudentTest {
     @BeforeEach
     void setup() {
         student = new Student("Irtaza", "Waseem", 472936);
-        waitlistCourse1 = new Course("programming tools and techniques", "CSE237", "2022-08-29T13:00:00.000Z", "2022-08-29T14:20:00.000Z", 45, 3);
-        waitlistCourse2 = new Course("Introduction to Computer Engineering", "CSE132", "2022-08-29T13:00:00.000Z", "2022-12-09T14:20:00.000Z", 60, 3);
-        registerCourse1 = new Course("Introduction to Data Science", "CSE217A", "2022-08-29T14:30:00.000Z", "2022-12-09T15:50:00.000Z", 30, 3);
-        registerCourse2 = new Course("Data Structures and Algorithms", "CSE247", "2022-08-29T13:00:00.000Z", "2022-12-09T14:20:00.000Z", 70, 3);
+        waitlistCourse1 = new Course("programming tools and techniques", "CSE237", "2022-08-29T13:00:00.000Z", "2022-08-29T14:20:00.000Z", 45, 3, "Shook", "Yes");
+        waitlistCourse2 = new Course("Introduction to Computer Engineering", "CSE132", "2022-08-29T13:00:00.000Z", "2022-12-09T14:20:00.000Z", 60, 3, "Shook", "Yes");
+        registerCourse1 = new Course("Introduction to Data Science", "CSE217A", "2022-08-29T14:30:00.000Z", "2022-12-09T15:50:00.000Z", 30, 3, "Shook", "Yes");
+        registerCourse2 = new Course("Data Structures and Algorithms", "CSE247", "2022-08-29T13:00:00.000Z", "2022-12-09T14:20:00.000Z", 70, 3, "Shook", "Yes");
         student.addWaitlistCourse(waitlistCourse1);
         student.addWaitlistCourse(waitlistCourse2);
         student.addRegisterCourse(registerCourse1);
         student.addRegisterCourse(registerCourse2);
         
-        course3 = new Course("abc", "CSE236", "2022-08-29T13:00:00.000Z", "2022-08-29T14:20:00.000Z", 45, 3);
-        course4 = new Course("def", "CSE235", "2022-08-29T13:00:00.000Z", "2022-08-29T14:20:00.000Z", 45, 3);
-        course5 = new Course("ghi", "CSE234", "2022-08-29T13:00:00.000Z", "2022-08-29T14:20:00.000Z", 45, 3);
-        course6 = new Course("jkl", "CSE233", "2022-08-29T13:00:00.000Z", "2022-08-29T14:20:00.000Z", 45, 3);
-        course7 = new Course("mno", "CSE232", "2022-08-29T13:00:00.000Z", "2022-08-29T14:20:00.000Z", 45, 3);
+        course3 = new Course("abc", "CSE236", "2022-08-29T13:00:00.000Z", "2022-08-29T14:20:00.000Z", 45, 3, "Shook", "Yes");
+        course4 = new Course("def", "CSE235", "2022-08-29T13:00:00.000Z", "2022-08-29T14:20:00.000Z", 45, 3, "Shook", "Yes");
+        course5 = new Course("ghi", "CSE234", "2022-08-29T13:00:00.000Z", "2022-08-29T14:20:00.000Z", 45, 3, "Shook", "Yes");
+        course6 = new Course("jkl", "CSE233", "2022-08-29T13:00:00.000Z", "2022-08-29T14:20:00.000Z", 45, 3, "Shook", "Yes");
+        course7 = new Course("mno", "CSE232", "2022-08-29T13:00:00.000Z", "2022-08-29T14:20:00.000Z", 45, 3, "Shook", "Yes");
     }
     @Test
 	void testGetFirstName() {
