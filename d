@@ -1,0 +1,489 @@
+[33mcommit 2fbc95ffc9edb41d040df418138c66a05cf0458d[m[33m ([m[1;36mHEAD -> [m[1;32mmake_main_registration_class[m[33m, [m[1;31morigin/make_main_registration_class[m[33m)[m
+Author: manzurayusup <manzurayusup@gmail.com>
+Date:   Sun Apr 10 21:49:03 2022 -0500
+
+    small change
+
+[33mcommit adea729523f90b5fb4d062381e504131e8803f05[m
+Merge: e8e8512 06218ad
+Author: Irtaza Waseem <54458381+irtaza210@users.noreply.github.com>
+Date:   Sun Apr 10 21:47:11 2022 -0500
+
+    Merge pull request #36 from manzurayusup/save_registration
+    
+    Save registration
+
+[33mcommit 06218ad3fdf41f09ac69355bca36194e7ecf11a2[m[33m ([m[1;31morigin/save_registration[m[33m)[m
+Author: manzurayusup <manzurayusup@gmail.com>
+Date:   Sun Apr 10 21:45:23 2022 -0500
+
+    can't register for a class twice
+
+[33mcommit 68c34403a6fa18d37dfab60d07cf701ab77fcfa0[m
+Author: Khushi Patel <khushi@khushis-air.wusm-wifi.wucon.wustl.edu>
+Date:   Sun Apr 10 21:15:12 2022 -0500
+
+    save registration problems
+
+[33mcommit 3421c18bf68f1b7a59579301f68ad645d384383e[m
+Author: Khushi Patel <khushi@Khushis-MacBook-Air.local>
+Date:   Sun Apr 10 19:27:11 2022 -0500
+
+    save registration
+
+[33mcommit 6583d5c519df12daeb13246392f2170d80d164aa[m
+Author: Khushi Patel <khushi@Khushis-MacBook-Air.local>
+Date:   Sun Apr 10 18:59:50 2022 -0500
+
+    save registration method
+
+[33mcommit e8e8512740218d79c023a5b9fa209643c345aa23[m
+Author: irtaza210 <54458381+irtaza210@users.noreply.github.com>
+Date:   Sun Apr 10 15:41:28 2022 -0500
+
+    fixing general UI stuff
+
+[33mcommit 40eeb75ff7b1b3e3b4032a46d53e6e985b84a306[m
+Merge: b20bc4f e021ad4
+Author: Irtaza Waseem <54458381+irtaza210@users.noreply.github.com>
+Date:   Sun Apr 10 15:34:33 2022 -0500
+
+    Merge pull request #35 from manzurayusup/waitlist_course
+    
+    Waitlist course
+
+[33mcommit e021ad49f60eb82f4a42a3550846ced5f75d2551[m[33m ([m[1;31morigin/waitlist_course[m[33m)[m
+Merge: be04af5 b20bc4f
+Author: Irtaza Waseem <54458381+irtaza210@users.noreply.github.com>
+Date:   Sun Apr 10 15:34:27 2022 -0500
+
+    Merge branch 'make_main_registration_class' into waitlist_course
+
+[33mcommit b20bc4fb2a8edcbcfff322c8a318808d628c11ce[m
+Merge: 5b4d5e0 47484d4
+Author: manzurayusup <46665712+manzurayusup@users.noreply.github.com>
+Date:   Sun Apr 10 15:31:23 2022 -0500
+
+    Merge pull request #34 from manzurayusup/printCourseFeature
+    
+    Print course feature
+
+[33mcommit 47484d443927e819165788f6373b45e0e496c5ea[m[33m ([m[1;31morigin/printCourseFeature[m[33m)[m
+Merge: c814ce1 5b4d5e0
+Author: manzurayusup <46665712+manzurayusup@users.noreply.github.com>
+Date:   Sun Apr 10 15:31:13 2022 -0500
+
+    Merge branch 'make_main_registration_class' into printCourseFeature
+
+[33mcommit be04af5917567d8cf423817adabfded05e09b7d5[m
+Author: manzurayusup <manzurayusup@gmail.com>
+Date:   Sun Apr 10 15:27:09 2022 -0500
+
+    waitlist implementation
+
+[33mcommit 405cedabfaa2cfa7ba92769e3770baec71a79afa[m
+Merge: c267a7d 5b4d5e0
+Author: manzurayusup <manzurayusup@gmail.com>
+Date:   Sun Apr 10 14:50:25 2022 -0500
+
+    Merge branch 'make_main_registration_class' of https://github.com/manzurayusup/student_registration into waitlist_course
+    pulling see_all_courses_offered branch into waitlist_course
+
+[33mcommit 5b4d5e0dd72fe943b998f15dc1ab857ee53aaaf3[m
+Merge: 7434d00 bb3fd8f
+Author: manzurayusup <46665712+manzurayusup@users.noreply.github.com>
+Date:   Sun Apr 10 14:48:50 2022 -0500
+
+    Merge pull request #33 from manzurayusup/see_all_courses_offered
+    
+    user can see al courses offered
+
+[33mcommit bb3fd8f7475f95a3ba997033960bc4b100aa59e8[m[33m ([m[1;31morigin/see_all_courses_offered[m[33m)[m
+Author: irtaza210 <54458381+irtaza210@users.noreply.github.com>
+Date:   Sun Apr 10 12:34:25 2022 -0500
+
+    user can see al courses offered
+
+[33mcommit c814ce14fc20f5ec6060d9985844b9c686beb1f3[m[33m ([m[1;32mprintCourseFeature[m[33m)[m
+Author: Yeab1 <46411839+Yeab1@users.noreply.github.com>
+Date:   Sat Apr 9 11:50:35 2022 -0500
+
+    users should now be able to see details of a course
+
+[33mcommit c267a7db159b08308087c3783f044fa9d8055d5a[m[33m ([m[1;31morigin/list_enrolled_courses[m[33m)[m
+Author: manzurayusup <manzurayusup@gmail.com>
+Date:   Sat Apr 9 00:54:00 2022 -0500
+
+    added choice list enrolled courses
+
+[33mcommit 7434d001d8afc7ccad94b7d1d894e403a3099ce1[m
+Author: manzurayusup <manzurayusup@gmail.com>
+Date:   Fri Apr 8 17:54:29 2022 -0500
+
+    removed static from Registration
+
+[33mcommit 0cfc4660532ca870467fe6013a0ba509190526b8[m
+Merge: 8897a53 731aad8
+Author: Irtaza Waseem <54458381+irtaza210@users.noreply.github.com>
+Date:   Fri Apr 8 17:33:57 2022 -0500
+
+    Merge pull request #32 from manzurayusup/main
+    
+    Pull latest changes
+
+[33mcommit 731aad846cdfd6d93e69d8192c500017d4de2fff[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Irtaza Waseem <54458381+irtaza210@users.noreply.github.com>
+Date:   Wed Mar 30 10:44:17 2022 -0500
+
+    remove print statement from StudentTest
+
+[33mcommit 7d2d951f0b6770a3d7c5a9860396b802b1a31fb0[m
+Author: Irtaza Waseem <54458381+irtaza210@users.noreply.github.com>
+Date:   Tue Mar 29 23:23:11 2022 -0500
+
+    Update README.md
+
+[33mcommit 632e3de94cecec7aeb17824539a0c1ab39c7a683[m
+Author: manzurayusup <46665712+manzurayusup@users.noreply.github.com>
+Date:   Tue Mar 29 23:20:50 2022 -0500
+
+    Update README.md
+
+[33mcommit 7ad146f94e8a1a75e92ec81cf3da7534b9a9fbc8[m
+Author: manzurayusup <46665712+manzurayusup@users.noreply.github.com>
+Date:   Tue Mar 29 23:19:23 2022 -0500
+
+    Update README.md
+
+[33mcommit 82a08e445f38d04ea22703149ff81bebd022ac1e[m
+Author: manzurayusup <46665712+manzurayusup@users.noreply.github.com>
+Date:   Tue Mar 29 22:59:53 2022 -0500
+
+    Update README.md
+
+[33mcommit 81687f0b5baaeb4369980f362bf8093e079ed864[m
+Author: manzurayusup <46665712+manzurayusup@users.noreply.github.com>
+Date:   Tue Mar 29 22:58:59 2022 -0500
+
+    Update README.md
+
+[33mcommit 5a5afc1387b088823f8eece602267f007fac2f2b[m
+Author: manzurayusup <46665712+manzurayusup@users.noreply.github.com>
+Date:   Tue Mar 29 22:58:34 2022 -0500
+
+    Update README.md
+
+[33mcommit bf7471525045c935df7b7577a7fada8e4fd19d0f[m
+Author: manzurayusup <46665712+manzurayusup@users.noreply.github.com>
+Date:   Tue Mar 29 22:57:29 2022 -0500
+
+    Update README.md
+
+[33mcommit cf7e9a1b47220b7e3f81ff60ef0318983a851652[m
+Merge: 320bdee 9853de7
+Author: Yeabsira Lemma <46411839+Yeab1@users.noreply.github.com>
+Date:   Tue Mar 29 22:45:50 2022 -0500
+
+    Merge pull request #16 from manzurayusup/updateScript
+    
+    updated script
+
+[33mcommit 9853de74382cd394922d658c487168f8321fb27c[m[33m ([m[1;31morigin/updateScript[m[33m)[m
+Author: manzurayusup <manzurayusup@gmail.com>
+Date:   Tue Mar 29 22:44:11 2022 -0500
+
+    updated script
+
+[33mcommit 320bdeea75ef4ba7c19807cb5c2b769c5bd80933[m[33m ([m[1;32mmain[m[33m)[m
+Author: manzurayusup <manzurayusup@gmail.com>
+Date:   Tue Mar 29 22:33:23 2022 -0500
+
+    deleted bin
+
+[33mcommit 7c17fa372d55c5f008a1ec834fb3aa22b7f36ec3[m
+Merge: 05701f6 8897a53
+Author: manzurayusup <46665712+manzurayusup@users.noreply.github.com>
+Date:   Tue Mar 29 22:31:19 2022 -0500
+
+    Merge pull request #15 from manzurayusup/make_main_registration_class
+    
+    Make main registration class
+
+[33mcommit 8897a532050c5a2f562773f133cc170f9ce39011[m
+Merge: 4620665 fe52a04
+Author: Yeabsira Lemma <46411839+Yeab1@users.noreply.github.com>
+Date:   Tue Mar 29 22:30:28 2022 -0500
+
+    Merge pull request #14 from manzurayusup/tests
+    
+    Tests
+
+[33mcommit fe52a04e67889baff83eb583633ec9b0f39769dc[m[33m ([m[1;31morigin/tests[m[33m)[m
+Author: manzurayusup <manzurayusup@gmail.com>
+Date:   Tue Mar 29 22:29:26 2022 -0500
+
+    update tests, refactor
+
+[33mcommit 0574e51291384571472ee0070ef3eed6548d16d3[m[33m ([m[1;32mtests[m[33m)[m
+Author: irtaza210 <54458381+irtaza210@users.noreply.github.com>
+Date:   Tue Mar 29 19:56:12 2022 -0500
+
+    registration tests
+
+[33mcommit 4620665e9040485e16a40131bb2071fe378149dc[m
+Merge: 037f5cb 7813ff4
+Author: Irtaza Waseem <54458381+irtaza210@users.noreply.github.com>
+Date:   Tue Mar 29 16:52:22 2022 -0500
+
+    Merge pull request #13 from manzurayusup/refactor
+    
+    Refactor
+
+[33mcommit 7813ff47f0ba90b935fb80254a6d7df9a06483de[m[33m ([m[1;31morigin/refactor[m[33m, [m[1;32mrefactor[m[33m)[m
+Author: Yeab1 <46411839+Yeab1@users.noreply.github.com>
+Date:   Tue Mar 29 16:51:31 2022 -0500
+
+    refactored registration.java and added comments
+
+[33mcommit 72757c5b4c3f2137bae6c9a236c5e389c95b410f[m
+Author: irtaza210 <54458381+irtaza210@users.noreply.github.com>
+Date:   Mon Mar 28 22:18:38 2022 -0500
+
+    third refactor
+
+[33mcommit 13c4c684b72710b43c835bf830b73bc9913ffef6[m
+Author: irtaza210 <54458381+irtaza210@users.noreply.github.com>
+Date:   Mon Mar 28 22:16:02 2022 -0500
+
+    second refactor
+
+[33mcommit a1bf546fe73cc21191712832a38dfe48f09e8203[m
+Author: irtaza210 <54458381+irtaza210@users.noreply.github.com>
+Date:   Mon Mar 28 21:57:18 2022 -0500
+
+    first refactor
+
+[33mcommit 037f5cb54093bdc34da89ce6c728c0779b4db5ff[m
+Merge: e843a53 672b5c1
+Author: khuuushi <70972540+khuuushi@users.noreply.github.com>
+Date:   Mon Mar 28 21:29:35 2022 -0500
+
+    Merge pull request #12 from manzurayusup/studentTests
+    
+    fixed buggy student tests
+
+[33mcommit 672b5c1257cd8522f39ebd77a416fa2186a06884[m[33m ([m[1;31morigin/studentTests[m[33m)[m
+Author: irtaza210 <54458381+irtaza210@users.noreply.github.com>
+Date:   Mon Mar 28 21:27:49 2022 -0500
+
+    fixed buggy student tests
+
+[33mcommit e843a538d3c034df0e7c3d8e48e004f9937a6f3b[m
+Merge: fb0fb9f 423cb28
+Author: Yeabsira Lemma <46411839+Yeab1@users.noreply.github.com>
+Date:   Mon Mar 28 13:38:24 2022 -0500
+
+    Merge pull request #11 from manzurayusup/script
+    
+    added script
+
+[33mcommit 423cb283722bc632cf963fd3f20e704a2ecf1d23[m[33m ([m[1;31morigin/script[m[33m)[m
+Author: manzurayusup <manzurayusup@gmail.com>
+Date:   Mon Mar 28 13:36:41 2022 -0500
+
+    added script
+
+[33mcommit fb0fb9f6c4e2078291ab9815d9d9b16e4d1ede84[m
+Author: manzurayusup <manzurayusup@gmail.com>
+Date:   Mon Mar 28 13:31:11 2022 -0500
+
+    added relative path
+
+[33mcommit 2b62b7788a10efce4d1996e6f687dab91cd353bd[m
+Merge: 49eaffc 4d25d82
+Author: Irtaza Waseem <54458381+irtaza210@users.noreply.github.com>
+Date:   Sun Mar 27 16:43:34 2022 -0500
+
+    Merge pull request #9 from manzurayusup/register_function
+    
+    register function
+
+[33mcommit 4d25d820dc98b9e334e56995f5b1275931e03ad3[m[33m ([m[1;31morigin/register_function[m[33m)[m
+Author: Khushi Patel <khushi@khushis-air.wusm-wifi.wucon.wustl.edu>
+Date:   Sun Mar 27 16:40:10 2022 -0500
+
+    register function
+
+[33mcommit 49eaffc755a07589f0b2e8feb486743924c9f75a[m
+Merge: 1231e2c bb0c271
+Author: khuuushi <70972540+khuuushi@users.noreply.github.com>
+Date:   Sun Mar 27 16:03:14 2022 -0500
+
+    Merge pull request #8 from manzurayusup/displayOptions
+    
+    Display options
+
+[33mcommit bb0c271ba1e2da94c0b7c8e6beffbc7e33f7d76b[m[33m ([m[1;31morigin/displayOptions[m[33m)[m
+Author: irtaza210 <54458381+irtaza210@users.noreply.github.com>
+Date:   Sun Mar 27 16:01:56 2022 -0500
+
+    displaying the options on log in
+
+[33mcommit 1231e2c9646835d2f4de64252f82219118561085[m
+Merge: 85713dd dfed18c
+Author: Irtaza Waseem <54458381+irtaza210@users.noreply.github.com>
+Date:   Sun Mar 27 15:36:05 2022 -0500
+
+    Merge pull request #7 from manzurayusup/log_in
+    
+    log in and make course done
+
+[33mcommit dfed18cf3cfbab4ecec9fc0eb8a8ec04d8fbb0e3[m[33m ([m[1;31morigin/log_in[m[33m, [m[1;32mlog_in[m[33m)[m
+Author: Yeab1 <46411839+Yeab1@users.noreply.github.com>
+Date:   Sun Mar 27 15:34:02 2022 -0500
+
+    log in and make course done
+
+[33mcommit 85713ddd7f607ceb4167e757386b1d1b78588a10[m
+Author: Yeab1 <46411839+Yeab1@users.noreply.github.com>
+Date:   Sun Mar 27 14:51:00 2022 -0500
+
+    fix bug
+
+[33mcommit 055cb8f8de8dc619835d81cdae0e855cfcf4b771[m
+Merge: 96abcf5 0ef144e
+Author: Yeabsira Lemma <46411839+Yeab1@users.noreply.github.com>
+Date:   Sun Mar 27 14:47:30 2022 -0500
+
+    Merge pull request #6 from manzurayusup/populate_student_from_textfile
+    
+    Populate student from textfile
+
+[33mcommit 0ef144ea8ee59f153de07a5222fc696ff6618658[m[33m ([m[1;31morigin/populate_student_from_textfile[m[33m)[m
+Author: manzurayusup <manzurayusup@gmail.com>
+Date:   Sun Mar 27 14:44:52 2022 -0500
+
+    updated populate function
+
+[33mcommit 99975ecdb033ead52a83fba911812eb37205c108[m
+Author: manzurayusup <manzurayusup@gmail.com>
+Date:   Sat Mar 26 22:35:30 2022 -0500
+
+    added populate student object method
+
+[33mcommit 96abcf5697c6966e2218b16d8751931b439294a6[m
+Author: Yeab1 <46411839+Yeab1@users.noreply.github.com>
+Date:   Sat Mar 26 21:24:09 2022 -0500
+
+    created registration.java
+
+[33mcommit 05701f696173c6672ada71c16aaba963e6b75dd8[m
+Merge: bfb68a8 ae89141
+Author: Irtaza Waseem <54458381+irtaza210@users.noreply.github.com>
+Date:   Sat Mar 26 21:16:15 2022 -0500
+
+    Merge pull request #5 from manzurayusup/create_students_textfile
+    
+    added students text file
+
+[33mcommit ae8914162740c7994a8f2a2aceef2a20d34caae1[m[33m ([m[1;31morigin/create_students_textfile[m[33m)[m
+Author: manzurayusup <manzurayusup@gmail.com>
+Date:   Sat Mar 26 21:14:23 2022 -0500
+
+    added students text file
+
+[33mcommit bfb68a89f795150f50cd9b2d11a64c3359bb4e68[m
+Merge: 40e29dd 76fadc7
+Author: manzurayusup <46665712+manzurayusup@users.noreply.github.com>
+Date:   Sat Mar 26 21:08:57 2022 -0500
+
+    Merge pull request #4 from manzurayusup/course_text_file
+    
+    courses text file
+
+[33mcommit 76fadc77e1e1a791365c4f4e2e154d03adb0a814[m[33m ([m[1;31morigin/course_text_file[m[33m)[m
+Author: Khushi Patel <khushi@Khushis-MacBook-Air.local>
+Date:   Sat Mar 26 21:07:34 2022 -0500
+
+    courses text file
+
+[33mcommit 40e29ddb634cdbcb8de64b8c2645696384551503[m
+Merge: 5080df0 3b424ea
+Author: manzurayusup <46665712+manzurayusup@users.noreply.github.com>
+Date:   Sat Mar 26 21:00:39 2022 -0500
+
+    Merge pull request #3 from manzurayusup/create_course
+    
+    fix course bug
+
+[33mcommit 3b424ea46fff88706a2af43b206b6d8858e618a3[m[33m ([m[1;31morigin/create_course[m[33m, [m[1;32mcreate_course[m[33m)[m
+Author: Yeab1 <46411839+Yeab1@users.noreply.github.com>
+Date:   Sat Mar 26 20:58:50 2022 -0500
+
+    fix course bug
+
+[33mcommit 5080df00f1be2f7339e5c0e6bdb23dd21ee987d9[m
+Merge: f0b0c71 b61fbf4
+Author: Irtaza Waseem <54458381+irtaza210@users.noreply.github.com>
+Date:   Sat Mar 26 20:49:50 2022 -0500
+
+    Merge pull request #2 from manzurayusup/create_course
+    
+    Create course
+
+[33mcommit b61fbf4ce42fdcec44bc1b607c38572a321b50a6[m
+Author: Yeab1 <46411839+Yeab1@users.noreply.github.com>
+Date:   Sat Mar 26 20:48:45 2022 -0500
+
+    added course tests
+
+[33mcommit f552ff9bdce7b8ef9b358cc18c76042ad2bf3a9d[m
+Author: Yeab1 <46411839+Yeab1@users.noreply.github.com>
+Date:   Sat Mar 26 20:47:11 2022 -0500
+
+    added course.java
+
+[33mcommit f0b0c710ad0f2a097dd7918d2705628413f10777[m
+Merge: 30a75e3 812bf06
+Author: Yeabsira Lemma <46411839+Yeab1@users.noreply.github.com>
+Date:   Sat Mar 26 20:39:03 2022 -0500
+
+    Merge pull request #1 from manzurayusup/create_student_class
+    
+    Create student class
+
+[33mcommit 812bf06ace12073e69807fb5a056145cfb7a5d2a[m[33m ([m[1;31morigin/create_student_class[m[33m)[m
+Author: irtaza210 <54458381+irtaza210@users.noreply.github.com>
+Date:   Sat Mar 26 20:37:32 2022 -0500
+
+    student class work
+
+[33mcommit ef2ee70c780be1ee6bf5a2fe8f836ca074947c4c[m
+Author: irtaza210 <54458381+irtaza210@users.noreply.github.com>
+Date:   Sat Mar 26 20:34:24 2022 -0500
+
+    student class work
+
+[33mcommit 30a75e32c8489210184c048e19fc08d8e056842c[m
+Author: Yeab1 <46411839+Yeab1@users.noreply.github.com>
+Date:   Sat Mar 26 20:17:51 2022 -0500
+
+    eclipse project initial
+
+[33mcommit fc44dea0fdbe12a8c6f3dd93351b2402c9815d34[m
+Author: Yeabsira Lemma <46411839+Yeab1@users.noreply.github.com>
+Date:   Sat Mar 26 20:06:05 2022 -0500
+
+    Delete org.eclipse.jdt.core.prefs
+
+[33mcommit 0a4a5728fc86f43105a79836436b4f4da8e70e04[m
+Author: Yeabsira Lemma <46411839+Yeab1@users.noreply.github.com>
+Date:   Sat Mar 26 20:05:56 2022 -0500
+
+    Delete .project
+
+[33mcommit bfebadcaa555d9ae36d3e01bc81d319daee9a282[m
+Author: Yeabsira Lemma <46411839+Yeab1@users.noreply.github.com>
+Date:   Sat Mar 26 20:05:35 2022 -0500
+
+    Delete .classpath

@@ -19,7 +19,7 @@ import java.util.Vector;
 public class Registration
 {
 	private Scanner keyboard=new Scanner(System.in);
-	private String courseTextPath = "src/textfiles/courses.txt";
+	private static String courseTextPath = "src/textfiles/courses.txt";
 	private String studentTextPath = "src/textfiles/students.txt";
     public static void main(String[] args) throws IOException
     {
@@ -147,7 +147,7 @@ public class Registration
     	StringBuilder sb = new StringBuilder();
     	for (int i=0; i<registeredCourses.length(); i++) {
     		if (registeredCourses.charAt(i)=='-') {	
-    			student.addRegisterCourse(makeCourse(sb.toString()));
+    			student.addRegisterCourse(MakeCourse.makeCourse(sb.toString()));
     			sb.setLength(0);
     		}
     		else {
@@ -155,7 +155,7 @@ public class Registration
     		}
     	}
     	if (sb.toString().length()>0) {
-    		student.addRegisterCourse(makeCourse(sb.toString()));
+    		student.addRegisterCourse(MakeCourse.makeCourse(sb.toString()));
     	}
     }
     
@@ -166,7 +166,7 @@ public class Registration
     	StringBuilder sb = new StringBuilder();
     	for (int i=0; i<waitlistedCourses.length(); i++) {
     		if (waitlistedCourses.charAt(i)=='-') {
-    			student.addWaitlistCourse(makeCourse(sb.toString()));
+    			student.addWaitlistCourse(MakeCourse.makeCourse(sb.toString()));
     			sb.setLength(0);
     		}
     		else {
@@ -174,50 +174,11 @@ public class Registration
     		}
     	}
     	if (sb.toString().length()>0) {
-    		student.addWaitlistCourse(makeCourse(sb.toString()));
+    		student.addWaitlistCourse(MakeCourse.makeCourse(sb.toString()));
     	}
     }
     
-    // return: a course object or null if course could not be created
-    // input: a string coursecode.
-    public Course makeCourse(String courseCode) throws FileNotFoundException {
-    	String path = courseTextPath;
-    	File file = new File(path);
-    	Scanner courseReader = new Scanner(file);
-    	
-    	Course newCourse = findAndCreateCourse(courseCode, courseReader);
-    	return newCourse;
-    }
     
-    // return: a course object corresponding to a coursecode given as input, null if course could not be created.
-    // input: a string coursecode and a scanner pointing to courses.txt
-    private Course findAndCreateCourse(String courseCode, Scanner courseReader) {
-    	while(courseReader.hasNextLine()) {
-    		String currentCourse = courseReader.nextLine();
-    		String splittedCurrentCourse[] = currentCourse.split("\\s");
-    		if(courseCode.equals(splittedCurrentCourse[0])) {
-    			return createSingleCourse(splittedCurrentCourse);
-    		}
-    	}
-    	return null;
-    }
-//    CSE131 Introduction-to-Computer-Science 2022-08-29T11:30:00.000Z 2022-12-09T12:50:00.000Z TR Shook Yes Urbauer-222
-
-
-    // return: a course object
-    // input: an array of strings with information about the course.
-    // 		array should be in the structure of: courseCode, courseName, courseStartTime, and courseEndTime. separaged with dashes.
-    private Course createSingleCourse (String[] splittedCurrentCourse) {
-    	String courseCode = splittedCurrentCourse[0];
-		String courseName = splittedCurrentCourse[1];
-		String startTime = splittedCurrentCourse[2];
-		String endTime = splittedCurrentCourse[3];
-		int seats = Integer.valueOf(splittedCurrentCourse[4]);
-		String professorName = splittedCurrentCourse[5];
-		String exams = splittedCurrentCourse[6];
-		Course course = new Course(courseName, courseCode, startTime, endTime, seats, 3, professorName, exams);
-		return course;
-    }
 	
     // Post: prints the action options of the user.
 	public void printChoices() {
@@ -229,57 +190,6 @@ public class Registration
         System.out.println("\t5. Quit");
 	}
 	
-	public void saveRegistration(Student currentStudent, Course course) throws IOException {
-		// this method saves the current registration status of the student in the student file.
-		LinkedList<String[]> studentList = bufferedReaderSaveRegistration(studentTextPath);
-		
-		BufferedWriter sbw = new BufferedWriter(new FileWriter(studentTextPath));
-		for (int i = 0; i <studentList.size(); i++) {
-			String words[] = studentList.get(i);
-			String studentOnThisLine = words[0] + " " + words[1] + " " + words[2];
-			for (int j = 0; j < words.length; j++) {
-				if ((studentOnThisLine.equals(currentStudent.toString())) && (j == 3)) {
-					sbw.write(words[3] + "-" + course.getCourseCode());
-				} else {
-					sbw.write(words[j]);
-				}
-				sbw.write(" ");
-			}
-			sbw.write("\n");
-		}
-		sbw.close();
-		
-		
-		LinkedList<String[]> courseList = bufferedReaderSaveRegistration(courseTextPath);
-		
-		BufferedWriter cbw = new BufferedWriter(new FileWriter(courseTextPath));
-		for (int i = 0; i < courseList.size(); i++) {
-			String words[] = courseList.get(i);
-			for (int j = 0; j < words.length; j++) {
-				if ((words[0].equals(course.getCourseCode())) && (j == 4)) {
-					cbw.write(String.valueOf(course.getSeats()));
-				} else {
-					cbw.write(words[j]);
-				}
-				cbw.write(" ");
-			}
-			cbw.write("\n");
-		}
-		cbw.close();
-	}
-	
-	public LinkedList<String[]> bufferedReaderSaveRegistration(String textpath) throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(textpath));
-		String line;
-		LinkedList<String[]> list = new LinkedList<>();
-		while ((line = br.readLine()) != null) {
-			String words[] = line.split("\\s");
-			list.add(words);
-		}
-		br.close();
-		return list;
-	}
-	
 	// input: the current student that registers for a course.
 	// Desc: prompts user for course code, checks if course is in database and adds course to registered courses for student.
 	public void register(Student currentStudent, InputStream inputStream) throws IOException {
@@ -288,40 +198,13 @@ public class Registration
 		String courseCode = scanner.next();
 		System.out.println("Course code: " + courseCode);
 		scanner.nextLine();
-		Course course = makeCourse(courseCode);
+		Course course = MakeCourse.makeCourse(courseCode);
 		if (course != null) {
-			registerForSingleCourse(course, currentStudent);
+			RegistrationHandler registrationHandler= new RegistrationHandler(currentStudent);
+			registrationHandler.register(courseCode);
 		}
 		else {
 			System.out.println("Course does not exist");
-		}
-	}
-	
-	// input: a course to register for and the registering student
-	public void registerForSingleCourse (Course course, Student currentStudent) throws IOException {
-		if (currentStudent.getRegisteredCourses().contains(course)) {
-			System.out.println("You're already registered for this course");
-			return;
-		}
-		if (currentStudent.getWaitlistedCourses().contains(course)) {
-			System.out.println("You're already waitlisted for this course");
-			return;
-		}
-		if (course.getSeats() > 0) {
-			ErrorCodes register = currentStudent.addRegisterCourse(course);
-			if (register == ErrorCodes.ERROR) {
-				System.out.println("Student was not able to register to this course");
-			}else {
-				course.setSeats(course.getSeats() - 1);
-				System.out.println("Student has successfully registered to this course");
-				saveRegistration(currentStudent, course);
-				currentStudent.printSummary();
-			}
-		} else {
-			// waitlist the student
-			currentStudent.addWaitlistCourse(course);
-			System.out.println("Student added to the waitlist for this course.");
-			currentStudent.printSummary();
 		}
 	}
 	
@@ -332,7 +215,7 @@ public class Registration
 		Scanner scanner = new Scanner(inputStream);
 		String courseCode = scanner.nextLine();
 		
-		Course course = makeCourse(courseCode);
+		Course course = MakeCourse.makeCourse(courseCode);
 		if (course != null) {
 			System.out.println(course);
 			return ErrorCodes.SUCCESS;
@@ -349,7 +232,7 @@ public class Registration
     	String allCourses="";
     	while(courseReader.hasNextLine()) {
     		String splittedCurrentCourse[] = courseReader.nextLine().split("\\s");
-    		Course course = makeCourse(splittedCurrentCourse[0]);
+    		Course course = MakeCourse.makeCourse(splittedCurrentCourse[0]);
     		allCourses+=course.toString()+"\n\n";
     	}
     	System.out.println(allCourses);
