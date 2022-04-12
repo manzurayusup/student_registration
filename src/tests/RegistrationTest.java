@@ -30,18 +30,13 @@ class RegistrationTest {
 	
 	@Test
 	void testRegister() throws IOException {
+		String courseCode = "CSE240";
 		Student student = new Student("Jack", "Sparrow", 123456);
-    	InputStream isLogIn = new ByteArrayInputStream("CSE131\n".getBytes());    			
+    	InputStream isLogIn = new ByteArrayInputStream((courseCode + "\n").getBytes());    			
 		registration.register(student, isLogIn);
-		String expected = "Name: Introduction-to-Computer-Science \n"
-				+ "Code: CSE131 \n"
-				+ "start time: 11:30:00 \n"
-				+ "end time: 12:50:00 \n"
-				+ "seats left: 19 \n"
-				+ "Credits: 3\n"
-				+ "Professor: Shook\n"
-				+ "Exams: Yes";
-		assertTrue(expected.equals(student.getRegisteredCourses().get(0).toString()));
+		Course course = student.getRegisteredCourses().getLast();
+		System.out.println(course);
+		assertTrue(courseCode.equals(student.getRegisteredCourses().getLast().getCourseCode()));
 
 	}
 
@@ -57,41 +52,35 @@ class RegistrationTest {
 
 	@Test
 	void testMakeCourse() throws FileNotFoundException {
-		Course createdCourse = registration.makeCourse("CSE131");
-		String expected = "Name: Introduction-to-Computer-Science \n"+ "Code: CSE131 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 20 \n"+ "Credits: 3\n"+ "Professor: Shook\n"+ "Exams: Yes";
-		assertTrue(expected.equals(createdCourse.toString()));
+		String courseCode = "CSE131";
+		Course createdCourse = registration.makeCourse(courseCode);
+		System.out.println(createdCourse.getCourseCode());
+		assertTrue(courseCode.equals(createdCourse.getCourseCode()));
 	}
 
 	@Test
 	void testAddRegisteredCoursesToStudentObject() throws FileNotFoundException {
+		String courseCode = "CSE217";
 		Student student = new Student("Jack", "Sparrow", 123456);
-		registration.AddRegisteredCoursesToStudentObject("CSE131", student);
-		String expected = "Name: Introduction-to-Computer-Science \n"+ "Code: CSE131 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 20 \n"+ "Credits: 3\n"+ "Professor: Shook\n"+ "Exams: Yes";
-		assertTrue(expected.equals(student.getRegisteredCourses().get(0).toString()));
+		registration.AddRegisteredCoursesToStudentObject(courseCode, student);
+		assertTrue(courseCode.equals(student.getRegisteredCourses().getLast().getCourseCode()));
 	}
 
 	@Test
 	void testAddWaitlistedCoursesToStudentObject() throws FileNotFoundException {
+		String courseCode = "CSE132";
 		Student student = new Student("Jack", "Sparrow", 123456);
-		registration.AddWaitlistedCoursesToStudentObject("CSE131", student);
-		String expected = "Name: Introduction-to-Computer-Science \n"+ "Code: CSE131 \n"+ "start time: 11:30:00 \n"+ "end time: 12:50:00 \n"+ "seats left: 20 \n"+ "Credits: 3\n"+ "Professor: Shook\n"+ "Exams: Yes";
-		assertTrue(expected.equals(student.getWaitlistedCourses().get(0).toString()));
+		registration.AddWaitlistedCoursesToStudentObject(courseCode, student);
+		assertTrue(courseCode.equals(student.getWaitlistedCourses().getLast().getCourseCode()));
 	}
 
 	@Test
 	void testRegisterForSingleCourse() throws IOException {
+		String courseCode = "CSE332";
 		Student currentStudent = new Student("Jack", "Sparrow", 123456);
-		Course course = registration.makeCourse("CSE131");
+		Course course = registration.makeCourse(courseCode);
 		registration.registerForSingleCourse(course, currentStudent);
-		String expected = "Name: Introduction-to-Computer-Science \n"
-				+ "Code: CSE131 \n"
-				+ "start time: 11:30:00 \n"
-				+ "end time: 12:50:00 \n"
-				+ "seats left: 19 \n"
-				+ "Credits: 3\n"
-				+ "Professor: Shook\n"
-				+ "Exams: Yes";
-		assertTrue(expected.equals(currentStudent.getRegisteredCourses().get(0).toString()));
+		assertTrue(courseCode.equals(currentStudent.getRegisteredCourses().getLast().getCourseCode()));
 	}
 	
 	@Test
@@ -157,6 +146,7 @@ class RegistrationTest {
 	@Test
 	void testSaveRegistrationCourseInfo() throws IOException {
 	    String courseTextPath = "src/textfiles/courses.txt";
+	    String courseCode = "CSE204";
 		BufferedReader cbrBefore = new BufferedReader(new FileReader(courseTextPath));
 		String courseLineBefore;
 		LinkedList<String[]> courseListBefore = new LinkedList<>();
@@ -165,9 +155,10 @@ class RegistrationTest {
 			courseListBefore.add(words);
 		}
 		cbrBefore.close();
+		String before = courseListBefore.get(0)[4];
 		int seatsBefore = Integer.valueOf(courseListBefore.get(0)[4]);
 		Student student = new Student("Jack", "Sparrow", 123456);
-    	InputStream isLogIn = new ByteArrayInputStream("CSE131\n".getBytes());    	
+    	InputStream isLogIn = new ByteArrayInputStream((courseCode + "\n").getBytes());    	
 		registration.register(student, isLogIn);
 		BufferedReader cbrAfter = new BufferedReader(new FileReader(courseTextPath));
 		String courseLineAfter;
@@ -178,14 +169,17 @@ class RegistrationTest {
 		}
 		cbrAfter.close();
 		int seatsAfter = Integer.valueOf(courseListAfter.get(0)[4]);
+		System.out.println("Seats before = " + before);
+		System.out.println("Seats after = " + seatsAfter);
 		assertTrue(seatsBefore-seatsAfter==1);
 	}
 	
 	@Test
 	void testSaveRegistrationStudentInfo() throws IOException {
 	    String studentTextPath = "src/textfiles/students.txt";
+	    String courseCode = "CSE330";
 		Student student = new Student("Jack", "Sparrow", 123456);
-    	InputStream isLogIn = new ByteArrayInputStream("CSE131\n".getBytes());    	
+    	InputStream isLogIn = new ByteArrayInputStream((courseCode + "\n").getBytes());    	
 		registration.register(student, isLogIn);
 		BufferedReader cbr = new BufferedReader(new FileReader(studentTextPath));
 		String studentLine;
@@ -197,7 +191,7 @@ class RegistrationTest {
 		cbr.close();
 		String[] registeredCourses = studentList.get(0)[3].split("-");
 		System.out.println(registeredCourses[registeredCourses.length-1]);
-		assertTrue(registeredCourses[registeredCourses.length-1].equals("CSE131"));
+		assertTrue(registeredCourses[registeredCourses.length-1].equals(courseCode));
 	}
 
 }
