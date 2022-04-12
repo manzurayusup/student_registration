@@ -28,7 +28,8 @@ List of courses with seats left: <br/>
 * CSE240 
 * CSE247 
 * CSE330 
-* CSE332
+* CSE332 
+<br/>
 List of courses with 0 seats: <br/>
 * CSE131
 * CSE132
