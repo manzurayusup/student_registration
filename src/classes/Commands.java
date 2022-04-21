@@ -1,0 +1,10 @@
+package classes;
+
+public enum Commands {
+	REGISTER,
+	PRINT_COURSE,
+	PRINT_COURSES_ALL,
+	PRINT_COURSES_ENROLLED,
+	QUIT,
+	NON_COMMAND
+}
