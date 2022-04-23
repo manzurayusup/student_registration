@@ -12,28 +12,18 @@ import java.io.IOException;
  */
 
 public class AppFileProcessor {
-//	private FileReader studentsFileReader, coursesFileReader;
-//	private BufferedReader br_students, br_courses;
-	private File studentsFile, coursesFile;
-	private StringBuilder sb = new StringBuilder();
-	
+	private File studentsFile, coursesFile;	
 	
 	public AppFileProcessor(String studentsFilePath, String coursesFilePath) throws FileNotFoundException {
 		studentsFile = new File(studentsFilePath);
-		coursesFile = new File(coursesFilePath);
-//		studentsFileReader = new FileReader(studentsFile);
-//		coursesFileReader = new FileReader(coursesFile);
-//		br_students = new BufferedReader();
-//		br_courses = new BufferedReader(coursesFileReader);
+		
 	}
-	
 	
     /**
      * Parses the student from file into a Student object and returns it.
      * @param id of the student	
      * @return Student object, null if no student with that ID is found
      */
-    // 
  	public Student createStudent(String id) {
  		String[] studentInfo = parseStudent(id);
  		if (studentInfo == null) return null;
@@ -53,7 +43,6 @@ public class AppFileProcessor {
     	    	String strings[] = line.split("\\s");
     	    	if (strings[2].equals(id)) {
     	    		br.close();
-    	    		System.out.println("parseStudent: " + strings[0] + " " + strings[3]);
     	    		return strings;
     	    	}
     	    }
@@ -87,14 +76,12 @@ public class AppFileProcessor {
      * @param courseList
      */
     private void addCourses(String courseList, Student student, boolean register) {
-//    	StringBuilder sb = new StringBuilder();
-//    	sb.setLength(0);
-		ErrorCodes code;
+    	StringBuilder sb = new StringBuilder();
+    	sb.setLength(0);
     	for (int i = 0; i < courseList.length(); i++) {
     		if (courseList.charAt(i) == '-') {
-    			if (register) code = student.addRegisterCourse(createCourse(sb.toString()));
-    			else code = student.addWaitlistCourse(createCourse(sb.toString()));
-//				System.out.println(sb.toString() + ", code: " + code);	// TODO: debug
+    			if (register) student.addRegisterCourse(createCourse(sb.toString()));
+    			else student.addWaitlistCourse(createCourse(sb.toString()));
     			sb.setLength(0);
     		}
     		else {
@@ -102,14 +89,10 @@ public class AppFileProcessor {
     		}
     	}
     	if (sb.toString().length() > 0) {
-    		if (register) code = student.addRegisterCourse(createCourse(sb.toString()));
-			else code = student.addWaitlistCourse(createCourse(sb.toString()));
-//			System.out.println(sb.toString() + ", code: " + code);	// TODO: debug
+    		if (register) student.addRegisterCourse(createCourse(sb.toString()));
+			else student.addWaitlistCourse(createCourse(sb.toString()));
     	}
-//    	if (!register) closeAllReaders();
     	
-//		student.displayRegisterCourses();	//TODO: DEBUG
-
     }
     
     
@@ -136,15 +119,9 @@ public class AppFileProcessor {
     		String line;
     		int i = 0;
         	while ((line = br.readLine()) != null) {
-//    	    	System.out.println("iteration " + i); // TODO: debug
-//        		System.out.println("------------------------------------------------------------------------------");
-//        		System.out.println(line);
-//        		System.out.println("------------------------------------------------------------------------------");
     	    	String strings[] = line.split("\\s");
     	    	i++;
     	    	if (strings[0].equals(courseCode)) {
-//    	    		br_courses.close();	// TODO: DEBUG
-    	    		System.out.println(strings[0] + " " + strings[strings.length-1]);
     	    		br.close();
     	    		return strings;
     	    	}
@@ -155,7 +132,6 @@ public class AppFileProcessor {
 			e.printStackTrace();
 			return null;
 		} 
-//    	System.out.println("Could not find course?");
 		return null;
     }
     
@@ -183,28 +159,20 @@ public class AppFileProcessor {
     public static void main(String[] args) {
     	try {
 			AppFileProcessor fp = new AppFileProcessor("src/textfiles/test_students.txt", "src/textfiles/test_courses.txt");
-//			String[] jWords = fp.parseStudent("123456");
-//			String[] dWords = fp.parseStudent("234567");
-//			System.out.println(jWords[0] + " " + jWords[2]);
-//			System.out.println(dWords[0] + " " + dWords[2]);
+			// Test course creation: DONE!
+//			System.out.println(fp.createCourse("CSE247"));
+//			System.out.println(fp.createCourse("CSE132"));
+//			System.out.println(fp.createCourse("CSE330"));
 			
-//			System.out.println(fp.constructStudent(jWords));
-//			System.out.println(fp.constructStudent(dWords));
-			String[] cse247 = fp.parseCourse("CSE247");
-			Course c = fp.constructCourse(cse247);
-			System.out.println(c);
-			
-			String[] cse132 = fp.parseCourse("CSE132");
-			Course c2 = fp.constructCourse(cse132);
-			System.out.println(c2);
-			
-			String[] cse330 = fp.parseCourse("CSE330");
-			Course c3 = fp.constructCourse(cse330);
-			System.out.println(c3);
-			
-//			String[] cse204 = fp.parseCourse("CSE204");
-//			String[] cse332 = fp.parseCourse("CSE332");
-
+			// Test student creation: DONE!
+//			Student jack = fp.createStudent("123456");
+//			Student dor = fp.createStudent("234567");
+//			System.out.println(jack);
+//			jack.displayRegisterCourses();
+//			jack.displayWaitListCourses();
+//			System.out.println(dor);
+//			dor.displayRegisterCourses();
+//			dor.displayWaitListCourses();
 
 		} catch (FileNotFoundException e) {
 			// Display appropriate user message
