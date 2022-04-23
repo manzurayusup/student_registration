@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
 /**
  * AppFileReader handles reading files and returning Student or Course object.
  * @author manzura
@@ -13,12 +14,91 @@ import java.io.IOException;
 
 public class AppFileProcessor {
 	private File studentsFile, coursesFile;	
+	private LinkedList<Course> coursesList;
 	
 	public AppFileProcessor(String studentsFilePath, String coursesFilePath) throws FileNotFoundException {
 		studentsFile = new File(studentsFilePath);
-		
+		coursesFile = new File(coursesFilePath);
+		coursesList = new LinkedList<Course>();
+		populateCoursesList();
 	}
 	
+	/**
+	 * Reads the courses file, constructs each course and adds it to the courses list.
+	 */
+	private void populateCoursesList() {
+    	try {
+        	BufferedReader br = new BufferedReader(new FileReader(coursesFile));
+    		String line;
+        	while ((line = br.readLine()) != null) {
+    	    	coursesList.add(constructCourse(line.split("\\s")));
+    	    }
+        	br.close();
+		    
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+    }
+	
+	/**
+     * Parses the course from file and returns it.
+     * @param course code 
+     * @return Course object, null if no course with that course code is found.
+     */
+//    public Course createCourse(String courseCode) {
+//    	String[] courseInfo = parseCourse(courseCode);
+//    	if (courseInfo == null) return null;
+//    	return constructCourse(courseInfo);
+//    }
+    
+    /**
+     * Helper method that returns an array of strings with the course info.
+     * @param course code
+     * @return course info, null if no course is found
+     */
+//    private String[] parseCourse(String courseCode) {
+//    	try {
+//        	BufferedReader br = new BufferedReader(new FileReader(coursesFile));
+//    		String line;
+//        	while ((line = br.readLine()) != null) {
+//    	    	String strings[] = line.split("\\s");
+//    	    	if (strings[0].equals(courseCode)) {
+//    	    		br.close();
+//    	    		return strings;
+//    	    	}
+//    	    }
+//        	br.close();
+//		    
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		} 
+//		return null;
+//    }
+    
+    /**
+     * Helper method that constructs a course from the array of strings.
+     * @param array of course info
+     * @return course object
+     */
+    private Course constructCourse(String[] strings) {
+    	String courseCode = strings[0];
+		String courseName = strings[1];
+		String startTime = strings[2];
+		String endTime = strings[3];
+		int seats = Integer.valueOf(strings[4]);
+		String professorName = strings[5];
+		String exams = strings[6];
+		return new Course(courseName, courseCode, startTime, endTime, seats, 3, professorName, exams);
+    }
+    
+    public LinkedList<Course> getAllCourses() {
+    	return coursesList;
+    }
+	
+ // --------------------------------- END COURSE METHODS --------------------------------------	
+	
+    
     /**
      * Parses the student from file into a Student object and returns it.
      * @param id of the student	
@@ -46,6 +126,7 @@ public class AppFileProcessor {
     	    		return strings;
     	    	}
     	    }
+        	br.close();
 		    
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,104 +157,67 @@ public class AppFileProcessor {
      * @param courseList
      */
     private void addCourses(String courseList, Student student, boolean register) {
-    	StringBuilder sb = new StringBuilder();
-    	sb.setLength(0);
-    	for (int i = 0; i < courseList.length(); i++) {
-    		if (courseList.charAt(i) == '-') {
-    			if (register) student.addRegisterCourse(createCourse(sb.toString()));
-    			else student.addWaitlistCourse(createCourse(sb.toString()));
-    			sb.setLength(0);
-    		}
-    		else {
-    			sb.append(courseList.charAt(i));
-    		}
-    	}
-    	if (sb.toString().length() > 0) {
-    		if (register) student.addRegisterCourse(createCourse(sb.toString()));
-			else student.addWaitlistCourse(createCourse(sb.toString()));
+    	String[] courseCodes = courseList.split("-");
+    	for (int i = 0; i < courseCodes.length; i++) {
+    		Course course = findCourse(courseCodes[i]);
+    		if (register) student.addRegisterCourse(course);
+			else student.addWaitlistCourse(course);
     	}
     	
     }
     
+    private Course findCourse(String courseCode) {
+    	for (int i = 0; i < coursesList.size(); i++) {
+    		Course c = coursesList.get(i);
+    		if (courseCode.equals(c.getCourseCode())) return c;
+    	}
+    	return null;
+    }
+    
     
 // ------------------------------ END STUDENT METHODS --------------------------------------
-    /**
-     * Parses the course from file and returns it.
-     * @param course code 
-     * @return Course object, null if no course with that course code is found.
-     */
-    public Course createCourse(String courseCode) {
-    	String[] courseInfo = parseCourse(courseCode);
-    	if (courseInfo == null) return null;
-    	return constructCourse(courseInfo);
-    }
     
-    /**
-     * Helper method that returns an array of strings with the course info.
-     * @param course code
-     * @return course info, null if no course is found
-     */
-    private String[] parseCourse(String courseCode) {
-    	try {
-        	BufferedReader br = new BufferedReader(new FileReader(coursesFile));
-    		String line;
-    		int i = 0;
-        	while ((line = br.readLine()) != null) {
-    	    	String strings[] = line.split("\\s");
-    	    	i++;
-    	    	if (strings[0].equals(courseCode)) {
-    	    		br.close();
-    	    		return strings;
-    	    	}
-    	    	
-    	    }
-		    
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		} 
-		return null;
-    }
+        
     
-    /**
-     * Helper method that constructs a course from the array of strings.
-     * @param array of course info
-     * @return course object
-     */
-    private Course constructCourse(String[] strings) {
-    	String courseCode = strings[0];
-		String courseName = strings[1];
-		String startTime = strings[2];
-		String endTime = strings[3];
-		int seats = Integer.valueOf(strings[4]);
-		String professorName = strings[5];
-		String exams = strings[6];
-		return new Course(courseName, courseCode, startTime, endTime, seats, 3, professorName, exams);
-    }
-    
-    
-    
-    
-    // ------------------------------------- MAIN ----------------------------------------- //
+// ------------------------------------- MAIN --------------------------------------------- //
     
     public static void main(String[] args) {
     	try {
 			AppFileProcessor fp = new AppFileProcessor("src/textfiles/test_students.txt", "src/textfiles/test_courses.txt");
-			// Test course creation: DONE!
-//			System.out.println(fp.createCourse("CSE247"));
-//			System.out.println(fp.createCourse("CSE132"));
-//			System.out.println(fp.createCourse("CSE330"));
+			Student a = fp.createStudent("123456");
+			Student b = fp.createStudent("234567");
+			a.displayRegisterCourses();
+			a.displayWaitListCourses();
+			System.out.println("-------------------------");
+			b.displayRegisterCourses();
+			b.displayWaitListCourses();
 			
-			// Test student creation: DONE!
-//			Student jack = fp.createStudent("123456");
-//			Student dor = fp.createStudent("234567");
-//			System.out.println(jack);
-//			jack.displayRegisterCourses();
-//			jack.displayWaitListCourses();
-//			System.out.println(dor);
-//			dor.displayRegisterCourses();
-//			dor.displayWaitListCourses();
-
+			
+// ------------------------ SPRINT BUILDER VS ARRAY.SPLIT TEST !!! -----------------------------
+//			LinkedList<String> list = new LinkedList<String>();
+//			
+//			String courseList = "CSE131-CSE247-CSE330";
+//			StringBuilder sb = new StringBuilder();
+//	    	sb.setLength(0);
+//	    	for (int i = 0; i < courseList.length(); i++) {
+//	    		if (courseList.charAt(i) == '-') {
+//	    			list.add(sb.toString());
+//	    			sb.setLength(0);
+//	    		}
+//	    		else {
+//	    			sb.append(courseList.charAt(i));
+//	    		}
+//	    	}
+//	    	if (sb.toString().length() > 0) {
+//	    		list.add(sb.toString());
+//	    	}
+//	    	System.out.println(list);
+//	    	System.out.println("-----------------");
+//	    	String[] arr = courseList.split("-");
+//	    	for (int i = 0; i < arr.length; i++) {
+//	    		System.out.println(arr[i]);
+//	    	}
+// ------------------------ END IMPORTANT TEST -----------------------------
 		} catch (FileNotFoundException e) {
 			// Display appropriate user message
 			e.printStackTrace();

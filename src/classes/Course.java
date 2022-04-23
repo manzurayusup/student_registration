@@ -149,7 +149,7 @@ public class Course{
 	 * @return a string containing all information about this course.
 	 */
 	public String toString(){
-		return "Name: " + this.getName() + " \nCode: " + this.getCourseCode() + " \nstart time: " + this.getStartTime() + " \nend time: " + this.getEndTime() + " \nseats left: " + this.getSeats() + " \nCredits: " + this.getCredits() + "\nProfessor: " + this.getProfessorName() + "\nExams: " + this.getExams();
+		return "{ Name: " + this.getName() + " \nCode: " + this.getCourseCode() + " \nstart time: " + this.getStartTime() + " \nend time: " + this.getEndTime() + " \nseats left: " + this.getSeats() + " \nCredits: " + this.getCredits() + "\nProfessor: " + this.getProfessorName() + "\nExams: " + this.getExams() + " }\n";
 	}
 	
 	@Override

@@ -125,6 +125,17 @@ public class Student {
         }
     }
     
+    @Override
+	public boolean equals(Object o) {
+	    // self check
+	    if (this == o) return true;
+	    // null check
+	    if (o == null) return false;
+	    Student s = (Student) o;
+	    // field comparison
+	    return (this.wustlID == s.wustlID) && firstName.equals(s.firstName) && this.lastName.equals(s.lastName);
+	}
+    
     public void printSummary() {
 		System.out.println("----------------------- Summary ---------------------------");
 		System.out.println(toString());
