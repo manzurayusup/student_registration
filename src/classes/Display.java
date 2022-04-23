@@ -45,4 +45,10 @@ public class Display {
     	System.out.println(allCourses);
     	return allCourses;
 	}
+	public static void displayRegisteredCourses(Student student) {
+		student.displayRegisterCourses();
+	}
+	public static void displayWaitlistedCourses(Student student) {
+		student.displayWaitListCourses();
+	}
 }
