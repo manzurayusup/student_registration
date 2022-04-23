@@ -25,30 +25,9 @@ public class Registration
     {
     	Registration registration = new Registration();
         Student currentStudent = registration.intro();
-        registration.processChoice(currentStudent, System.in);
+        Menu menu = new Menu(currentStudent);
+        menu.processChoice(currentStudent, System.in);
         
-    }
-    
-    // get a choice from user and process it accordingly.
-    // input: the current student that is making the choices.
-    public void processChoice(Student currentStudent, InputStream inputStream) throws IOException {
-    	int choice=6;
-    	
-        do {
-            printChoices();
-            Scanner scanner = new Scanner(inputStream);
-            choice= scanner.nextInt();
-            scanner.nextLine();
-            switch (choice)
-            {
-				// more functionalities will be added as we go.
-                case 1: register(currentStudent, System.in); break;
-                case 2: printCourse(System.in); break;
-                case 3: printAllCourses(); break;
-                case 4: currentStudent.displayRegisterCourses(); break;
-                default: break;
-            }
-        }while (choice!=5);
     }
     
     // print an intro to the user and get their information.
@@ -188,24 +167,6 @@ public class Registration
         System.out.println("\t3. Print all courses");
         System.out.println("\t4. Print enrolled courses");
         System.out.println("\t5. Quit");
-	}
-	
-	// input: the current student that registers for a course.
-	// Desc: prompts user for course code, checks if course is in database and adds course to registered courses for student.
-	public void register(Student currentStudent, InputStream inputStream) throws IOException {
-		System.out.println("Please enter the course code of the course you want to register for");
-		Scanner scanner = new Scanner(inputStream);
-		String courseCode = scanner.next();
-		System.out.println("Course code: " + courseCode);
-		scanner.nextLine();
-		Course course = MakeCourse.makeCourse(courseCode);
-		if (course != null) {
-			RegistrationHandler registrationHandler= new RegistrationHandler(currentStudent);
-			registrationHandler.register(courseCode);
-		}
-		else {
-			System.out.println("Course does not exist");
-		}
 	}
 	
 	public ErrorCodes printCourse(InputStream inputStream) throws FileNotFoundException {

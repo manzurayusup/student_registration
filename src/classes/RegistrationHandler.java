@@ -1,7 +1,9 @@
 package classes;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class RegistrationHandler {
 	private Student student;
@@ -9,6 +11,23 @@ public class RegistrationHandler {
     public RegistrationHandler(Student student) {
         this.student = student;
     }
+    
+    // input: the current student that registers for a course.
+ 	// Desc: prompts user for course code, checks if course is in database and adds course to registered courses for student.
+ 	public void register(Student currentStudent, InputStream inputStream) throws IOException {
+ 		System.out.println("Please enter the course code of the course you want to register for");
+ 		Scanner scanner = new Scanner(inputStream);
+ 		String courseCode = scanner.next();
+ 		System.out.println("Course code: " + courseCode);
+ 		scanner.nextLine();
+ 		Course course = MakeCourse.makeCourse(courseCode);
+ 		if (course != null) {
+ 			register(courseCode);
+ 		}
+ 		else {
+ 			System.out.println("Course does not exist");
+ 		}
+ 	}
 
 	public void register(String courseCode) throws IOException {
 		// TODO Auto-generated method stub
