@@ -1,0 +1,9 @@
+CSE131 Introduction-to-Computer-Science 2022-08-29T11:30:00.000Z 2022-12-09T12:50:00.000Z 100 Shook Yes Urbauer-222 
+CSE132 Introduction-to-Computer-Engineering 2022-08-29T13:00:00.000Z 2022-12-09T14:20:00.000Z 0 Chamberlain Yes Urbauer-218 
+CSE204 Web-Development 2022-08-29T08:30:00.000Z 2022-12-09T09:50:00.000Z 40 Clapp No Urbauer-220 
+CSE217 Introduction-to-Data-Science 2022-08-29T14:30:00.000Z 2022-12-09T15:50:00.000Z 100 Singh No Urbauer-224 
+CSE240 Logic-and-Discrete-Mathematics 2022-08-29T10:00:00.000Z 2022-12-09T11:20:00.000Z 100 Garnett No Urbauer-226 
+CSE247 Data-Structures-and-Algorithms 2022-08-29T13:00:00.000Z 2022-12-09T14:20:00.000Z 100 Cole No Eads-016 
+CSE330 Rapid-Prototype-Development-and-Creative-Programming 2022-08-29T11:30:00.000Z 2022-12-09T12:50:00.000Z 60 Sproull No Urbauer-222 
+CSE332 Object-Oriented-Software-Development-Laboratory 2022-08-29T10:00:00.000Z 2022-12-09T11:20:00.000Z 100 Shidal No Eads-016 
+CSE347 Analysis-of-Algorithms 2022-08-29T11:30:00.000Z 2022-12-09T12:50:00.000Z 0 Buhler Yes Brown-118 

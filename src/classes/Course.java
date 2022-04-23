@@ -160,7 +160,7 @@ public class Course{
 	    if (o == null) return false;
 	    Course course = (Course) o;
 	    // field comparison
-	    return Objects.equals(this.courseCode, course.courseCode);
+	    return this.courseCode.equals(course.courseCode);
 	}
 	
 }

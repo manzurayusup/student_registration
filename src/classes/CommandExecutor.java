@@ -11,6 +11,7 @@ import java.io.InputStream;
 
 public class CommandExecutor {
 	private CommandReader cmdReader;
+	private AppFileProcessor fileProcessor;
 	private Student student;
 //	private Course course;
 
@@ -27,32 +28,39 @@ public class CommandExecutor {
 			Commands cmd = cmdReader.processCommand();
 			while (cmd != Commands.QUIT) {
 				cmd = cmdReader.processCommand();
+				executeCommand(cmd);
 				
-				switch (cmd) {
-				case REGISTER: 
-					// get course code, make course object
-					// call register method on this.student
-					break;
-				case PRINT_COURSE: 
-					// get course code, make course object
-					// call course's toString
-					break;
-				case PRINT_COURSES_ALL: 
-					// read courses.txt, make Course object, and call toString on each 
-					break;
-				case PRINT_COURSES_ENROLLED: 
-					// call printEnrolledCourses() on this.student
-					break;
-				case NON_COMMAND: 
-					Menu.printErrorNonCommand();
-					break;
-				}
 			}
 		} catch (IOException e) {
 			Menu.printIOError();
 		}		
 	}
 	
+	/**
+	 * Takes in a Command and executes it.
+	 * @param cmd
+	 */
+	public void executeCommand(Commands cmd) {
+		switch (cmd) {
+		case REGISTER: 
+			// get course code, make course object
+			// call register method on this.student
+			break;
+		case PRINT_COURSE: 
+			// get course code, make course object
+			// call course's toString
+			break;
+		case PRINT_COURSES_ALL: 
+			// read courses.txt, make Course object, and call toString on each 
+			break;
+		case PRINT_COURSES_ENROLLED: 
+			// call printEnrolledCourses() on this.student
+			break;
+		case NON_COMMAND: 
+			Menu.printErrorNonCommand();
+			break;
+		}
+	}
 	// other methods go here
 
 }

@@ -42,15 +42,15 @@ public class Student {
      */
     public ErrorCodes addWaitlistCourse(Course waitlistCourse) {
     	if (this.waitlistedCourses.size() + this.registeredCourses.size() == 7) {
-    		return ErrorCodes.ERROR;
+    		return ErrorCodes.ERROR_MAX_CREDITS;
     	} else {
     		if (this.registeredCourses.contains(waitlistCourse)) {;
-    			return ErrorCodes.ERROR;
+    			return ErrorCodes.ERROR_ALREADY_ENROLLED;
     		} else {
     			if (!this.waitlistedCourses.contains(waitlistCourse)) {
                     this.waitlistedCourses.add(waitlistCourse);
                 } else {
-        			return ErrorCodes.ERROR;
+        			return ErrorCodes.ERROR_ALREADY_WAITLISTED;
         		}
     		}
     	}
@@ -89,20 +89,24 @@ public class Student {
      * @return An enum indicating whether the action was successful.
      */
     public ErrorCodes addRegisterCourse(Course registerCourse) {
-    	if (this.waitlistedCourses.size() + this.registeredCourses.size() == 7) {
-    		return ErrorCodes.ERROR;
+    	System.out.println("--DEBUG--BEFORE--ADD--");	//TODO: DEBUG
+    	System.out.println(this.registeredCourses.toString());    	if (this.waitlistedCourses.size() + this.registeredCourses.size() == 7) {
+    		return ErrorCodes.ERROR_MAX_CREDITS;
     	} else {
     		if (this.waitlistedCourses.contains(registerCourse)) {
-    			return ErrorCodes.ERROR;
+    			return ErrorCodes.ERROR_ALREADY_WAITLISTED;
     		} else {
     			if (!this.registeredCourses.contains(registerCourse)) {
 	                this.registeredCourses.add(registerCourse);
+	            	System.out.println("--DEBUG--AFTER--ADD--");	//TODO: DEBUG
+	            	System.out.println(this.registeredCourses.toString());
+	                return ErrorCodes.SUCCESS;
 	            } else {
-	    			return ErrorCodes.ERROR;
+	            	System.out.println("--DEBUG--AFTER--FAIL--" + this.registeredCourses.toString());	//TODO: DEBUG
+	    			return ErrorCodes.ERROR_ALREADY_ENROLLED;
 	    		}
     		}
     	}
-    	return ErrorCodes.SUCCESS;
     }
     
     /**

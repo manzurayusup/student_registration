@@ -8,5 +8,9 @@ package classes;
  */
 public enum ErrorCodes {
 	SUCCESS, 
+	ERROR_MAX_CREDITS,
+	ERROR_ALREADY_ENROLLED,
+	ERROR_ALREADY_WAITLISTED,
 	ERROR
+	
 }
