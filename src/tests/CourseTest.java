@@ -43,22 +43,6 @@ class CourseTest {
 		assertTrue("CSE247".equals(returnedCode));
 	}
 	
-	// test setStartTime and getStartTime
-//	@Test
-//	void testStartTime(){
-//		course.setStartTime("2022-08-29T13:00:00.000Z");
-//		String returnedTime = course.getStartTime();
-//		assertTrue("13:00:00".equals(returnedTime));
-//	}
-	
-	// test setEndTime and getEndTime
-//	@Test
-//	void testEndTime(){
-//		course.setEndTime("2022-08-29T13:00:00.000Z");
-//		String returnedTime = course.getEndTime();
-//		assertTrue("13:00:00".equals(returnedTime));
-//	}
-	
 	// test setSeats and getSeats
 	@Test
 	void testSeats(){

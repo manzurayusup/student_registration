@@ -1,4 +1,4 @@
-package oop_classes;
+package classes;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,9 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.LinkedList;
-
-import classes.Course;
-import classes.Student;
 
 public class AppFileWriter {
 //	private String studentFilePath = "src/textfiles/test_students.txt";

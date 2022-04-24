@@ -1,14 +1,9 @@
-package oop_classes;
+package classes;
 
 import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
-
-import classes.Commands;
-import classes.Course;
-import classes.ErrorCodes;
-import classes.Student;
 
 public class Commandline {
 	private Scanner scanner;
@@ -56,10 +51,8 @@ public class Commandline {
 			if (scanner.hasNextInt()) choice = scanner.nextInt();
 			else choice = 0;
 	        scanner.nextLine();
-	        System.out.println("Watermelon: "+ choice);
 	        return Commands.valueOf(choice);
 		} catch (InputMismatchException e) {
-			System.out.println("Watermelon:");
 			e.printStackTrace();
 			return Commands.NON_COMMAND;
 		}
@@ -127,7 +120,7 @@ public class Commandline {
 			fw.saveCourseData(list.get(i));
 		}
 	}
-//	------------------------------- Display class -------------------------------
+	
 	public ErrorCodes printCourse() throws FileNotFoundException {
 		// this method gets the coursecode from user input and displays details of that course
 		// Course (String name, String courseCode, String startTime, String endTime, int seats, int credits)

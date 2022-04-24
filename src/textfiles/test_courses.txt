@@ -1,9 +1,9 @@
-CSE131 Introduction-to-Computer-Science 11:30:00 12:50:00 100 Shook Yes Urbauer-222 
-CSE132 Introduction-to-Computer-Engineering 13:00:00 14:20:00 0 Chamberlain Yes Urbauer-218 
-CSE204 Web-Development 08:30:00 09:50:00 100 Clapp No Urbauer-220 
-CSE217 Introduction-to-Data-Science 14:30:00 15:50:00 100 Singh No Urbauer-224 
-CSE240 Logic-and-Discrete-Mathematics 10:00:00 11:20:00 100 Garnett No Urbauer-226 
-CSE247 Data-Structures-and-Algorithms 13:00:00 14:20:00 100 Cole No Eads-016 
-CSE330 Rapid-Prototype-Development-and-Creative-Programming 11:30:00 12:50:00 100 Sproull No Urbauer-222 
-CSE332 Object-Oriented-Software-Development-Laboratory 10:00:00 11:20:00 100 Shidal No Eads-016 
-CSE347 Analysis-of-Algorithms 11:30:00 12:50:00 0 Buhler Yes Brown-118 
+CSE131 Introduction-to-Computer-Science 11:30:00 12:50:00 99 Shook Yes
+CSE132 Introduction-to-Computer-Engineering 13:00:00 14:20:00 0 Chamberlain Yes
+CSE204 Web-Development 08:30:00 09:50:00 100 Clapp No
+CSE217 Introduction-to-Data-Science 14:30:00 15:50:00 100 Singh No
+CSE240 Logic-and-Discrete-Mathematics 10:00:00 11:20:00 100 Garnett No
+CSE247 Data-Structures-and-Algorithms 13:00:00 14:20:00 100 Cole No
+CSE330 Rapid-Prototype-Development-and-Creative-Programming 11:30:00 12:50:00 100 Sproull No
+CSE332 Object-Oriented-Software-Development-Laboratory 10:00:00 11:20:00 100 Shidal No
+CSE347 Analysis-of-Algorithms 11:30:00 12:50:00 0 Buhler Yes
