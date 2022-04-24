@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.LinkedList;
 
 public class AppFileWriter {
@@ -25,17 +26,20 @@ public class AppFileWriter {
 	 * @return true if data is successfully saved, false otherwise
 	 */
 	public boolean writeStudentData(Student s) {
+		
 		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter(studentFile));
-			String[] contents = returnFileContentsStudents(studentFile, s.getID());
-			String oldData = contents[0];
+			String[] contents = returnFileContentsAndLine(studentFile, String.valueOf(s.getID()));
+			String data = contents[0];
 			String newData = constructFileStringStudent(s);
-			oldData.replace(contents[1], null);
+			BufferedWriter bw = new BufferedWriter(new FileWriter(studentFile));
+			data = data.replace(contents[1], newData);
+			bw.write(data);
+			bw.close();
+			return true;
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
 		}
-		return false;
 	}
 	
 	/**
@@ -44,7 +48,7 @@ public class AppFileWriter {
 	 * @return constructed string 
 	 */
 	public String constructFileStringStudent(Student s) {
-		String result = s.getFirstName() + " " + s.getLastName() + " " + s.getID() + " ";
+		String result = s.getID() + " " + s.getFirstName() + " " + s.getLastName() + " ";
 		LinkedList<Course> registered = s.getRegisteredCourses();
 		LinkedList<Course> waitlisted = s.getWaitlistedCourses();
 		
@@ -64,17 +68,17 @@ public class AppFileWriter {
 	 * Helper method that reads all the lines of the file and returns an array containing all
 	 * the contents of the file and the line that needs to be replaced with new data.
 	 * @param file
-	 * @return all the contents of the file in a string
+	 * @return array: [0]->file contents, [1]->line to be replaced
 	 * @throws IOException
 	 */
-	private String[] returnFileContentsStudents(File file, int studentId) throws IOException {
+	private String[] returnFileContentsAndLine(File file, String firstString) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line;
 		String lines = "";
 		String[] contents = new String[2];	// [0]: lines, [1]: the line to be replaced
 		while ((line = br.readLine()) != null) {
 			String[] data = line.split("\\s");
-			if (data[2].equals(String.valueOf(studentId))) contents[1] = line;
+			if (data[0].equals(firstString)) contents[1] = line;
 			lines += line + "\n";
 		}
 		br.close();
@@ -83,6 +87,27 @@ public class AppFileWriter {
 	}
 	
 	
+//	------------------------- COURSE METHODS START -----------------------------------------
+
+	public boolean saveCourseData(Course c) {
+		try {
+			String[] contents = returnFileContentsAndLine(courseFile, String.valueOf(c.getCourseCode()));
+			String data = contents[0];
+			String newData = constructFileStringCourse(c);
+			BufferedWriter bw = new BufferedWriter(new FileWriter(courseFile));
+			data = data.replace(contents[1], newData);
+			bw.write(data);
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public String constructFileStringCourse(Course c) {
+		return c.getCourseCode() + " " + c.getName() + " " + c.getStartTime() + " " + c.getEndTime() + " " + c.getSeats() + " " + c.getProfessorName() + " " + c.getExams();
+	}
 	
 //	---------------------------------- MAIN -----------------------------------------
 
@@ -91,12 +116,21 @@ public class AppFileWriter {
 		String coursePath = "src/textfiles/test_courses.txt";
 		AppFileWriter appWriter = new AppFileWriter(studentPath, coursePath);
 		AppFileProcessor fp = new AppFileProcessor(studentPath, coursePath);
-		Student jack = fp.createStudent("234567");
-		String[] contents = appWriter.returnFileContentsStudents(new File(studentPath), jack.getID());
-		String newData = appWriter.constructFileStringStudent(jack);
-		System.out.println(newData);
-		System.out.println(contents[1]);
-		System.out.println(contents[0]);
+//		Student dor = fp.createStudent("234567");
+		Course c = fp.findCourse("CSE204");
+		Course c2 = fp.findCourse("CSE347");
+//		Course c2 = fp.findCourse("CSE330");
+//		dor.addRegisterCourse(c);
+//		ErrorCodes error = dor.addWaitlistCourse(c2);
+//		System.out.println(error);
+//		appWriter.writeStudentData(dor);
+//		c.setSeats(c.getSeats() - 50);
+//		appWriter.saveCourseData(c);
+		c.setSeats(c.getSeats()-40);
+		c2.setSeats(c2.getSeats()-10);
+		appWriter.saveCourseData(c);
+		appWriter.saveCourseData(c2);
+
 	}
 
 }

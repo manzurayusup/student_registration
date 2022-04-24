@@ -121,7 +121,7 @@ public class AppFileProcessor {
     		String line;
         	while ((line = br.readLine()) != null) {
     	    	String strings[] = line.split("\\s");
-    	    	if (strings[2].equals(id)) {
+    	    	if (strings[0].equals(id)) {
     	    		br.close();
     	    		return strings;
     	    	}
@@ -141,9 +141,10 @@ public class AppFileProcessor {
      * @return Student object
      */
     private Student constructStudent(String strings[]) {
-    	String firstName = strings[0];
-		String lastName = strings[1];
-    	Student student = new Student(firstName, lastName, Integer.valueOf(strings[2]));
+    	int id = Integer.valueOf(strings[0]);
+    	String firstName = strings[1];
+		String lastName = strings[2];
+    	Student student = new Student(firstName, lastName, id);
     	String registeredCourses = strings[3];
     	addCourses(registeredCourses, student, true); 
     	String waitlistedCourses = strings[4];
@@ -166,7 +167,7 @@ public class AppFileProcessor {
     	
     }
     
-    private Course findCourse(String courseCode) {
+    public Course findCourse(String courseCode) {
     	for (int i = 0; i < coursesList.size(); i++) {
     		Course c = coursesList.get(i);
     		if (courseCode.equals(c.getCourseCode())) return c;
