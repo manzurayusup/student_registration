@@ -16,7 +16,7 @@ public class AppFileProcessor {
 	private File studentsFile, coursesFile;	
 	private LinkedList<Course> coursesList;
 	
-	public AppFileProcessor(String studentsFilePath, String coursesFilePath) throws FileNotFoundException {
+	public AppFileProcessor(String studentsFilePath, String coursesFilePath) {
 		studentsFile = new File(studentsFilePath);
 		coursesFile = new File(coursesFilePath);
 		coursesList = new LinkedList<Course>();
@@ -182,15 +182,15 @@ public class AppFileProcessor {
 // ------------------------------------- MAIN --------------------------------------------- //
     
     public static void main(String[] args) {
-    	try {
-			AppFileProcessor fp = new AppFileProcessor("src/textfiles/test_students.txt", "src/textfiles/test_courses.txt");
-			Student a = fp.createStudent("123456");
-			Student b = fp.createStudent("234567");
-			a.displayRegisterCourses();
-			a.displayWaitListCourses();
-			System.out.println("-------------------------");
-			b.displayRegisterCourses();
-			b.displayWaitListCourses();
+    	
+		AppFileProcessor fp = new AppFileProcessor("src/textfiles/test_students.txt", "src/textfiles/test_courses.txt");
+		Student a = fp.createStudent("123456");
+		Student b = fp.createStudent("234567");
+		a.displayRegisterCourses();
+		a.displayWaitListCourses();
+		System.out.println("-------------------------");
+		b.displayRegisterCourses();
+		b.displayWaitListCourses();
 			
 			
 // ------------------------ SPRINT BUILDER VS ARRAY.SPLIT TEST !!! -----------------------------
@@ -218,10 +218,7 @@ public class AppFileProcessor {
 //	    		System.out.println(arr[i]);
 //	    	}
 // ------------------------ END IMPORTANT TEST -----------------------------
-		} catch (FileNotFoundException e) {
-			// Display appropriate user message
-			e.printStackTrace();
-		}
+		
     }
     
     
