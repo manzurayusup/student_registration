@@ -14,9 +14,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import classes.AppFileProcessor;
 import classes.Course;
 import classes.Student;
+import oop_classes.AppFileProcessor;
 
 class AppFileProcessorTest {
 	private String studentsFilePath = "src/textfiles/test_students.txt";

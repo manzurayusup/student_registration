@@ -106,6 +106,25 @@ public class Student {
     }
     
     /**
+     * Registers the student if the course has available seats, waitlists the student if not.  
+     * @param course
+     * @return ADDED_TO_WAITLIST if student was waitlisted,
+     * SUCCESS_REGISTER if student was registered,
+     * ERROR if neither
+     */
+    public ErrorCodes register(Course c) {
+    	if (c != null && c.getSeats() <= 0) {
+    		if (addWaitlistCourse(c) == ErrorCodes.SUCCESS) return ErrorCodes.ADDED_TO_WAITLIST;
+    	} else {
+    		if (addRegisterCourse(c) == ErrorCodes.SUCCESS) { 
+    			c.setSeats(c.getSeats() - 1);
+    			return ErrorCodes.SUCCESS_REGISTER;
+    		}
+    	}
+    	return ErrorCodes.ERROR;
+    }
+    
+    /**
      * 
      * @param registerCourse: Remove a Course from the Student's register list.
      * @return	An enum indicating whether the action was successful.

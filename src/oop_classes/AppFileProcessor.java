@@ -1,4 +1,4 @@
-package classes;
+package oop_classes;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,6 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
+
+import classes.Course;
+import classes.Student;
 /**
  * AppFileReader handles reading files and returning Student or Course object.
  * @author manzura
@@ -13,12 +16,21 @@ import java.util.LinkedList;
  */
 
 public class AppFileProcessor {
+	private String defaultStudentFilePath = "src/textfiles/test_students.txt";
+	private String defaultCourseFilePath = "src/textfiles/test_courses.txt";
 	private File studentsFile, coursesFile;	
 	private LinkedList<Course> coursesList;
 	
 	public AppFileProcessor(String studentsFilePath, String coursesFilePath) {
 		studentsFile = new File(studentsFilePath);
 		coursesFile = new File(coursesFilePath);
+		coursesList = new LinkedList<Course>();
+		populateCoursesList();
+	}
+	
+	public AppFileProcessor() {
+		studentsFile = new File(defaultStudentFilePath);
+		coursesFile = new File(defaultCourseFilePath);
 		coursesList = new LinkedList<Course>();
 		populateCoursesList();
 	}

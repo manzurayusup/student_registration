@@ -1,4 +1,4 @@
-package classes;
+package oop_classes;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.LinkedList;
 
+import classes.Course;
+import classes.Student;
+
 public class AppFileWriter {
 //	private String studentFilePath = "src/textfiles/test_students.txt";
 //	private String courseFilePath = "src/textfiles/test_courses.txt";
@@ -18,6 +21,11 @@ public class AppFileWriter {
 	public AppFileWriter(String studentFilePath, String courseFilePath) {
 		studentFile = new File(studentFilePath);
 		courseFile = new File(courseFilePath);
+	}
+	
+	public AppFileWriter() {
+		studentFile = new File("src/textfiles/test_students.txt");
+		courseFile = new File("src/textfiles/test_courses.txt");
 	}
 	/**
 	 * Writes to the students file with the updated student info. This method assumes the student
@@ -28,7 +36,8 @@ public class AppFileWriter {
 	public boolean writeStudentData(Student s) {
 		
 		try {
-			String[] contents = returnFileContentsAndLine(studentFile, String.valueOf(s.getID()));
+			String[] contents = getFileContentsAndLine(studentFile, String.valueOf(s.getID()));
+			if (contents == null) return false;
 			String data = contents[0];
 			String newData = constructFileStringStudent(s);
 			BufferedWriter bw = new BufferedWriter(new FileWriter(studentFile));
@@ -43,7 +52,8 @@ public class AppFileWriter {
 	}
 	
 	/**
-	 * Helper method that creates a string to be written to the students file.
+	 * Helper method that creates a string to be written to the students file. This method expects
+	 * the passed student to be a valid Student object.
 	 * @param student
 	 * @return constructed string 
 	 */
@@ -68,43 +78,63 @@ public class AppFileWriter {
 	 * Helper method that reads all the lines of the file and returns an array containing all
 	 * the contents of the file and the line that needs to be replaced with new data.
 	 * @param file
-	 * @return array: [0]->file contents, [1]->line to be replaced
+	 * @return array: [0]->file contents, [1]->line to be replaced, null if no line with 
+	 * the matching first string is found
 	 * @throws IOException
 	 */
-	private String[] returnFileContentsAndLine(File file, String firstString) throws IOException {
+	private String[] getFileContentsAndLine(File file, String firstString) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(file));
-		String line;
+		String line; 
 		String lines = "";
-		String[] contents = new String[2];	// [0]: lines, [1]: the line to be replaced
+		String[] contents = new String[2];	
+		boolean foundMatchingLine = false;
 		while ((line = br.readLine()) != null) {
-			String[] data = line.split("\\s");
-			if (data[0].equals(firstString)) contents[1] = line;
+			if (line.split("\\s")[0].equals(firstString)) {
+				contents[1] = line;
+				foundMatchingLine = true;
+			}
 			lines += line + "\n";
 		}
 		br.close();
-		contents[0] = lines;
-		return contents;
+		if (foundMatchingLine) {
+			contents[0] = lines;
+			return contents;
+		} else {
+			return null;
+		}
+		
 	}
 	
 	
-//	------------------------- COURSE METHODS START -----------------------------------------
-
+//	--------------------------- COURSE METHODS  ------------------------------------
+	/**
+	 * Writes to the courses file with the updated course data.
+	 * @param course to be updated
+	 * @return true if successfully written, false otherwise
+	 */
 	public boolean saveCourseData(Course c) {
 		try {
-			String[] contents = returnFileContentsAndLine(courseFile, String.valueOf(c.getCourseCode()));
+			String[] contents = getFileContentsAndLine(courseFile, String.valueOf(c.getCourseCode()));
+			if (contents == null) return false;
 			String data = contents[0];
 			String newData = constructFileStringCourse(c);
 			BufferedWriter bw = new BufferedWriter(new FileWriter(courseFile));
 			data = data.replace(contents[1], newData);
 			bw.write(data);
 			bw.close();
+			return true;
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
 		}
-		return true;
 	}
 	
+	/**
+	 * Helper method that creates a string to be written to the courses file. This method expects the 
+	 * passed course to be a valid Course object.
+	 * @param course 
+	 * @return constructed line
+	 */
 	public String constructFileStringCourse(Course c) {
 		return c.getCourseCode() + " " + c.getName() + " " + c.getStartTime() + " " + c.getEndTime() + " " + c.getSeats() + " " + c.getProfessorName() + " " + c.getExams();
 	}
@@ -116,16 +146,9 @@ public class AppFileWriter {
 		String coursePath = "src/textfiles/test_courses.txt";
 		AppFileWriter appWriter = new AppFileWriter(studentPath, coursePath);
 		AppFileProcessor fp = new AppFileProcessor(studentPath, coursePath);
-//		Student dor = fp.createStudent("234567");
 		Course c = fp.findCourse("CSE204");
 		Course c2 = fp.findCourse("CSE347");
-//		Course c2 = fp.findCourse("CSE330");
-//		dor.addRegisterCourse(c);
-//		ErrorCodes error = dor.addWaitlistCourse(c2);
-//		System.out.println(error);
-//		appWriter.writeStudentData(dor);
-//		c.setSeats(c.getSeats() - 50);
-//		appWriter.saveCourseData(c);
+
 		c.setSeats(c.getSeats()-40);
 		c2.setSeats(c2.getSeats()-10);
 		appWriter.saveCourseData(c);
