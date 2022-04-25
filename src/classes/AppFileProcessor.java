@@ -11,7 +11,6 @@ import java.util.LinkedList;
  * @author manzura
  *
  */
-
 public class AppFileProcessor {
 	private String defaultStudentFilePath = "src/textfiles/test_students.txt";
 	private String defaultCourseFilePath = "src/textfiles/test_courses.txt";
@@ -25,6 +24,9 @@ public class AppFileProcessor {
 		populateCoursesList();
 	}
 	
+	/**
+	 * Default constructor uses the "test_students.txt" and "test_courses.txt" files.
+	 */
 	public AppFileProcessor() {
 		studentsFile = new File(defaultStudentFilePath);
 		coursesFile = new File(defaultCourseFilePath);
@@ -32,8 +34,9 @@ public class AppFileProcessor {
 		populateCoursesList();
 	}
 	
+// --------------------------------- START COURSE METHODS --------------------------------------	
 	/**
-	 * Reads the courses file, constructs each course and adds it to the courses list.
+	 * Reads the courses file, constructs each course and adds it to the list of all courses.
 	 */
 	private void populateCoursesList() {
     	try {
@@ -49,42 +52,6 @@ public class AppFileProcessor {
 		} 
     }
 	
-	/**
-     * Parses the course from file and returns it.
-     * @param course code 
-     * @return Course object, null if no course with that course code is found.
-     */
-//    public Course createCourse(String courseCode) {
-//    	String[] courseInfo = parseCourse(courseCode);
-//    	if (courseInfo == null) return null;
-//    	return constructCourse(courseInfo);
-//    }
-    
-    /**
-     * Helper method that returns an array of strings with the course info.
-     * @param course code
-     * @return course info, null if no course is found
-     */
-//    private String[] parseCourse(String courseCode) {
-//    	try {
-//        	BufferedReader br = new BufferedReader(new FileReader(coursesFile));
-//    		String line;
-//        	while ((line = br.readLine()) != null) {
-//    	    	String strings[] = line.split("\\s");
-//    	    	if (strings[0].equals(courseCode)) {
-//    	    		br.close();
-//    	    		return strings;
-//    	    	}
-//    	    }
-//        	br.close();
-//		    
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		} 
-//		return null;
-//    }
-    
     /**
      * Helper method that constructs a course from the array of strings.
      * @param array of course info
@@ -101,13 +68,26 @@ public class AppFileProcessor {
 		return new Course(courseName, courseCode, startTime, endTime, seats, 3, professorName, exams);
     }
     
+    /**
+     * Returns the course if it's in the list of all available courses, null otherwise.
+     * @param courseCode
+     * @return
+     */
+    public Course findCourse(String courseCode) {
+    	for (int i = 0; i < coursesList.size(); i++) {
+    		Course c = coursesList.get(i);
+    		if (courseCode.equals(c.getCourseCode())) return c;
+    	}
+    	return null;
+    }
+    
     public LinkedList<Course> getAllCourses() {
     	return coursesList;
     }
-	
- // --------------------------------- END COURSE METHODS --------------------------------------	
-	
     
+	
+ // --------------------------------- START STUDENT METHODS --------------------------------------	
+	
     /**
      * Parses the student from file into a Student object and returns it.
      * @param id of the student	
@@ -162,7 +142,7 @@ public class AppFileProcessor {
     }
     
     /**
-     * Helper method that adds courses to the student being constructed.
+     * Helper method that adds courses the student being constructed is already enrolled/waitlistes in.
      * Register flag indicates whether to add to the registered courses or waitlisted courses.
      * @param courseList
      */
@@ -176,18 +156,8 @@ public class AppFileProcessor {
     	
     }
     
-    public Course findCourse(String courseCode) {
-    	for (int i = 0; i < coursesList.size(); i++) {
-    		Course c = coursesList.get(i);
-    		if (courseCode.equals(c.getCourseCode())) return c;
-    	}
-    	return null;
-    }
     
     
-// ------------------------------ END STUDENT METHODS --------------------------------------
-    
-        
     
 // ------------------------------------- MAIN --------------------------------------------- //
     

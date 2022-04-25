@@ -1,7 +1,11 @@
 package classes;
 
 import java.util.HashMap;
-
+/**
+ * Enums corresponding with the numbered menu options.
+ * @author manzura, khushi, irtaza, yab
+ *
+ */
 public enum Commands {
 	NON_COMMAND(0),
 	REGISTER_FOR_COURSE(1),
@@ -17,13 +21,19 @@ public enum Commands {
 	Commands(int i) {
 		this.value = i;
 	}
-	
+	/**
+	 * This static method maps the enum values to the enums. 
+	 */
 	static {
         for (Commands command : Commands.values()) {
             map.put(command.value, command);
         }
     }
-	
+	/**
+	 * Returns the enum with value "value". 
+	 * @param value
+	 * @return
+	 */
 	public static Commands valueOf(int value) {
         return (Commands) map.get(value);
     }

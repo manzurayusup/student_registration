@@ -108,8 +108,7 @@ public class Student {
     /**
      * Registers the student if the course has available seats, waitlists the student if not.  
      * @param course
-     * @return ADDED_TO_WAITLIST if student was waitlisted,
-     * SUCCESS_REGISTER if student was registered,
+     * @return ADDED_TO_WAITLIST if student was waitlisted, SUCCESS_REGISTER if student was registered,
      * ERROR if neither
      */
     public ErrorCodes register(Course c) {
@@ -153,16 +152,6 @@ public class Student {
 	    Student s = (Student) o;
 	    // field comparison
 	    return (this.wustlID == s.wustlID) && firstName.equals(s.firstName) && this.lastName.equals(s.lastName);
-	}
-    
-    public void printSummary() {
-		System.out.println("----------------------- Summary ---------------------------");
-		System.out.println(toString());
-		System.out.println("------------------ Registered Courses ---------------------");
-		displayRegisterCourses();
-		System.out.println("------------------ Waitlisted Courses ---------------------");
-		displayWaitListCourses();
-		System.out.println("-----------------------------------------------------------");
 	}
     
 

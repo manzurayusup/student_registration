@@ -4,7 +4,11 @@ import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
-
+/**
+ * The Commandline class handles displaying the menu options and useful messages to the user.
+ * @authors manzura, yab, khushi, irtaza
+ *
+ */
 public class Commandline {
 	private Scanner scanner;
 	private Student student;
@@ -17,13 +21,95 @@ public class Commandline {
 		fw = new AppFileWriter();
 	}
 	
-	public void printChoices() {
+	public void printMenuOptions() {
 		System.out.println("\t1. Register for a course");
 		System.out.println("\t2. Print a course");
 		System.out.println("\t3. Print all courses");
 		System.out.println("\t4. Print enrolled courses");
 		System.out.println("\t5. Print waitlisted courses");
 		System.out.println("\t6. Quit");
+	}
+	
+	/**
+	 * Displays welcome message, logs student in, and returns the student.
+	 * @return logged-in student, null if error
+	 */
+	public Student welcomeAndLogin() {
+		System.out.println("Welcome to Student Registration App!");
+		Student s = login();
+		while(s == null) {
+			System.out.println("Invalid ID or user doesn't exist.");
+			s = login();
+		}
+		return s;
+	}
+	
+	/**
+	 * Helper method that creates a student from user ID input and assigns the student to a 
+	 * property of this class.
+	 * @return logged-in student if success, null otherwise
+	 */
+	private Student login() {
+		System.out.println("Please enter your student ID: ");
+		String id = parseInputId();
+		student = fp.createStudent(id);
+		return student;
+		
+	}
+	
+	/**
+	 * Displays a welcome message and menu after login, continuously listens to user input and calls
+	 * the method to execute the commands.
+	 * @throws FileNotFoundException
+	 */
+	public void displayMenuAndProcessInput() throws FileNotFoundException {
+		System.out.println("Logged in as " + student.getFirstName() + " " + student.getLastName() + ".");
+		System.out.println("Please choose one of the commands:");
+		
+		Commands choice = null;
+        while(choice != Commands.QUIT) {
+        	printMenuOptions();
+        	choice = parseInputCommand(); 
+        	executeCommand(choice);
+        }
+	}
+	
+	/**
+	 * Helper method that takes in a command and executes the appropriate task.
+	 * @param command enum to be executed, assumes a non_command if null
+	 * @throws FileNotFoundException
+	 */
+	private void executeCommand(Commands choice) throws FileNotFoundException {
+		if (choice == null) choice = Commands.NON_COMMAND;
+		switch (choice) {
+            case REGISTER_FOR_COURSE: 
+            	System.out.println(registerForACourse().getMessage());
+            	break;
+            case PRINT_COURSE: 
+            	printCourse();
+            	break;
+            case PRINT_COURSES_ALL: 
+            	System.out.println("Printing all courses.");
+            	printAllCourses(); 
+            	break;
+            case PRINT_COURSES_ENROLLED: 
+            	System.out.println("Your enrolled courses:");
+            	printEnrolledCourses(); 
+            	break;
+            case PRINT_COURSES_WAITLISTED: 
+            	System.out.println("Your waitlisted courses:");
+            	printWaitlistedCourses();
+            	break;
+            case QUIT: 
+            	System.out.println("Logging you out... Bye!");
+            	break;
+            case NON_COMMAND: 
+            	System.out.println("Invalid command.");
+            	break;
+            default: 
+            	System.out.println("Not a valid command.");
+            	break;
+        }
 	}
 	
 	/**
@@ -59,17 +145,6 @@ public class Commandline {
 	}
 	
 	/**
-	 * Creates a student from user ID input and assigns the student to a property of this class.
-	 * @return logged-in student if success, null otherwise
-	 */
-	public Student login() {
-		System.out.println("Please enter your student ID: ");
-		String id = parseInputId();
-		student = fp.createStudent(id);
-		return student;
-		
-	}
-	/**
 	 * Helper method that parses user input into a course. 
 	 * @return course if successful, null otherwise
 	 */
@@ -80,6 +155,7 @@ public class Commandline {
 		}
 		return fp.findCourse(code);
 	}
+	
 	/**
 	 * Register the logged-in student for the given course.
 	 * @return error code based on success or failure
@@ -90,7 +166,6 @@ public class Commandline {
 		if (course != null) {
 			return student.register(course);
 		}
-//		if ((course != null) && (student.addRegisterCourse(course) == ErrorCodes.SUCCESS)) return true;
 		return ErrorCodes.ERROR;
 	}
 	
@@ -112,8 +187,12 @@ public class Commandline {
 	public Student getStudent() {
 		return this.student;
 	}
+	
+	/**
+	 * Saves the info of the logged-in student and all the courses into the appropriate files.
+	 */
 	public void saveStatus() {
-		fw.writeStudentData(this.student);
+		fw.saveStudentData(this.student);
 		
 		LinkedList<Course> list = fp.getAllCourses();
 		for (int i = 0; i < list.size(); i++) {
@@ -121,9 +200,12 @@ public class Commandline {
 		}
 	}
 	
+	/**
+	 * Gets the course code from user input and displays details of that course.
+	 * @return error code corresponding with the error
+	 * @throws FileNotFoundException
+	 */
 	public ErrorCodes printCourse() throws FileNotFoundException {
-		// this method gets the coursecode from user input and displays details of that course
-		// Course (String name, String courseCode, String startTime, String endTime, int seats, int credits)
 		System.out.println("Please enter the course code: ");
 		
 		String courseCode = scanner.nextLine();
@@ -141,73 +223,23 @@ public class Commandline {
 	public static void displayRegisteredCourses(Student student) {
 		student.displayRegisterCourses();
 	}
+	
 	public static void displayWaitlistedCourses(Student student) {
 		student.displayWaitListCourses();
 	}
 	
+	
+	
 // -------------------------------- MAIN ----------------------------------------------
+	
 	public static void main(String[] args) throws FileNotFoundException {
-		/* Setup */
 		Commandline cline = new Commandline();
-		 
-		System.out.println("Welcome to Student Registration App!");
 		
-		/* Login user */
-		
-		Student s = cline.login();
-		while(s == null) {
-			System.out.println("Invalid ID or user doesn't exist.");
-			s = cline.login();
-		}
-		
-		System.out.println("Logged in as " + s.getFirstName() + " " + s.getLastName() + ".");
-		
-		/* Display commands and handle user input */
-		System.out.println("Please choose one of the commands:");
-		Commands choice = null;
-        while(choice != Commands.QUIT) {
-        	cline.printChoices();
-        	choice = cline.parseInputCommand();
-
-        	if (choice == null) choice = Commands.NON_COMMAND;
-        	
-            switch (choice)
-            {
-				// more functionalities will be added as we go.
-                case REGISTER_FOR_COURSE: 
-                	System.out.println(cline.registerForACourse().getMessage());
-                	break;
-                case PRINT_COURSE: 
-//                	System.out.println("Print a course?");
-                	cline.printCourse();
-                	break;
-                case PRINT_COURSES_ALL: 
-                	System.out.println("Printing all courses.");
-                	cline.printAllCourses(); 
-                	break;
-                case PRINT_COURSES_ENROLLED: 
-                	System.out.println("Your enrolled courses:");
-                	cline.printEnrolledCourses(); 
-                	break;
-                case PRINT_COURSES_WAITLISTED: 
-                	System.out.println("Your waitlisted courses:");
-                	cline.printWaitlistedCourses();
-                	break;
-                case QUIT: 
-                	System.out.println("Logging you out... Bye!");
-                	break;
-                case NON_COMMAND: 
-                	System.out.println("Invalid command.");
-                	break;
-                default: 
-                	System.out.println("Not a valid command.");
-                	break;
-            }
-        }
-        
+		Student s = cline.welcomeAndLogin();
+		cline.displayMenuAndProcessInput();
         cline.saveStatus();
         
-		System.out.println("_____Program ended_____");
+		System.out.println("_______Program ended_______");
 		
 	}
 

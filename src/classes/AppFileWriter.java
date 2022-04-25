@@ -7,12 +7,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.LinkedList;
-
+/**
+ * AppFileWriter class has methods that writes to the text files with the updated
+ * course and student info. 
+ * @author manzura
+ *
+ */
 public class AppFileWriter {
-//	private String studentFilePath = "src/textfiles/test_students.txt";
-//	private String courseFilePath = "src/textfiles/test_courses.txt";
+	private String defaultStudentFilePath = "src/textfiles/test_students.txt";
+	private String defaultCourseFilePath = "src/textfiles/test_courses.txt";
 	private File studentFile, courseFile;
 	
 	public AppFileWriter(String studentFilePath, String courseFilePath) {
@@ -21,16 +25,17 @@ public class AppFileWriter {
 	}
 	
 	public AppFileWriter() {
-		studentFile = new File("src/textfiles/test_students.txt");
-		courseFile = new File("src/textfiles/test_courses.txt");
+		studentFile = new File(defaultStudentFilePath);
+		courseFile = new File(defaultCourseFilePath);
 	}
+	
 	/**
 	 * Writes to the students file with the updated student info. This method assumes the student
 	 * already exists in the file.
 	 * @param student whose info should be saved
 	 * @return true if data is successfully saved, false otherwise
 	 */
-	public boolean writeStudentData(Student s) {
+	public boolean saveStudentData(Student s) {
 		
 		try {
 			String[] contents = getFileContentsAndLine(studentFile, String.valueOf(s.getID()));
@@ -70,37 +75,7 @@ public class AppFileWriter {
 			else result += "-";
 		}
 		return result;
-	}
-	/**
-	 * Helper method that reads all the lines of the file and returns an array containing all
-	 * the contents of the file and the line that needs to be replaced with new data.
-	 * @param file
-	 * @return array: [0]->file contents, [1]->line to be replaced, null if no line with 
-	 * the matching first string is found
-	 * @throws IOException
-	 */
-	private String[] getFileContentsAndLine(File file, String firstString) throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(file));
-		String line; 
-		String lines = "";
-		String[] contents = new String[2];	
-		boolean foundMatchingLine = false;
-		while ((line = br.readLine()) != null) {
-			if (line.split("\\s")[0].equals(firstString)) {
-				contents[1] = line;
-				foundMatchingLine = true;
-			}
-			lines += line + "\n";
-		}
-		br.close();
-		if (foundMatchingLine) {
-			contents[0] = lines;
-			return contents;
-		} else {
-			return null;
-		}
-		
-	}
+	}	
 	
 	
 //	--------------------------- COURSE METHODS  ------------------------------------
@@ -134,6 +109,37 @@ public class AppFileWriter {
 	 */
 	public String constructFileStringCourse(Course c) {
 		return c.getCourseCode() + " " + c.getName() + " " + c.getStartTime() + " " + c.getEndTime() + " " + c.getSeats() + " " + c.getProfessorName() + " " + c.getExams();
+	}
+	
+	/**
+	 * Helper method that reads all the lines of the file and returns an array containing all
+	 * the contents of the file and the line that needs to be replaced with new data.
+	 * @param file
+	 * @return array: [0]->file contents, [1]->line to be replaced, null if no line with 
+	 * the matching first string is found
+	 * @throws IOException
+	 */
+	private String[] getFileContentsAndLine(File file, String firstString) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		String line; 
+		String lines = "";
+		String[] contents = new String[2];	
+		boolean foundMatchingLine = false;
+		while ((line = br.readLine()) != null) {
+			if (line.split("\\s")[0].equals(firstString)) {
+				contents[1] = line;
+				foundMatchingLine = true;
+			}
+			lines += line + "\n";
+		}
+		br.close();
+		if (foundMatchingLine) {
+			contents[0] = lines;
+			return contents;
+		} else {
+			return null;
+		}
+		
 	}
 	
 //	---------------------------------- MAIN -----------------------------------------

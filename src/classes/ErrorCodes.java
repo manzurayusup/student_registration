@@ -1,9 +1,8 @@
 package classes;
 
 /**
- * 
- * @author Manzura, Irtaza, Yab, Khushi
  * Enumerations indicating success or error.
+ * @author manzura, irtaza, yab, khushi
  *
  */
 public enum ErrorCodes {

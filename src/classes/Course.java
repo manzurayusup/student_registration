@@ -1,11 +1,9 @@
 package classes;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.io.*;
-import java.util.*;
-import java.text.*;
-
+/**
+ * 
+ * @author yab
+ *
+ */
 public class Course{
 	private String name;
 	private String courseCode;
@@ -19,8 +17,6 @@ public class Course{
 	public Course () {
 		this.name = "unknown";
 		this.courseCode = "N/A";
-//		this.startTime = initializeDate();
-//		this.endTime = initializeDate();
 		this.seats = -1;
 		this.credits = -1;
 		this.professorName = "unknown";
@@ -30,29 +26,12 @@ public class Course{
 	public Course (String name, String courseCode, String startTime, String endTime, int seats, int credits, String professorName, String exams) {
 		this.name = name;
 		this.courseCode = courseCode;
-//		setStartTime(startTime);
-//		setEndTime(endTime);
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.seats = seats;
 		this.credits = credits;
 		this.professorName = professorName;
 		this.exams = exams;
-	}
-	
-	/**
-	 * 
-	 * @return a default date object initialized to a dummy date.
-	 */
-	public Date initializeDate() {
-		Date defaultDate = new Date();
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-		try {
-			defaultDate = dateFormatter.parse("1970-01-01T01:01:01.000Z");
-		} catch (ParseException e) {
-			System.out.println("could not initialize dates: " + e);
-		}
-		return defaultDate;
 	}
 	
 	public void setName(String name){
@@ -77,16 +56,6 @@ public class Course{
 		this.courseCode = code;
 	}
 	
-//	public void setStartTime(String time) {
-//		Date startTime = parseStringToDate(time);
-//		this.startTime = startTime;
-//	}
-	
-//	public void setEndTime(String time) {
-//		Date endTime = parseStringToDate(time);
-//		this.endTime = endTime;
-//	}
-	
 	public void setSeats(int seats) {
 		this.seats = seats;
 	}
@@ -107,45 +76,17 @@ public class Course{
 		return this.courseCode;
 	}
 	
-//	public Date getStartTimeAsDate() {
-//		return this.startTime;
-//	}
-//	
-//	public Date getEndDateAsDate() {
-//		return this.endTime;
-//	}
-	
 	public String getStartTime() {
-//		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-//		String time = timeFormat.format(this.startTime);
 		return this.startTime;
 	}
 	
 	public String getEndTime() {
-//		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-//		String time = timeFormat.format(this.endTime);
 		return this.endTime;
 	}
 	
 	public int getSeats (){
 		return this.seats;
 	}
-	
-	/**
-	 * 
-	 * @param time: a string time to be converted to date object
-	 * @return: a date object from time.
-	 */
-//	public Date parseStringToDate(String time) {
-//		Date courseDate = new Date();
-//		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-//		try {
-//			courseDate = dateFormatter.parse(time);
-//		} catch (ParseException e) {
-//			System.out.println("could not parse given string to date: " + e);
-//		}
-//		return courseDate;
-//	}
 	
 	/**
 	 * @return a string containing all information about this course.
