@@ -5,7 +5,8 @@ import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Scanner;
 /**
- * The Commandline class handles displaying the menu options and useful messages to the user.
+ * The Commandline class handles displaying the menu options and useful messages to the user and 
+ * executing the commands the user types in.
  * @authors manzura, yab, khushi, irtaza
  *
  */
@@ -234,7 +235,6 @@ public class Commandline {
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		Commandline cline = new Commandline();
-		
 		Student s = cline.welcomeAndLogin();
 		cline.displayMenuAndProcessInput();
         cline.saveStatus();
