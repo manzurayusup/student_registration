@@ -1,27 +1,24 @@
 # student_registration
 
 ### What user stories were completed this iteration?
-In iteration 2, we complemented five new use cases. The app now saves the student's registration info and updates the courses' seats. Moreover, the app automatically adds the course to the student's waitlisted courses if the course is full. Another small change is that the user (student) is now able to see the list of all of their registered/waitlisted classes.
-
-### What user stories do you intend to complete next iteration?
-In the next iteration, we are planning to split up the Registration class because it is getting too big. We're trying to extract objects out of it which will make our program easier to test and easier to understand. (You can take a look at branch "updateRegistrationFile" if you want to see our progress so far.) We think this will take up some time. But if we do have some time leftover before the third iteration, we will first fix our current bugs and then implement logout and dropping a class.
+In iteration 3, we primarily focused on refactoring the Registration class so it'd be easier to implement new features and test our code. We were able to complete three new use cases. The app now saves all course and student info including their waitlisted courses. We added another option to the menu - "Print waitlisted courses" - so now our menu has a total of 6 options. Refactoring took a lot of time, so we weren't able to implement lots of new features, but we did improve usage messages and error handling.
 
 ###	Is there anything that you implemented but doesn't currently work
-Currently, all the menu options should be working. We do not have test cases for all the methods that depend on user input, but we think they will be testable after we break up the Registration class. <br/>
-<br/>
-Other bugs we need to fix:
-* The app crashes if a student with no registered courses logs in.
-* The app crashes if the user types a string that doesn't match any of the menu options. 
-* The code doesn't save the student's waitlisted courses.
+In iteration 2, we listed three things that weren't working. We fixed 2 of those:. <br/>
 
-### What commands are needed to compile and run your code from the command line (or better yet, provide a script that people can use to run your program!)
+* The app doesn't crash if the user types an invalid input. 
+* The app saves the student's waitlisted courses.
+* But the app still crashes if a student with no registered/waitlisted courses logs in.
+
+### What commands are needed to compile and run your code from the command line?
 You need to be in the root directory and using bash. Run the following command: ./run_program.sh <br/>
 <br/>
 You can login as:
-Jack Sparrow (ID: 123456)
-Dorothy Gale (ID: 234567)
+Jack Sparrow (ID: 123456), enrolled in CSE247, CSE204, CSE332 and waitlisted in CSE132. <br/>
+Dorothy Gale (ID: 234567), enrolled in CSE132 and waitlisted in CSE347. <br/>
 <br/>
 List of courses with seats left: <br/>
+* CSE131 
 * CSE204 
 * CSE217 
 * CSE240 
@@ -30,9 +27,11 @@ List of courses with seats left: <br/>
 * CSE332 
 <br/>
 List of courses with 0 seats: <br/>
-* CSE131
-* CSE132
+* CSE132 
 * CSE347 
+* GER101 
+* GER201 
+* GER313 <br/>
 
   
   
