@@ -171,38 +171,6 @@ public class AppFileProcessor {
 		a.displayWaitListCourses();
 		System.out.println("-------------------------");
 		b.displayRegisterCourses();
-		b.displayWaitListCourses();
-			
-			
-// ------------------------ SPRINT BUILDER VS ARRAY.SPLIT TEST !!! -----------------------------
-//			LinkedList<String> list = new LinkedList<String>();
-//			
-//			String courseList = "CSE131-CSE247-CSE330";
-//			StringBuilder sb = new StringBuilder();
-//	    	sb.setLength(0);
-//	    	for (int i = 0; i < courseList.length(); i++) {
-//	    		if (courseList.charAt(i) == '-') {
-//	    			list.add(sb.toString());
-//	    			sb.setLength(0);
-//	    		}
-//	    		else {
-//	    			sb.append(courseList.charAt(i));
-//	    		}
-//	    	}
-//	    	if (sb.toString().length() > 0) {
-//	    		list.add(sb.toString());
-//	    	}
-//	    	System.out.println(list);
-//	    	System.out.println("-----------------");
-//	    	String[] arr = courseList.split("-");
-//	    	for (int i = 0; i < arr.length; i++) {
-//	    		System.out.println(arr[i]);
-//	    	}
-// ------------------------ END IMPORTANT TEST -----------------------------
-		
+		b.displayWaitListCourses();	
     }
-    
-    
-    
-
 }
