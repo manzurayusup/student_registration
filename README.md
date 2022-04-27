@@ -31,7 +31,8 @@ List of courses with 0 seats: <br/>
 * CSE347 
 * GER101 
 * GER201 
-* GER313 <br/>
+* GER313 
+<br/>
 
   
   
