@@ -159,18 +159,3 @@ public class AppFileProcessor {
     
     
     
-// ------------------------------------- MAIN --------------------------------------------- //
-    
-    public static void main(String[] args) {
-    	
-		AppFileProcessor fp = new AppFileProcessor("src/textfiles/test_students.txt", "src/textfiles/test_courses.txt");
-		System.out.println(fp.findCourse("CSE131"));
-		Student a = fp.createStudent("123456");
-		Student b = fp.createStudent("234567");
-		a.displayRegisterCourses();
-		a.displayWaitListCourses();
-		System.out.println("-------------------------");
-		b.displayRegisterCourses();
-		b.displayWaitListCourses();	
-    }
-}
