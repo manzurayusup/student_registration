@@ -125,7 +125,6 @@ public class Student {
 			return ErrorCodes.ERROR_ALREADY_WAITLISTED;
 		}
     	}
-    	return ErrorCodes.ERROR;
     }
     
     /**
