@@ -37,6 +37,12 @@ class AppFileProcessorTest {
 		
 		assertEquals(numLines, numCourses);
 	}
+	@Test
+	void findCourseTest() {
+		Course expected = fp.findCourse("CSE247");
+		String expectedCourseCode = expected.getCourseCode();
+		assertTrue(expectedCourseCode.equals("CSE247"));
+	}
 	
 	@Test
 	void createStudentTest() {
