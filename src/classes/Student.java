@@ -114,13 +114,17 @@ public class Student {
     public ErrorCodes register(Course c) {
     	if (c != null && c.getSeats() <= 0) {
     		if (addWaitlistCourse(c) == ErrorCodes.SUCCESS) return ErrorCodes.ADDED_TO_WAITLIST;
+		else {
+			return ErrorCodes.ERROR_ALREADY_WAITLISTED;
+		}
     	} else {
     		if (addRegisterCourse(c) == ErrorCodes.SUCCESS) { 
     			c.setSeats(c.getSeats() - 1);
     			return ErrorCodes.SUCCESS_REGISTER;
-    		}
+    		}else {
+			return ErrorCodes.ERROR_ALREADY_ENROLLED;
+		}
     	}
-    	return ErrorCodes.ERROR;
     }
     
     /**
