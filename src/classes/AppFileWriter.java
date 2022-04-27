@@ -141,22 +141,6 @@ public class AppFileWriter {
 		}
 		
 	}
-	
-//	---------------------------------- MAIN -----------------------------------------
 
-	public static void main(String[] args) throws IOException {
-		String studentPath = "src/textfiles/test_students.txt";
-		String coursePath = "src/textfiles/test_courses.txt";
-		AppFileWriter appWriter = new AppFileWriter(studentPath, coursePath);
-		AppFileProcessor fp = new AppFileProcessor(studentPath, coursePath);
-		Course c = fp.findCourse("CSE204");
-		Course c2 = fp.findCourse("CSE347");
-
-		c.setSeats(c.getSeats()-40);
-		c2.setSeats(c2.getSeats()-10);
-		appWriter.saveCourseData(c);
-		appWriter.saveCourseData(c2);
-
-	}
 
 }

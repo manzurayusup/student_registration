@@ -21,7 +21,6 @@ class CourseTest {
 	// test toString overloadded method method.
 	@Test
 	void testToString () {
-//		String expected = "Name: programming tools and techniques \nCode: CSE237 \nstart time: 13:00:00 \nendtime: 14:20:00 \nseats left: 45 \nCredits: 3";
 		String expected = "{ Name: Introduction-to-Computer-Science \n"
 				+ "Code: CSE131 \n"
 				+ "start time: 11:30:00 \n"

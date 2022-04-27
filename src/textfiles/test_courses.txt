@@ -1,4 +1,4 @@
-CSE131 Introduction-to-Computer-Science 11:30:00 12:50:00 98 Shook Yes
+CSE131 Introduction-to-Computer-Science 11:30:00 12:50:00 100 Shook Yes
 CSE132 Introduction-to-Computer-Engineering 13:00:00 14:20:00 0 Chamberlain Yes
 CSE204 Web-Development 08:30:00 09:50:00 100 Clapp No
 CSE217 Introduction-to-Data-Science 14:30:00 15:50:00 100 Singh No
