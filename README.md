@@ -11,7 +11,7 @@ In iteration 2, we listed three things that weren't working. We fixed 2 of those
 * But the app still crashes if a student with no registered/waitlisted courses logs in.
 
 There are also other things that we think we could've done better:
-We only wrote tests for the important methods (not helper methods). We also aren't testing the Commandline class because it runs a while loop that depends on user input and we wanted to prioritize refactoring. 
+We only wrote tests for the important methods (not helper methods). We also aren't testing the Commandline class because it runs a while loop that depends on user input. Due to our time constraint, we decided to prioritize refactoring. 
 
 ### What commands are needed to compile and run your code from the command line?
 You need to be in the root directory and using bash. Run the following command: ./run_program.sh <br/>
