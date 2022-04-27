@@ -84,13 +84,13 @@ class StudentTest {
     @Test
     void testAddDuplicateWaitlistCourse() {
     	ErrorCodes returnValue = student.addWaitlistCourse(waitlistCourse1);
-    	assertEquals(ErrorCodes.ERROR, returnValue);	
+    	assertEquals(ErrorCodes.ERROR_ALREADY_WAITLISTED, returnValue);	
     }
     
     @Test
     void testAddWaitlistCourseThatAlreadyExistsInRegisterCourses() {
     	ErrorCodes returnValue = student.addWaitlistCourse(registerCourse1);
-    	assertEquals(ErrorCodes.ERROR, returnValue);
+    	assertEquals(ErrorCodes.ERROR_ALREADY_ENROLLED, returnValue);
     }
     @Test
     void testCreditsExceedWhenAddingWaitlistCourse() {
@@ -98,7 +98,7 @@ class StudentTest {
     	student.addWaitlistCourse(course4);
     	student.addWaitlistCourse(course5);
     	ErrorCodes returnValue = student.addWaitlistCourse(course6);
-    	assertEquals(ErrorCodes.ERROR, returnValue);
+    	assertEquals(ErrorCodes.ERROR_MAX_CREDITS, returnValue);
     }
     @Test
     void testRemoveWaitlistCourse() {
@@ -133,12 +133,12 @@ class StudentTest {
     @Test
     void testAddDuplicateRegisterCourse() {
     	ErrorCodes returnValue = student.addRegisterCourse(registerCourse1);
-    	assertEquals(ErrorCodes.ERROR, returnValue);
+    	assertEquals(ErrorCodes.ERROR_ALREADY_ENROLLED, returnValue);
     }
     @Test
     void testAddRegisterCourseThatAlreadyExistsInWaitlistCourses() {
     	ErrorCodes returnValue = student.addRegisterCourse(waitlistCourse1);
-    	assertEquals(ErrorCodes.ERROR, returnValue);
+    	assertEquals(ErrorCodes.ERROR_ALREADY_WAITLISTED, returnValue);
     }
     @Test
     void testCreditsExceedWhenAddingRegisterCourse() {
@@ -146,7 +146,7 @@ class StudentTest {
     	student.addRegisterCourse(course4);
     	student.addRegisterCourse(course5);
     	ErrorCodes returnValue = student.addRegisterCourse(course6);
-    	assertEquals(ErrorCodes.ERROR, returnValue);
+    	assertEquals(ErrorCodes.ERROR_MAX_CREDITS, returnValue);
     }
     @Test
     void testRemoveRegisterCourse() {
